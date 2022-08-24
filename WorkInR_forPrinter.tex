@@ -1,0 +1,105 @@
+\documentclass[a4paper, 12pt]{article}
+
+%% for bibliography
+\usepackage[natbibapa]{apacite}
+\bibliographystyle{apacite} 
+
+% size of plots and tables
+\usepackage{adjustbox} 
+
+% section numbering
+\usepackage{chngcntr}
+\counterwithin{table}{section}
+\counterwithin{figure}{section}
+
+% header of paper
+\title{This is my work in R}
+\author{
+        MyFirstName MyLastName\\
+        OrganizationName\\
+        City, ZipCope, \underline{Country}\\
+        \texttt{username@the.rest}
+}
+%\date{August 23, 2022} %manually
+\date{\today}  %automatic
+
+
+% every "begin: needs and "end"
+\usepackage{Sweave}
+\begin{document}
+
+\input{WorkInR_forPrinter-concordance}
+\maketitle 
+
+\begin{abstract}
+This is an example of an abstract in a paper. This is an example of an abstract in a paper. This is an example of an abstract in a paper. This is an example of an abstract in a paper.This is an example of an abstract in a paper.This is an example of an abstract in a paper.This is an example of an abstract in a paper.
+
+\end{abstract}
+
+% a chunk hidden (echo=FALSE) with some setup
+% chunk has its own name 
+
+
+\section*{Introduction} % * to unnumber
+
+This is just my intro to my nice paper. This is just my intro to my nice paper.This is just my intro to my nice paper. This is just my intro to my nice paper.This is just my intro to my nice paper. This is just my intro to my nice paper.This is just my intro to my nice paper. This is just my intro to my nice paper.This is just my intro to my nice paper. This is just my intro to my nice paper.This is just my intro to my nice paper. This is just my intro to my nice paper.
+
+This is just my intro to my nice paper. This is just my intro to my nice paper.This is just my intro to my nice paper. This is just my intro to my nice paper.This is just my intro to my nice paper. This is just my intro to my nice paper.This is just my intro to my nice paper. This is just my intro to my nice paper.
+
+
+\section{Exploring Tables}\label{explo-tables} % label for crossref
+
+%footnote coming
+Another section. I will use a footnot now \footnote{This is a footnote.}. I will soon use cross-ref.I will soon use cross-ref.I will soon use cross-ref.I will soon use cross-ref. I will soon use cross-ref. I will soon use cross-ref.I will soon use cross-ref.I will soon use cross-ref.I will soon use cross-ref.I will soon use cross-ref. I will soon use cross-ref. I will soon use cross-ref.
+%cross-ref coming
+
+%cross-ref coming
+I will soon use cross-ref.I will soon use cross-ref: as we see in Section \ref{catexplor}.
+
+
+
+\subsection{Exploring Categorical Data}\label{catexplor}
+
+Here, I continue doing this nice work, I hope you like it and read it. It has been a very hard work.Here, I continue doing this nice work, I hope you like it and read it. It has been a very hard work.Here, I continue doing this nice work, I hope you like it and read it. It has been a very hard work.Here, I continue doing this nice work, I hope you like it and read it. It has been a very hard work.Here, I continue doing this nice work, I hope you like it and read it. It has been a very hard work.Here, I continue doing this nice work, I hope you like it and read it. It has been a very hard work.
+
+I hope you like it and read it. It has been a very hard work.Here, I continue doing this nice work, I hope you like it and read it. It has been a very hard work.Here, I continue doing this nice work, I hope you like it and read it. It has been a very hard work.Here, I continue doing this nice work, I hope you like it and read it. It has been a very hard work.Here, I continue doing this nice work, I hope you like it and read it. It has been a very hard work.
+
+You can see the statistics of a categorical variable in Table \ref{catexploreTable}.
+
+%the chunk name is NOT used in cross-ref for table.
+%Table is created and displayed.
+
+\begin{table}
+
+\caption{This is a table\label{catexploreTable}}
+\centering
+\begin{tabular}[t]{l|r|r|r}
+\hline
+Democracy Index & count & pct & pct\_cumm\\
+\hline
+veryLow & 53 & 33.76 & 33.76\\
+\hline
+low & 31 & 19.75 & 53.50\\
+\hline
+medium & 53 & 33.76 & 87.26\\
+\hline
+good & 0 & 0.00 & 87.26\\
+\hline
+veryGood & 20 & 12.74 & 100.00\\
+\hline
+\end{tabular}
+\end{table}
+
+%%%%%%
+
+You can see this variable plotted in Figure \ref{catBarplot} on page \pageref{catBarplot}.
+
+% NO need for figure caption in chunk header.
+% Object will be created BUT NOT plotted
+% the chunk name IS NOT used in cross-ref for figure
+
+
+% Latex will use this code for plotting
+\begin{figure}[h]
+\centering
+\begin{adjustbox}{width=7cm,height=5cm} %resize
