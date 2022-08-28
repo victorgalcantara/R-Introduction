@@ -26,7 +26,7 @@ options(htmltools.dir.version = FALSE)
 ```
 
 # O que é programação?
-
+![Esquema Input-Process-Output](R-Intro_Aula-01_files/IPO.png)
 ---
 # O que é R?
 R é um software livre e uma linguagem de programação voltada à computação estatística e representação gráfica.
@@ -42,22 +42,21 @@ R é um software livre e uma linguagem de programação voltada à computação 
 
 ---
 # Uma ilustração do processo
-
-<img src="HORST, Alisson. paint data-science.png" alt="Input-Process-Output schema" caption="Adaptação do desenho de Alisson Horst, inspirado no esquema de Wickham"/>
+![Adaptação do desenho de Alisson Horst, inspirado no esquema de Wickham](R-Intro_Aula-01_files/HORST, Alisson. paint data-science.png)
 ---
 # História R e RStudio
 
 **R CRAN**
-S: linguagem desenvolvida no Bell Labs ~1976 por John Chambers, Rick Becker, and Allan Wilks. Primeira linguagem estatística com código aberto ( _open source_ ) <br>
-R: inicialmente desenvolvido como open source por Ross
-Ihaka and Robert Gentleman na _University of Auckland_ nos anos 90 (trocadilho com o nome “S”) <br>
-Desde 1997 desenvolvido por R Development Core Team
-<br>
+- S: linguagem desenvolvida no Bell Labs ~1976 por John Chambers, Rick Becker, and Allan Wilks. Primeira linguagem estatística com código aberto ( _open source_ );
+- R: inicialmente desenvolvido como open source por Ross
+Ihaka and Robert Gentleman na _University of Auckland_ nos anos 90 (trocadilho com o nome “S”)
+- Desde 1997 desenvolvido por R Development Core Team.
 
-**RStudio/Posit** <br>
-Fundada em 2009 por [Joseph J. Allaire](https://en.wikipedia.org/wiki/Joseph_J._Allaire) <br>
-Em 2011 se consolidou como IDE para R e foi rapidamente incorporada pela comunidade de usuários <br>
-Em 2019 passou a integrar Python e hoje está entre as mais usadas <br>
+**RStudio/Posit**
+- Fundada em 2009 por [Joseph J. Allaire](https://en.wikipedia.org/wiki/Joseph_J._Allaire);
+- Em 2011 se consolidou como IDE para R e foi rapidamente incorporada pela comunidade de usuários;
+- Em 2019 passou a integrar Python e hoje está entre as mais usadas.
+
 Impulsiona o uso de softwares livres para análise de dados, oferece condições, confiança e segurança para programação por humanos. Atualmente é mantida pela receita de consumidores de funções adicionais (nuvem, suportes etc.).
 
 ---
