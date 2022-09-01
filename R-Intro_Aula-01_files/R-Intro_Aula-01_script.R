@@ -90,6 +90,12 @@ ifelse # Veja como essa função está programada
 
 sum(true_igual_um)
 
+# Navegação no computador ----
+getwd()
+setwd()
+dir()
+dir.create("minha pasta")
+
 # 5. Pacotes ----
 # são conj. de funções
 # devem ser instalados    : install.packages()
