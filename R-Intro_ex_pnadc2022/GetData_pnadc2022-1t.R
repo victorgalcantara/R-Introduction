@@ -51,7 +51,7 @@ getwd() # verifica o dir de trabalho
 setwd("H:/Meu Drive/00 data/IBGE/PNADc") # modifica o dir
 
 write.csv(x = myPnad2022_1trim,
-          file="sample_Pnad2022_1trim.csv")
+          file="sample_myPnad2022_1trim.csv")
 
 save(object = myPnad2022_1trim,
           file="sample_myPnad2022_1trim.RDS")

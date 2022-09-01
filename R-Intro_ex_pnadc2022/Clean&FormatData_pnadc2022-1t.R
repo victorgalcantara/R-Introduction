@@ -1,4 +1,4 @@
-# Title : importando dados da pnad-c
+# Title : manuseando dados da pnad-c
 # Author: Victor Gabriel Alcantara 
 # Date: 30/08/2022  
 # Github: https://github.com/victorgalcantara 
@@ -20,7 +20,7 @@ load("sample_myPnad2022_1trim.RDS")
 myPnad2022_1trim <- myPnad2022_1trim %>% select(!peso) 
 
 myPnad2022_1trim <- myPnad2022_1trim %>% filter(idad > 18,
-                                    idad < 65)
+                                                idad < 65)
 
 # Limpeza e formatação
 myPnad2022_1trim <- myPnad2022_1trim %>% 
