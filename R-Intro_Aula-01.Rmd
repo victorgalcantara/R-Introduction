@@ -66,7 +66,7 @@ Impulsiona o uso de softwares livres para análise de dados, oferece condições
 # Por quê usar R e RStudio?
 --
 
-<b>Potência:</b> podemos fazer (quase) tudo com R, considerado uma das melhores ferramentas para estatística e análise de dados. Excel,SPSS, SAS, Stata estão anos atrás!<br>
+<b>Potência:</b> podemos fazer (quase) tudo com R, considerado uma das melhores ferramentas para estatística e análise de dados. Excel e SPSS estão anos atrás!<br>
 
 --
 
@@ -78,15 +78,7 @@ Impulsiona o uso de softwares livres para análise de dados, oferece condições
 
 --
 
-<b>Flexível, portátil e rápido:</b> flexibilidade para diversos sistemas operacionais (ainda que configurado para Linux), portabilidade com outras linguagens e softwares e rapidez nas operações<br>
-
---
-
 <b>Ciência aberta! Replicabilidade, transparência e "fairness":</b> práticas fundamentais e cada vez mais impulsionadas por revistas e instituições acadêmicas!<br>
-
---
-
-<b>Controle sobre procedimentos:</b> R é uma linguagem ótima para te fazer pensar sobre procedimentos<br>
 
 ---
 
