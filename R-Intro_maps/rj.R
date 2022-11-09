@@ -1,0 +1,62 @@
+# População e renda por setor censitário - Rio de Janeiro
+# Author: Victor Alcantara (PPGSA/UFRJ)
+# Date: 09.09.21
+
+# 0. Packages and Setup ----------------------------------------
+
+library(tidyverse)
+library(ggplot2)
+library(geobr)
+
+wd <- "H:\\Meu Drive\\00 data\\RJ"
+setwd(wd)
+
+# 1. Data imput and merge --------------------------------------
+
+rj      <- read_census_tract(code_tract = 33,year = 2010)
+my_data <- read.csv("data.csv")
+
+data <- merge(rj,my_data, by = "code_tract")
+
+# 2. Data management -------------------------------------------
+
+data$me_renda2 <-  cut(data$me_renda,
+                       breaks = c(0,500,1000,2000,5000,10000,max(my_data$me_renda, na.rm = T)),
+                       labels = c("0-499", "500-1000", "1000-2000", 
+                                  "2000-5000","5000-10000", "+10000"),
+                       ordered_result = T)
+
+data$dens_pop2 <-  cut(data$densidade_pop,
+                       breaks = c(0,2500,5000,10000,15000,max(my_data$densidade_pop, na.rm = T)),
+                       labels = c("      0 - 2500 ", "  2500 - 5000 ", "  5000 - 10000",
+                                  "10000 - 15000", "  + 15000"),
+                       ordered_result = T)
+
+# 2. Plot maps --------------------------------------------------
+
+# We have to remove axis from the ggplot layers
+no_axis <- theme(axis.title=element_blank(),
+                 axis.text=element_blank(),
+                 axis.ticks=element_blank())
+
+# Mean of income
+ggplot() +
+  geom_sf(data= data,aes(fill = me_renda2), show.legend = T) +
+  scale_fill_manual(values = rev(heat.colors(6, alpha = 1.0)), name="Renda média")+
+  labs(title="Renda média", 
+       subtitle = "Setores censitários da RMRJ, 2010",
+       size=12,
+       caption = "Fonte: IBGE")+
+  theme_minimal() +
+  no_axis
+
+# Population density
+ggplot() +
+  geom_sf(data=data,aes(fill = dens_pop2), show.legend = T) +
+  scale_fill_manual(values = rev(heat.colors(5, alpha = 1.0)), name="Densidade\n(hab./km2)")+
+  labs(title="Densidade demográfica", 
+       subtitle = "Setores censitários da RMRJ, 2010",
+       size=12,
+       caption = "Fonte: IBGE")+
+  theme_minimal() +
+  no_axis

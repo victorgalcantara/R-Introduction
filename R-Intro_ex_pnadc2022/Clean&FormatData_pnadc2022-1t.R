@@ -8,7 +8,7 @@
 library(tidyverse)
 
 getwd() # verifica o dir de trabalho
-setwd("H:/Meu Drive/00 data/IBGE/PNADc") # modifica o dir
+setwd("G:/Meu Drive/00 data/IBGE/PNADc") # modifica o dir
 
 # 1. Import dos dados ----------------------------------------------------------
 load("sample_myPnad2022_1trim.RDS")
@@ -23,6 +23,9 @@ myPnad2022_1trim <- myPnad2022_1trim %>% filter(idad > 18,
                                                 idad < 65)
 
 # Limpeza e formatação
+
+unique(myPnad2022_1trim$educ)
+
 myPnad2022_1trim <- myPnad2022_1trim %>% 
   mutate(.,
          # Formatando para numérico
@@ -30,7 +33,10 @@ myPnad2022_1trim <- myPnad2022_1trim %>%
            test = educ == "Sem instrução e menos de 1 ano de estudo",
            yes  = 0,
            no   = as.numeric(educ)),
-         ocup = as.numeric(ocup)
+         
+         ocup = as.numeric(ocup),
+         
+         ln_rend = log(rend)
   )
 
 myPnad2022_1trim <- myPnad2022_1trim %>% 

@@ -17,6 +17,7 @@ pnad2022 <- get_pnadc(year = 2022, # ano
 
 # Selecionando vars de interesse
 myPnad2022 <- pnad2022 %>% select(
+  "UF",
   "V1028", # Peso amostral
   "V2009", # Idade
   "V2007", # Sexo
@@ -40,7 +41,18 @@ myPnad2022 <- myPnad2022 %>% rename(.,
 
 # Amostragem aleatória para fins didáticos
 # sample(x=1:6,size=1,replace=F)
+
+# Método 1 : TRUE / FALSE
+0.2 * nrow(pnad2022) # 20% dos casos
+
+s <- sample(x=c(T,F),size = nrow(myPnad2022),replace = T,prob = c(.2,.8))
+sum(s)
+
+myPnad2022_1trim <- myPnad2022[s,]
+
+# Método 2: números
 s <- sample(x=1:475193,size = 50000,replace = F)
+
 myPnad2022_1trim <- myPnad2022[s,]
 
 # Note que estamos acabando com o design amostral da pnad-c
@@ -48,10 +60,10 @@ myPnad2022_1trim <- myPnad2022[s,]
 
 # Salvando objeto com os dados
 getwd() # verifica o dir de trabalho
-setwd("H:/Meu Drive/00 data/IBGE/PNADc") # modifica o dir
+setwd("G:/Meu Drive/00 data/IBGE/PNADc") # modifica o dir
 
 write.csv(x = myPnad2022_1trim,
           file="sample_myPnad2022_1trim.csv")
 
 save(object = myPnad2022_1trim,
-          file="sample_myPnad2022_1trim.RDS")
+     file="sample_myPnad2022_1trim.RDS")

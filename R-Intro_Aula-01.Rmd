@@ -23,7 +23,7 @@ devtools::install_github('yihui/xaringan')
 
 style_mono_accent(base_color = "#43418A")
 
-wd <- "H:/Meu Drive/00 GitHub/R-Introduction/R-Intro_Aula-01_files"
+wd <- "G:/Meu Drive/00 GitHub/R-Introduction/R-Intro_Aula-01_files"
 setwd(wd)
 options(htmltools.dir.version = FALSE)
 ```
@@ -44,7 +44,7 @@ R é um software livre e uma linguagem de programação voltada à computação 
 **Setup:** intalar primeiro o [R base](https://cran.r-project.org/) (i.e. o software/linguagem) e depois o [RStudio](https://www.rstudio.com/products/rstudio/download/#download) (ambiente de desenvolvimento). Trabalharemos com o RStudio, mas precisamos ter o R instalado para o ambiente funcionar.
 
 ---
-# Uma ilustração do processo
+# O processo da pesquisa
 ![Adaptação do desenho de Alisson Horst, inspirado no esquema de Wickham](R-Intro_Aula-01_files/HORST, Alisson. paint data-science.png)
 ---
 # História R e RStudio
