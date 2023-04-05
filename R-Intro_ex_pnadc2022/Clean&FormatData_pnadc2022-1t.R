@@ -6,27 +6,27 @@
 
 # 0. Setup and packages --------------------------------------------------------
 library(tidyverse)
+library(openxlsx)
 
 getwd() # verifica o dir de trabalho
 setwd("G:/Meu Drive/00 data/IBGE/PNADc") # modifica o dir
 
 # 1. Import dos dados ----------------------------------------------------------
-load("sample_myPnad2022_1trim.RDS")
+load("PNAD2022_1T.RDS")
+load("PNAD2022_1T_SP.RDS")
 
 # 2. Manuseio dos dados --------------------------------------------------------
 # Select e Filter
 
 # "!" em geral é "negação"
-myPnad2022_1trim <- myPnad2022_1trim %>% select(!peso) 
-
-myPnad2022_1trim <- myPnad2022_1trim %>% filter(idad > 18,
-                                                idad < 65)
+myPnad2022 <- myPnad2022 %>% filter(idad > 18,
+                                    idad < 65)
 
 # Limpeza e formatação
 
-unique(myPnad2022_1trim$educ)
+unique(myPnad2022$educ)
 
-myPnad2022_1trim <- myPnad2022_1trim %>% 
+myPnad2022 <- myPnad2022 %>% 
   mutate(.,
          # Formatando para numérico
          educ = ifelse(
@@ -39,7 +39,7 @@ myPnad2022_1trim <- myPnad2022_1trim %>%
          ln_rend = log(rend)
   )
 
-myPnad2022_1trim <- myPnad2022_1trim %>% 
+myPnad2022 <- myPnad2022 %>% 
   mutate(.,
          # Grupamento das ocup pelo IBGE (anexos)
          vd_ocup = case_when(
@@ -64,11 +64,13 @@ bombeiros militares",
   )
 
 # Exclui todos os casos com NA
-myPnad2022_1trim <- na.exclude(myPnad2022_1trim)
+myPnad2022 <- na.exclude(myPnad2022)
 
 # Salvando objeto com os dados
-write.csv(x = myPnad2022_1trim,
-          file="myPnad2022_1trim.csv")
+write.csv(x = myPnad2022,
+          file="myPnad2022_1T.csv")
 
-save(object = myPnad2022_1trim,
-     file="myPnad2022_1trim.RDS")
+save(object = myPnad2022,
+     file="myPnad2022_1T.RDS")
+
+write.xlsx(myPnad2022,"myPnad2022_1T.xlsx")

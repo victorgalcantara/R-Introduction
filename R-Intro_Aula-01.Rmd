@@ -1,8 +1,7 @@
 ---
-title: "Introdução ao R"
-subtitle: "e RStudio"
-author: "Victor G Alcantara"
-institute: "PPGS/USP"
+title: "Nivelando por baixo"
+subtitle: "impacto da pandemia no 5º do Ensino Fundamental"
+author: "\n Adriano S Senkevics (Inep/UnB) \n Victor G Alcantara (USP)"
 date: "2016/12/12 (atualizado: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:

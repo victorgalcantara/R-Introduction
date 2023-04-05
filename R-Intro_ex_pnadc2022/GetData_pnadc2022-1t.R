@@ -8,6 +8,7 @@
 install.packages("PNADcIBGE")
 library(PNADcIBGE)
 library(tidyverse)
+library(openxlsx)
 
 # Requisitando/baixando dados da pnad-c 2022, 1º trim
 pnad2022 <- get_pnadc(year = 2022, # ano
@@ -15,9 +16,13 @@ pnad2022 <- get_pnadc(year = 2022, # ano
                       design = F   # estrutura específica survey design
                       )
 
+save(pnad2022,file = "PNAD2022_1T.RDS")
+
 # Selecionando vars de interesse
 myPnad2022 <- pnad2022 %>% select(
   "UF",
+  "V1022", # Área rural/urbana
+  "V1023", # Tipo de área
   "V1028", # Peso amostral
   "V2009", # Idade
   "V2007", # Sexo
@@ -31,6 +36,8 @@ myPnad2022 <- pnad2022 %>% select(
 
 myPnad2022 <- myPnad2022 %>% rename(.,
                                     peso = "V1028",
+                                    area = "V1022",
+                                    tipoArea = "V1023",
                                     idad = "V2009",
                                     sexo = "V2007",
                                     raca = "V2010",
@@ -39,31 +46,35 @@ myPnad2022 <- myPnad2022 %>% rename(.,
                                     ocup = "V4010"
                                     )
 
+myPnad2022_sp <- myPnad2022 %>% filter(UF == "São Paulo")
+
 # Amostragem aleatória para fins didáticos
-# sample(x=1:6,size=1,replace=F)
 
-# Método 1 : TRUE / FALSE
-0.2 * nrow(pnad2022) # 20% dos casos
-
-s <- sample(x=c(T,F),size = nrow(myPnad2022),replace = T,prob = c(.2,.8))
-sum(s)
-
-myPnad2022_1trim <- myPnad2022[s,]
-
-# Método 2: números
 s <- sample(x=1:475193,size = 50000,replace = F)
 
-myPnad2022_1trim <- myPnad2022[s,]
+myPnad2022 <- myPnad2022[s,]
 
 # Note que estamos acabando com o design amostral da pnad-c
 # para fins didáticos.
 
 # Salvando objeto com os dados
 getwd() # verifica o dir de trabalho
-setwd("G:/Meu Drive/00 data/IBGE/PNADc") # modifica o dir
+setwd("G:/Meu Drive/00 data/IBGE/PNADc/1T_2022") # modifica o dir
 
-write.csv(x = myPnad2022_1trim,
-          file="sample_myPnad2022_1trim.csv")
+write.csv(x = myPnad2022,
+          file="myPNAD2022_1T.csv")
 
-save(object = myPnad2022_1trim,
-     file="sample_myPnad2022_1trim.RDS")
+save(object = myPnad2022,
+     file="myPNAD2022_1T.RDS")
+
+write.xlsx(x= myPnad2022,"myPNAD2022_1T.xlsx")
+
+# Pnad SP
+
+write.csv(x = myPnad2022_sp,
+          file="myPNAD2022_1T_SP.csv")
+
+save(object = myPnad2022_sp,
+     file="myPNAD2022_1T_SP.RDS")
+
+write.xlsx(x= myPnad2022_sp,"myPNAD2022_1T_SP.xlsx")
