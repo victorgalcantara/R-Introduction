@@ -1,0 +1,30 @@
+{
+    "id": "05284924",
+    "path": "G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/01 codes/tutorial_01.Rmd",
+    "project_path": "01 codes/tutorial_01.Rmd",
+    "type": "r_markdown",
+    "hash": "4042700649",
+    "contents": "",
+    "dirty": false,
+    "created": 1682476356398.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "docOutlineVisible": "0",
+        "cursorPosition": "425,0",
+        "scrollLine": "417",
+        "docOutlineSize": "166",
+        "last_setup_crc32": "bc30e46bb338d19",
+        "chunk_output_type": "console"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1682477572,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1682477572321,
+    "read_only": false,
+    "read_only_alternatives": []
+}
