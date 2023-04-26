@@ -17,3 +17,8 @@ Este repositório contém arquivos do curso organizados nas seguintes pastas:
 
 - [000 P&R](https://github.com/victorgalcantara/R-Introduction/tree/main/000%20-%20P%26R): Programa e recursos do curso, incluindo: dados, códigos e recursos adicionais.
 - [A01 - Intro](https://github.com/victorgalcantara/R-Introduction/tree/main/A01%20-%20Intro): introdução ao R.
+
+## Referências importantes
+
+[Curso 1](https://github.com/leobarone/FLS6397) - Curso organizado por Leonardo Barone e Fernando Limongi
+
