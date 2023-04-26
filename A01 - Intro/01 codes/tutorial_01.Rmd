@@ -43,7 +43,7 @@ Por outro lado, em cada coluna há somente elementos de um tipo. Por exemplo, h�
 
 2- Contínuas, números que podem assumir valores não inteiros
 
-Se destacamos uma coluna do nosso data frame, temos um __vetor__. Por exemplo, a variável "Votos" pode ser presentado da seguinte maneira: {350, 1598, 784, 580, 2}. Um data frame é um conjunto de variáveis (vetores) dispostos na vertical e combinados um ao lado do outro.
+Se destacamos uma coluna do nosso data frame, temos um __vetor__. Por exemplo, a variável "Votos" pode ser presentado da seguinte maneira: {350, 298, 284, 180, 230}. Um data frame é um conjunto de variáveis (vetores) dispostos na vertical e combinados um ao lado do outro.
 
 Data frame e vetores são __objetos__ na linguagem R.
 
@@ -371,7 +371,7 @@ Veja que não precisamos usar o botão de importação do RStudio para abrir o a
 library(rio)
 
 # Carregue os dados
-enem2021_sp <- import("00 data/enem2021_sp.csv")
+enem2021_sp <- import("G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/00 data/enem2021_sp.csv")
 ```
 
 ## Breve exerício:
@@ -381,8 +381,6 @@ enem2021_sp <- import("00 data/enem2021_sp.csv")
 2- Observe as 4 primeiras linhas do _data frame_ com o comando _head_ (só as 4 primeiras).
 
 3- Use o comando _str_ para examinar a estrutura do _data frame_.
-
-
 
 ```{r}
 names(enem2021_sp)
