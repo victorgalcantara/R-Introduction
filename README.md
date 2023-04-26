@@ -15,5 +15,5 @@ O curso aborda o funcionamento da linguagem de programação R e do software de 
 
 Este repositório contém arquivos do curso organizados nas seguintes pastas:
 
-    [000 P&R](https://github.com/victorgalcantara/R-Introduction/tree/main/000%20-%20P%26R) - Programa e recursos do curso, incluindo: dados, códigos e recursos adicionais.
-    [A01 - Intro](https://github.com/victorgalcantara/R-Introduction/tree/main/A01%20-%20Intro): introdução ao R.
+- [000 P&R](https://github.com/victorgalcantara/R-Introduction/tree/main/000%20-%20P%26R) - Programa e recursos do curso, incluindo: dados, códigos e recursos adicionais.
+- [A01 - Intro](https://github.com/victorgalcantara/R-Introduction/tree/main/A01%20-%20Intro): introdução ao R.
