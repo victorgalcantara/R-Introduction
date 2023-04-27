@@ -1,0 +1,316 @@
+---
+title: "Tutorial 00 - Operações Básicas"
+author: "Victor G Alcantara"
+date: "2023-04-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Operações básicas no R
+
+O R é uma linguagem de programação. Como as outras (Python, Java, JS etc.), ele
+tem uma sintaxe específica. O diferencial do R é que é uma linguagem voltada
+para a estatística, o que atrai a comunidade acadêmica.
+
+Caso queria consultar materiais mais elaborados, recomendo:
+
+- Livro introdutório [R for data science](https://r4ds.had.co.nz/index.html)
+
+- [Tutorial Leonardo Barone no GitHub](https://github.com/leobarone/cebrap_lab_programacao_r)
+
+Neste tutorial, veremos o básico das operações em R.
+
+## Parte I - Operações elementares
+
+O R é, como as outras linguagens, uma grande calculadora. O principal fluxo de
+trabalho com dados é com *armazenamento* e *manuseio*.
+
+É fundamental entender a sintaxe e funcionamento do R, pois a base serve para
+a programação de funções mais complexas. Tudo o que vamos ver de importação,
+manuseio e visualização de dados é programado com as operações básicas.
+
+Sintaxe básica
+
+Usamos "#" para comentar na linha do código. Ou seja, indicar que a linha é só
+um comentário e não deve ser computada.
+```{r}
+# Este é um comentário
+```
+
+Usamos aspas para indicar texto. Qualquer caractere sem aspas o R vai entender como objeto
+
+```{r}
+"Este é um texto e deve ser escrito entre aspas"
+```
+
+Qualquer erro, o R não computa e retorna uma msg de erro padrão.
+
+```{r}
+teste
+```
+Note: como não definimos nada no objeto "teste", logo ele retorna um erro indicando
+que não encontrou o objeto na memória.
+
+O R é nosso amigão e muitas vezes, quando notar que pode ter algo errado, vai
+nos avisar com _Warning_
+
+### Armazenamento
+
+As informações podem ser armazenadas na memória do computador em *objetos*.
+
+A atribuição de informação a um objeto é feita com a setinha (<-) ou o igual (=)
+
+Veja o exemplo:
+
+```{r}
+objeto <- "Este é um objeto"
+
+idade <- 12
+```
+
+caso queira guardar mais de uma informação, é preciso colocar entre parênteses e
+concatenar com "c"
+
+```{r}
+idade <- c(10,11,12,13,14,15)
+
+# Alternativamente podemos escrever
+
+idade <- c(10:15)
+```
+
+### Manuseio
+
+Podemos fazer cálculos com R, veja:
+
+```{r}
+# 1. R como calculadora ----
+
+2+3      # soma
+2*3      # multiplicação
+2^2      # potência
+
+sqrt(16) # raíz quadrada / square roots
+16^(1/2)
+
+exp(1)   # exponencial
+
+log(10)  # logarítmo
+log2(16)
+
+# No python não tem isso!
+pi-2
+```
+
+Podemos também fazer cálculos com objetos, veja:
+
+```{r}
+# 2. Objetos ----
+
+x <- 2
+x+3
+
+x <- 1:100
+y <- log(1:100)
+
+plot(x,y)
+```
+
+Além dos cálculos, podemos também fazer operações lógicas (Verdadeiro/Falso)
+
+```{r}
+# 3. Operações lógicas ----
+# São operações em testamos uma sentença tendo como resultado:
+# TRUE (T) ou FALSE (F)
+
+2 >  2  # MAIOR QUE
+2 < 2   # MENOR QUE
+2 == 3  # IGUALDADE
+
+2 >= 2 # MAIOR OU IGUAL
+
+# Por quê igualdade são dois sinais?
+# R: Porque apenas um significa atribuição de valor. Igual a setinha.
+
+x = 1:10
+x <- 1:10
+
+"eu" == "todo mundo" # Igualdade
+"eu" == "eu"
+"eu" != "vc"         # Diferença
+
+# Teste em grupo
+"eu" %in% c("vc","todo mundo") # Generalização - se contém
+
+# Nota importante: "!" opera como um sinal de negação/diferença
+
+!("eu" %in% c("vc","todo mundo"))
+```
+
+Podemos também estabelecer relações de "E" e "OU"
+
+```{r}
+# 4. Relações "OU" e "E" ----
+# "|" para "OU"
+2 > 2 | 2 == 2
+2 > 2 | 2 < 2
+
+# "&" para "E"
+2 > 2 & 2 == 2
+2 > 1 & 2 == 2
+```
+
+Aqui vou acelerar o passo-a-passo para colocarmos tudo em prática.
+
+Com as operações básicas, podemos programar funções. As funções são algoritmos
+que fazem um determinado procedimento. São caixas pretas onde colocamos um input
+e recebemos um output.
+
+A lógica é essa:
+Input -> |FUNÇÃO| -> output
+
+Escrevemos o nome da função seguido de parênteses. Dentro dos parênteses inserimos
+os argumentos necessários, veja:
+
+*função*(atributo1 = isso, atributo2 = aquilo)
+
+Vamos ver um exemplo.
+
+```{r}
+# 7. Funções ----
+# são operações já programadas
+# (input-processo-output)
+# nome_da_função(argumentos)
+
+# Exemplo de funções
+# argumentos = input
+
+# A função ifelse recebe como argumento principal um teste lógico, e retorna
+# o que quisermos se a condição é verdadeira ou falsa (input em yes/no)
+
+# 1 é maior do que 3? Se sim, retorne "Verdade", se não, "Mentira"
+ifelse(test = 1>3,yes = "Verdade",no ="Mentira")
+ifelse # Veja como essa função está programada
+```
+
+
+Pois bem. Os *pacotes* são conjuntos de funções programadas. Temos uma infinidade
+de pacotes disponíveis com funções diferentes. No curso, trabalharemos com
+pacotes tradicionais de análise de dados.
+
+São eles:
+
+*rio*: R Input Output, para importação de dados
+
+*tidyverse*: para manuseio dos dados
+
+*ggplot2*: Grammar of Graphics, para visualização dos dados.
+
+Quando baixamos o R, temos apenas o programa e nenhum pacote adicional.
+
+Portanto, precisamos instalar os pacotes que precisamos. A função _install.packages_
+faz o download do pacote no repositório do R e instala na nossa máquina. Depois
+de instalado, temos que carregar o pacote na memória toda vez que abrimos o R
+para trabalhar. Para carregar o pacote, usamos a função _library_.
+
+Em geral, começamos nosso código com a identificação da autoria, algumas informações
+do trabalho e uma parte dedicada ao _setup_, com a instalação e carregamento dos
+pacotes necessários.
+
+```{r}
+# 8. Pacotes ----
+# são conj. de funções
+# devem ser instalados    : install.packages()
+# deve carregar na memória: library()
+install.packages("tidyverse") # Principal biblioteca de funções para manuseio
+install.packages("rio") # Biblioteca para importação dos dados
+
+# Carregando os pacotes ou "pegando na biblioteca do computador"
+library(tidyverse)
+library(rio)
+```
+
+Antes de finalizarmos, precisamos ver algumas funções básicas de conexão entre
+o R e nosso computador.
+
+Lembre-se: quando estamos trabalhando no R, sempre temos uma pasta de referência,
+que chamamos diretório de trabalho ( _Working Directory_ - wd), onde o R busca e salva
+arquivos.
+
+```{r}
+# 9. Navegação no computador ----
+# wd : Working Directory = Diretório/pasta de trabalho
+
+# Get wd
+getwd() # Em qual diretório/pasta estou trabalhando?
+
+# Directory
+dir()   # o que tem nesse diretório/pasta?
+
+# Set wd
+setwd() # Configure o diretório de trabalho
+
+dir.create("minha pasta") # Crie uma pasta com este nome
+```
+
+Vamos pular mais alguns passos para irmos direto ao ponto.
+
+Já podemos abrir uma base de dados.
+
+Em geral, as bases são estruturadas em CSV (Comma Separated Values), que são
+valores separados por vírgula.
+
+Recomendo que você abra um arquivo Wordpad e escreva o seu próprio dado, antes
+de importarmos outros.
+
+Abra um Wordpad e cole o seguinte:
+
+nome,idade,sexo,raca,renda
+"Laura",33,"F","branca",3300
+"Gabriel",17,"M","preta",1220
+"Alexandra",26,"F","parda",1800
+"Fernando",45,"M","branca",13000
+
+Quando for salvar o documento, salve como: "meus_dados.csv"
+
+Note que se você não especificar ".CSV", o arquivo será salvo como ".TXT"
+
+Quando importarmos, o R vai entender que cada linha corresponde a um caso e o
+primeiro será o nome das variáveis. Da seguinte forma:
+
+
+| Nome      | Idade   | Sexo  | raca    | renda |
+| --------- |:-------:| -----:|:-------:|:-----:|
+| Laura     |      33 | F     | branca  |  3300 |
+| Gabriel   |      17 | M     | preta   |  1220 |
+| Alexandra |      26 | F     | parta   |  1800 |
+| Fernando  |      45 | M     | indígena|  13000|
+
+
+Agora defina o endereço da pasta onde está o arquivo com os dados e importe para o R.
+
+Obs.: se estiver usando windows, as barras devem ser invertidas. O R foi programado
+para Linux, pois faz parte do projeto GNU, e as barras que separam o endereço
+no sistema é "/"
+
+Você vai copiar assim no windows:
+G:\Meu Drive\00 GitHub\R-Introduction\A01 - Intro\00 data
+
+Deve inverter as barras para ficar assim:
+G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/00 data
+
+```{r}
+setwd("G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/00 data")
+
+meus_dados <- import("meus_dados.csv")
+
+meus_dados
+```
+
+Vamos parar aqui para praticar essa parte básica (que é MUITO importante)
+
+Tente fazer o tutorial 01 do data.frame, nele tem mais explicações sobre como
+lidar com bases de dados estruturadas.

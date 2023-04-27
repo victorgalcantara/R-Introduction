@@ -11,8 +11,9 @@
 
 <meta name="author" content="Victor G Alcantara" />
 
+<meta name="date" content="2023-04-26" />
 
-<title>Tutorial 01</title>
+<title>Tutorial 00 - Operações Básicas</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,665 +350,362 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Tutorial 01</h1>
+<h1 class="title toc-ignore">Tutorial 00 - Operações Básicas</h1>
 <h4 class="author">Victor G Alcantara</h4>
-<h4 class="date">Abril 2023</h4>
+<h4 class="date">2023-04-26</h4>
 
 </div>
 
 
-<div id="parte-i---teoria-e-prática" class="section level1">
-<h1>Parte I - Teoria e prática</h1>
+<div id="operações-básicas-no-r" class="section level2">
+<h2>Operações básicas no R</h2>
+<p>O R é uma linguagem de programação. Como as outras (Python, Java, JS
+etc.), ele tem uma sintaxe específica. O diferencial do R é que é uma
+linguagem voltada para a estatística, o que atrai a comunidade
+acadêmica.</p>
+<p>Caso queria consultar materiais mais elaborados, recomendo:</p>
+<ul>
+<li><p>Livro introdutório <a href="https://r4ds.had.co.nz/index.html">R
+for data science</a></p></li>
+<li><p><a href="https://github.com/leobarone/cebrap_lab_programacao_r">Tutorial
+Leonardo Barone no GitHub</a></p></li>
+</ul>
+<p>Neste tutorial, veremos o básico das operações em R.</p>
 </div>
-<div id="começando-pelo-meio-data-frames" class="section level1">
-<h1>Começando pelo meio: data frames</h1>
-<p>Uma característica distintiva da linguagem de programação R é ter
-sido desenvolvida para a análise de dados. E quando pensamos em análise
-de dados, a protagonista do show é a <em>base de dados</em> ou, como
-vamos conhecer a partir de agora, <strong>data frame</strong>.</p>
-<p>Por esta razão, em vez de aprender como fazer aritmética, elaborar
-funções ou executar loops para repetir tarefas e outros aspectos básicos
-da linguagem, vamos começar olhando para o R como um software
-concorrente dos demais utilizados para análise de dados em ciências
-sociais, como SPSS, Stata, SAS e companhia.</p>
-<p>As principais características de um data frame são: (1) cada coluna
-representa uma variável (ou característica) de um conjunto de
-observações; (2) cada linha representa uma observação e contém os
-valores de cada variável para tal observação. Vejamos um exemplo:</p>
+<div id="parte-i---operações-elementares" class="section level2">
+<h2>Parte I - Operações elementares</h2>
+<p>O R é, como as outras linguagens, uma grande calculadora. O principal
+fluxo de trabalho com dados é com <em>armazenamento</em> e
+<em>manuseio</em>.</p>
+<p>É fundamental entender a sintaxe e funcionamento do R, pois a base
+serve para a programação de funções mais complexas. Tudo o que vamos ver
+de importação, manuseio e visualização de dados é programado com as
+operações básicas.</p>
+<p>Sintaxe básica</p>
+<p>Usamos “#” para comentar na linha do código. Ou seja, indicar que a
+linha é só um comentário e não deve ser computada.</p>
+<pre class="r"><code># Este é um comentário</code></pre>
+<p>Usamos aspas para indicar texto. Qualquer caractere sem aspas o R vai
+entender como objeto</p>
+<pre class="r"><code>&quot;Este é um texto e deve ser escrito entre aspas&quot;</code></pre>
+<pre><code>## [1] &quot;Este é um texto e deve ser escrito entre aspas&quot;</code></pre>
+<p>Qualquer erro, o R não computa e retorna uma msg de erro padrão.</p>
+<pre class="r"><code># Tente rodar a palavra teste sem aspas. Tire o comando do comentário
+
+# teste</code></pre>
+<p>Note: como não definimos nada no objeto “teste”, logo ele retorna um
+erro indicando que não encontrou o objeto na memória.</p>
+<p>O R é nosso amigão e muitas vezes, quando notar que pode ter algo
+errado, vai nos avisar com <em>Warning</em></p>
+<div id="armazenamento" class="section level3">
+<h3>Armazenamento</h3>
+<p>As informações podem ser armazenadas na memória do computador em
+<em>objetos</em>.</p>
+<p>A atribuição de informação a um objeto é feita com a setinha (&lt;-)
+ou o igual (=)</p>
+<p>Veja o exemplo:</p>
+<pre class="r"><code>objeto &lt;- &quot;Este é um objeto&quot;
+
+idade &lt;- 12</code></pre>
+<p>caso queira guardar mais de uma informação, é preciso colocar entre
+parênteses e concatenar com “c”</p>
+<pre class="r"><code>idade &lt;- c(10,11,12,13,14,15)
+
+# Alternativamente podemos escrever
+
+idade &lt;- c(10:15)</code></pre>
+</div>
+<div id="manuseio" class="section level3">
+<h3>Manuseio</h3>
+<p>Podemos fazer cálculos com R, veja:</p>
+<pre class="r"><code># 1. R como calculadora ----
+
+2+3      # soma</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>2*3      # multiplicação</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre class="r"><code>2^2      # potência</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>sqrt(16) # raíz quadrada / square roots</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>16^(1/2)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>exp(1)   # exponencial</code></pre>
+<pre><code>## [1] 2.718282</code></pre>
+<pre class="r"><code>log(10)  # logarítmo</code></pre>
+<pre><code>## [1] 2.302585</code></pre>
+<pre class="r"><code>log2(16)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code># No python não tem isso!
+pi-2</code></pre>
+<pre><code>## [1] 1.141593</code></pre>
+<p>Podemos também fazer cálculos com objetos, veja:</p>
+<pre class="r"><code># 2. Objetos ----
+
+x &lt;- 2
+x+3</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>x &lt;- 1:100
+y &lt;- log(1:100)
+
+plot(x,y)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABUAAAAPACAMAAADDuCPrAAAAwFBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZrY6AAA6OgA6Ojo6OmY6OpA6ZmY6ZpA6ZrY6kNtmAABmOgBmOjpmZjpmZmZmZpBmkLZmkNtmtttmtv+QOgCQOjqQZjqQZmaQkDqQkLaQtraQttuQtv+Q2/+2ZgC2Zjq2kDq2kGa2kLa2tpC2tra2ttu227a229u22/+2///bkDrbkGbbtmbbtpDbtrbb27bb29vb2//b////tmb/25D/27b/29v//7b//9v///+JVh1lAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAgAElEQVR4nO3de4PbVJrgYVWaUE1P0yQ9GYZk2QtLWGboBaphArmQ8vf/VuNLlS3b8kWvZUnv0fP8AY7LJekkzi+6HLmqGQAh1dAbAJCVgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQNC4A1oBdKb7RHW+xA4N/bsNlKXzRnW9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" width="672" /></p>
+<p>Além dos cálculos, podemos também fazer operações lógicas
+(Verdadeiro/Falso)</p>
+<pre class="r"><code># 3. Operações lógicas ----
+# São operações em testamos uma sentença tendo como resultado:
+# TRUE (T) ou FALSE (F)
+
+2 &gt;  2  # MAIOR QUE</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>2 &lt; 2   # MENOR QUE</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>2 == 3  # IGUALDADE</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>2 &gt;= 2 # MAIOR OU IGUAL</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># Por quê igualdade são dois sinais?
+# R: Porque apenas um significa atribuição de valor. Igual a setinha.
+
+x = 1:10
+x &lt;- 1:10
+
+&quot;eu&quot; == &quot;todo mundo&quot; # Igualdade</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>&quot;eu&quot; == &quot;eu&quot;</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>&quot;eu&quot; != &quot;vc&quot;         # Diferença</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># Teste em grupo
+&quot;eu&quot; %in% c(&quot;vc&quot;,&quot;todo mundo&quot;) # Generalização - se contém</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code># Nota importante: &quot;!&quot; opera como um sinal de negação/diferença
+
+!(&quot;eu&quot; %in% c(&quot;vc&quot;,&quot;todo mundo&quot;))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Podemos também estabelecer relações de “E” e “OU”</p>
+<pre class="r"><code># 4. Relações &quot;OU&quot; e &quot;E&quot; ----
+# &quot;|&quot; para &quot;OU&quot;
+2 &gt; 2 | 2 == 2</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>2 &gt; 2 | 2 &lt; 2</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code># &quot;&amp;&quot; para &quot;E&quot;
+2 &gt; 2 &amp; 2 == 2</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>2 &gt; 1 &amp; 2 == 2</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Aqui vou acelerar o passo-a-passo para colocarmos tudo em
+prática.</p>
+<p>Com as operações básicas, podemos programar funções. As funções são
+algoritmos que fazem um determinado procedimento. São caixas pretas onde
+colocamos um input e recebemos um output.</p>
+<p>A lógica é essa: Input -&gt; |FUNÇÃO| -&gt; output</p>
+<p>Escrevemos o nome da função seguido de parênteses. Dentro dos
+parênteses inserimos os argumentos necessários, veja:</p>
+<p><em>função</em>(atributo1 = isso, atributo2 = aquilo)</p>
+<p>Vamos ver um exemplo.</p>
+<pre class="r"><code># 7. Funções ----
+# são operações já programadas
+# (input-processo-output)
+# nome_da_função(argumentos)
+
+# Exemplo de funções
+# argumentos = input
+
+# A função ifelse recebe como argumento principal um teste lógico, e retorna
+# o que quisermos se a condição é verdadeira ou falsa (input em yes/no)
+
+# 1 é maior do que 3? Se sim, retorne &quot;Verdade&quot;, se não, &quot;Mentira&quot;
+ifelse(test = 1&gt;3,yes = &quot;Verdade&quot;,no =&quot;Mentira&quot;)</code></pre>
+<pre><code>## [1] &quot;Mentira&quot;</code></pre>
+<pre class="r"><code>ifelse # Veja como essa função está programada</code></pre>
+<pre><code>## function (test, yes, no) 
+## {
+##     if (is.atomic(test)) {
+##         if (typeof(test) != &quot;logical&quot;) 
+##             storage.mode(test) &lt;- &quot;logical&quot;
+##         if (length(test) == 1 &amp;&amp; is.null(attributes(test))) {
+##             if (is.na(test)) 
+##                 return(NA)
+##             else if (test) {
+##                 if (length(yes) == 1) {
+##                   yat &lt;- attributes(yes)
+##                   if (is.null(yat) || (is.function(yes) &amp;&amp; identical(names(yat), 
+##                     &quot;srcref&quot;))) 
+##                     return(yes)
+##                 }
+##             }
+##             else if (length(no) == 1) {
+##                 nat &lt;- attributes(no)
+##                 if (is.null(nat) || (is.function(no) &amp;&amp; identical(names(nat), 
+##                   &quot;srcref&quot;))) 
+##                   return(no)
+##             }
+##         }
+##     }
+##     else test &lt;- if (isS4(test)) 
+##         methods::as(test, &quot;logical&quot;)
+##     else as.logical(test)
+##     ans &lt;- test
+##     len &lt;- length(ans)
+##     ypos &lt;- which(test)
+##     npos &lt;- which(!test)
+##     if (length(ypos) &gt; 0L) 
+##         ans[ypos] &lt;- rep(yes, length.out = len)[ypos]
+##     if (length(npos) &gt; 0L) 
+##         ans[npos] &lt;- rep(no, length.out = len)[npos]
+##     ans
+## }
+## &lt;bytecode: 0x0000015ed4175828&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
+<p>Loucura né? Deixa pro pessoal da computação essa parte. O importante
+é entender o que a função faz para utilizá-la.</p>
+<p>Os <em>pacotes</em> são conjuntos de funções programadas. Temos uma
+infinidade de pacotes disponíveis com funções diferentes. No curso,
+trabalharemos com pacotes tradicionais de análise de dados.</p>
+<p>São eles:</p>
+<p><em>rio</em>: R Input Output, para importação de dados</p>
+<p><em>tidyverse</em>: para manuseio dos dados</p>
+<p><em>ggplot2</em>: Grammar of Graphics, para visualização dos
+dados.</p>
+<p>Quando baixamos o R, temos apenas o programa e nenhum pacote
+adicional.</p>
+<p>Portanto, precisamos instalar os pacotes que precisamos. A função
+<em>install.packages</em> faz o download do pacote no repositório do R e
+instala na nossa máquina. Depois de instalado, temos que carregar o
+pacote na memória toda vez que abrimos o R para trabalhar. Para carregar
+o pacote, usamos a função <em>library</em>.</p>
+<p>Em geral, começamos nosso código com a identificação da autoria,
+algumas informações do trabalho e uma parte dedicada ao <em>setup</em>,
+com a instalação e carregamento dos pacotes necessários.</p>
+<pre class="r"><code># 8. Pacotes ----
+# são conj. de funções
+# devem ser instalados    : install.packages()
+# deve carregar na memória: library()
+
+# Tire o &quot;#&quot; se necessário instalar
+
+#install.packages(&quot;tidyverse&quot;) # Principal biblioteca de funções para manuseio
+#install.packages(&quot;rio&quot;) # Biblioteca para importação dos dados
+
+# Carregando os pacotes ou &quot;pegando na biblioteca do computador&quot;
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.1     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.1     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>library(rio)</code></pre>
+<p>Antes de finalizarmos, precisamos ver algumas funções básicas de
+conexão entre o R e nosso computador.</p>
+<p>Lembre-se: quando estamos trabalhando no R, sempre temos uma pasta de
+referência, que chamamos diretório de trabalho ( <em>Working
+Directory</em> - wd), onde o R busca e salva arquivos.</p>
+<pre class="r"><code># 9. Navegação no computador ----
+# wd : Working Directory = Diretório/pasta de trabalho
+
+# Get wd
+getwd() # Em qual diretório/pasta estou trabalhando?</code></pre>
+<pre><code>## [1] &quot;G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/01 codes&quot;</code></pre>
+<pre class="r"><code># Directory
+dir()   # o que tem nesse diretório/pasta?</code></pre>
+<pre><code>## [1] &quot;A01 - Intro - basic R.R&quot;              
+## [2] &quot;A01 - Intro - slides.Rmd&quot;             
+## [3] &quot;Tutorial-00---operações-básicas.html&quot; 
+## [4] &quot;Tutorial-00---operações-básicas.Rmd&quot;  
+## [5] &quot;Tutorial-00---operações-básicas_files&quot;
+## [6] &quot;Tutorial 00 - operações básicas.Rmd&quot;  
+## [7] &quot;tutorial_01.html&quot;                     
+## [8] &quot;tutorial_01.Rmd&quot;</code></pre>
+<pre class="r"><code># Set wd
+# setwd() # Configure o diretório de trabalho
+
+# dir.create(&quot;minha pasta&quot;) # Crie uma pasta com este nome</code></pre>
+<p>Vamos pular mais alguns passos para irmos direto ao ponto.</p>
+<p>Já podemos abrir uma base de dados.</p>
+<p>Em geral, as bases são estruturadas em CSV (Comma Separated Values),
+que são valores separados por vírgula.</p>
+<p>Recomendo que você abra um arquivo Wordpad e escreva o seu próprio
+dado, antes de importarmos outros.</p>
+<p>Abra um Wordpad e cole o seguinte:</p>
+<p>nome,idade,sexo,raca,renda “Laura”,33,“F”,“branca”,3300
+“Gabriel”,17,“M”,“preta”,1220 “Alexandra”,26,“F”,“parda”,1800
+“Fernando”,45,“M”,“branca”,13000</p>
+<p>Quando for salvar o documento, salve como: “meus_dados.csv”</p>
+<p>Note que se você não especificar “.CSV”, o arquivo será salvo como
+“.TXT”</p>
+<p>Quando importarmos, o R vai entender que cada linha corresponde a um
+caso e o primeiro será o nome das variáveis. Da seguinte forma:</p>
 <table>
 <thead>
 <tr class="header">
-<th>Aluno</th>
-<th align="center">Escola</th>
-<th align="right">Desempenho</th>
+<th>Nome</th>
+<th align="center">Idade</th>
+<th align="right">Sexo</th>
+<th align="center">raca</th>
+<th align="center">renda</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Beatriz</td>
-<td align="center">Escola01</td>
-<td align="right">350</td>
+<td>Laura</td>
+<td align="center">33</td>
+<td align="right">F</td>
+<td align="center">branca</td>
+<td align="center">3300</td>
 </tr>
 <tr class="even">
-<td>Danilo</td>
-<td align="center">Escola01</td>
-<td align="right">298</td>
+<td>Gabriel</td>
+<td align="center">17</td>
+<td align="right">M</td>
+<td align="center">preta</td>
+<td align="center">1220</td>
 </tr>
 <tr class="odd">
-<td>Flora</td>
-<td align="center">Escola02</td>
-<td align="right">284</td>
+<td>Alexandra</td>
+<td align="center">26</td>
+<td align="right">F</td>
+<td align="center">parta</td>
+<td align="center">1800</td>
 </tr>
 <tr class="even">
-<td>Lara</td>
-<td align="center">Escola02</td>
-<td align="right">180</td>
-</tr>
-<tr class="odd">
-<td>Mateus</td>
-<td align="center">Escola03</td>
-<td align="right">230</td>
+<td>Fernando</td>
+<td align="center">45</td>
+<td align="right">M</td>
+<td align="center">indígena</td>
+<td align="center">13000</td>
 </tr>
 </tbody>
 </table>
-<p>Note que em uma linha os elementos são de tipos de diferentes: na
-primeira coluna há nomes (texto), na segunda uma identificação das
-escolas (texto) e na terceira desempenho em uma avaliação (número
-contínuos).</p>
-<p>Por outro lado, em cada coluna há somente elementos de um tipo. Por
-exemplo, há apenas números contínuos na coluna desempenho. Colunas são
-variáveis e por isso aceitam registros de um único tipo. Se você já fez
-um curso de estatísticas básica ou de métodos quantitativos deve se
-lembrar que as variáveis são classificadas da seguinte maneira:</p>
-<p>1- Discretas</p>
-<ul>
-<li><p>Nominais, que são categorias (normalmente texto) não
-ordenadas</p></li>
-<li><p>Ordinais, que são categorias (normalmente texto)
-ordenadas</p></li>
-<li><p>Inteiros, ou seja, o conjunto dos números inteiros</p></li>
-</ul>
-<p>2- Contínuas, números que podem assumir valores não inteiros</p>
-<p>Se destacamos uma coluna do nosso data frame, temos um
-<strong>vetor</strong>. Por exemplo, a variável “Votos” pode ser
-presentado da seguinte maneira: {350, 1598, 784, 580, 2}. Um data frame
-é um conjunto de variáveis (vetores) dispostos na vertical e combinados
-um ao lado do outro.</p>
-<p>Data frame e vetores são <strong>objetos</strong> na linguagem R.</p>
-<p>Vamos ver como o R representa vetores e data frames na tela. Antes
-disso, é preciso “abrir” um data frame.</p>
-<div id="pausa-para-pacotes" class="section level2">
-<h2>Pausa para pacotes</h2>
-<p>Uma das características mais atrativas da linguagem R é o
-desenvolvimento de <strong>pacotes</strong> pela comunidade de usuários.
-Pacotes são conjuntos de funções (aka comandos) e, por vezes, guardam
-também dados em diversos formatos.</p>
-<p>Vamos carregar um pacote chamado <em>datasets</em>, que contém
-diversos conjuntos de dados úteis para fins didáticos. Para carregar um
-pacote (e, portanto, tornar as funções disponíveis para uso naquela
-sessão de R) usamos a função <em>library</em>:</p>
-<pre class="r"><code>library(datasets)</code></pre>
-</div>
-<div id="de-volta-aos-dataframes" class="section level2">
-<h2>De volta aos dataframes</h2>
-<p>Com a função <em>data</em> podemos carregar um conjunto de dados
-disponível na sua sessão de R. Utilizaremos a base <em>mtcars</em>, que
-contém dados da revista <em>Motor Trend US</em> sobre características
-(variáveis) de 32 automóveis (esse é um dos conjuntos de dados mais
-populares em cursos introdutórios de R).</p>
-<pre class="r"><code>data(mtcars)</code></pre>
-<p>Pronto! Logo mais veremos como abrir conjuntos de dados de outras
-fontes (arquivos de texto, outros softwares, etc), mas já podemos
-começar a trabalhar com <em>data frames</em>.</p>
-<p>Antes de avançar, vamos usar o <strong>help</strong> (documentação)
-do R para descobrir o que há no <em>data frame</em> chamado
-<em>mtcars</em>:</p>
-<pre class="r"><code>?mtcars</code></pre>
-<pre><code>## starting httpd help server ... done</code></pre>
-<p>Você pode ler com calma antes de avançar.</p>
-<p>Se quiseremos olhar para os dados que acabamos de carregar utilizamos
-a função <em>View</em> (com V maiúsculo, algo pouco usual em R):</p>
-<pre class="r"><code>View(mtcars)</code></pre>
-<p>Com apenas 32 observações, não fica tão difícil “olhar” para os
-dados. Mas e se estívessemos trabalhando com, por exemplo, o total de
-candidatos vereadores no Brasil em 2016 (aprox. meio milhão de
-candidatos)? Seria útil utilizar o comando <em>View</em>?</p>
-</div>
-<div id="do-editor-de-planilhas-ao-r---parte-1" class="section level2">
-<h2>Do editor de planilhas ao R - parte 1</h2>
-<p>A partir desse ponto no curso vamos resistir à tentação de “olhar”
-para os dados. O hábito de quem utiliza com editores de planilha como MS
-Excel ou Libre Office, ou ainda com algums softwares de análise de dados
-como SPSS e Minitab, é trabalhar “olhando” para os dados, ou seja, para
-os valores de cada célula de uma base dados.</p>
-<p>Você perceberá em pouco tempo que isso não é necessário. Na verdade,
-é contraproducente. Nas primeiras aulas vamos nos munir de ferramentas
-que nos permitirão conhecer os dados sem olhá-los diretamente.</p>
-</div>
-<div id="head-no-lugar-de-view" class="section level2">
-<h2>Head no lugar de View</h2>
-<p>Por exemplo, podemos substituir a função <em>View</em> pela função
-<em>head</em>. Veja o resultado:</p>
-<pre class="r"><code>head(mtcars)</code></pre>
-<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
-<p>Com apenas as 6 primeiras linhas do <em>data frame</em> temos noção
-de todo o conjunto. Sabemos rapidamente que os nomes dos carros são o
-nome de cada uma das linhas, e que o nome das colunas indicam qual
-característica está armazenada coluna (lembra-se da documentação de
-<em>mtcars</em> que você acabou de ler).</p>
-<p>Alternativamente, podemos usar a função <em>str</em> (atalho para
-“structure”):</p>
-<pre class="r"><code>str(mtcars)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    32 obs. of  11 variables:
-##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
-##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
-##  $ disp: num  160 160 108 258 360 ...
-##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
-##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
-##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
-##  $ qsec: num  16.5 17 18.6 19.4 17 ...
-##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
-##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
-##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
-##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
-<p>Com <em>str</em> sabemos qual é a lista de variáveis (colunas) no
-<em>data frame</em>, de qual tipo são – no caso, todas são numéricas e
-vamos falar sobre esse tema mais tarde – e os primeiros valores de cada
-uma, além do número total de observações e variáveis mostrados no topo
-do <strong>output</strong>.</p>
-<p>Há outras maneiras de obter o número linhas e colunas de um <em>data
-frame</em>:</p>
-<pre class="r"><code>nrow(mtcars)</code></pre>
-<pre><code>## [1] 32</code></pre>
-<pre class="r"><code>ncol(mtcars)</code></pre>
-<pre><code>## [1] 11</code></pre>
-<pre class="r"><code>dim(mtcars)</code></pre>
-<pre><code>## [1] 32 11</code></pre>
-<p><em>nrow</em> retorna o número de linhas; <em>ncol</em>, o de coluna;
-<em>dim</em> as dimensões (na ordem linha e depois coluna) do
-objeto.</p>
-<p><em>names</em>, por sua vez, retorna os nomes das variáveis do
-<em>data frame</em></p>
-<pre class="r"><code>names(mtcars)</code></pre>
-<pre><code>##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;
-## [11] &quot;carb&quot;</code></pre>
-</div>
-<div id="argumentos-ou-parâmetros-das-funções" class="section level2">
-<h2>Argumentos ou parâmetros das funções</h2>
-<p>Note que em todas as funções que utilizamos até agora,
-<em>mtcars</em> está dentro do parêntesis que segue o nome da função.
-Essa <strong>sintax</strong> é característica das funções de R. O que
-vai entre parêntesis são os <strong>argumentos</strong> ou
-<strong>parâmetros</strong> da função, ou seja, os “inputs” que serão
-transformados.</p>
-<p>Uma função pode receber mais de um argumento. Pode também ter
-argumentos não obrigatórios, ou seja, para os quais não é necessário
-informar nada se você não quiser alterar os valores pré-definidos. Por
-exemplo, a função <em>head</em> contém o argumento <em>n</em>, que se
-refere ao número de linhas a serem <strong>impressas</strong> na tela,
-pré-estabelecido em 6 (você pode conhecer os argumentos da função na
-documentação do R usando <em>?</em> antes do nome da função). Para
-alterá-lo para 10, por exemplo, basta fazer:</p>
-<pre class="r"><code>head(x = mtcars, n = 10)</code></pre>
-<pre><code>##                    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-## Duster 360        14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
-## Merc 240D         24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-## Merc 230          22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-## Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</code></pre>
-<p><em>x</em> é o argumento que já havíamos utilizado anteriormente e
-indica em que objeto a função <em>head</em> será aplicada. Dica: você
-pode omitir tanto “x =” quanto “n =” se você já conhecer a ordem de cada
-argumento no uso da função. Veja que neste caso estamos utilizando o
-símbolo “=” sem fazer a atribuição de dados a um objeto, mas para
-atribuir valores (ou objetos) aos argumento de uma função. Para não
-haver confusão é preferível usar o símbolo “&lt;-” para atribuição e o
-“=” para as demais situações.</p>
-</div>
-<div id="pausa-para-um-comentário" class="section level2">
-<h2>Pausa para um comentário</h2>
-<p>Podemos fazer comentários no meio do código. Basta usar # e tudo que
-seguir até o final da linha não será interpertado pelo R como código.
-Por exemplo:</p>
-<pre class="r"><code># Imprime o nome das variaveis do data frame mtcars
-names(mtcars)</code></pre>
-<pre><code>##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;
-## [11] &quot;carb&quot;</code></pre>
-<pre class="r"><code>names(mtcars) # Repetindo o comando acima com comentario em outro lugar</code></pre>
-<pre><code>##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;
-## [11] &quot;carb&quot;</code></pre>
-<p>Comentários são extremamente úteis para documentar seu código.
-Documentar é parte de programar e você deve pensar nas pessoas com as
-quais vai compartilhar o código e no fato de que com certeza não se
-lembrará do que fez em pouco tempo (garanto, você vai esquecer).</p>
-</div>
-<div id="construindo-vetores-e-data-frames" class="section level2">
-<h2>Construindo vetores e data frames</h2>
-<p>Vamos esquecer o <em>data frame</em> com o qual estávamos trabalhando
-até agora. Para remover um objeto do <strong>Workspace</strong>
-fazemos:</p>
-<pre class="r"><code>rm(mtcars)</code></pre>
-<p>Vamos fazer isso de forma menos entediante. Vamos montar um banco de
-dados de notícias.</p>
-<p>Escolha 2 jornais ou portais de notícias diferentes. Vá em cada um
-deles e colete 3 notícias. Em casa notícia, colete as seguintes
-informações:</p>
-<ul>
-<li>Nome do jornal ou portal</li>
-<li>Data da notícia (não precisa coletar a hora)</li>
-<li>Título</li>
-<li>Autor(a)</li>
-<li>Número de palavras no texto (use o MS Word ou Libre Office se
-precisar - chute se tiver preguiça)</li>
-<li>Marque 1 se a notícia for sobre política e 0 caso contrário</li>
-<li>Marque 1 se a notícia for sobre esporte e 0 caso contrário</li>
-<li>Marque TRUE se a notícia contiver vídeo e FALSE caso contrário</li>
-</ul>
-<p>Insira as informações nos vetores em ordem de coleta das notícias</p>
-<p>Com cada informação, vamos construir um vetor. Vejam meus exemplos.
-Começando com o nome do jornal ou portal:</p>
-<pre class="r"><code>jornal &lt;- c(&quot;The Guardian&quot;, &quot;The Guardian&quot;, &quot;The Guardian&quot;, &quot;Folha de São Paulo&quot;, 
-            &quot;Folha de São Paulo&quot;, &quot;Folha de São Paulo&quot;)</code></pre>
-<p>Opa, calma! Temos um monte de coisas novas aqui!</p>
-<p>A primeira delas é: se você criou corretamente o vetor
-<em>jornal</em>, então nada aconteceu na sua tela, ou seja, nenhum
-output foi impresso. Isso se deve ao fato de que criamos um novo
-<strong>objeto</strong>, chamado <em>jornal</em> e
-<strong>atribuímos</strong> a ele os valores coletados sobre os nomes
-dos veículos nos quais coletamos as notícias. O símbolo de
-<strong>atribuição</strong> em R é <strong>&lt;-</strong>. Note que o
-símbolo lembra uma seta para a esquerda, indicando que o conteúdo do
-vetor será armazenado no objeto <em>jornal</em>.</p>
-<p>Objetos não são nada mais do que um nome usado para armazenar dados
-na memória RAM (temporária) do seu computador. No exemplo acima,
-<em>jornal</em> é o objeto e o vetor é a informação armazenada. Uma vez
-criado, o objeto está disponível para ser usado novamente, pois ele
-ficará disponível no <strong>workspace</strong>. Veremos adiante que
-podemos criar um <em>data frame</em> a partir de vários vetores
-armazenados na memória. Especificamente no RStudio, os objetos ficam
-disponíveis no painel <em>environment</em> (que provavelmente está no
-canto direito superior da sua tela).</p>
-<p>Posso usar o símbolo <strong>=</strong> no lugar de
-<strong>&lt;-</strong>? Sim. Funciona. Mas nem sempre funciona e esta
-substituição é uma fonte grande de confusão. Quando entendermos um pouco
-mais da sintaxe da linguagem R ficará claro.</p>
-<p>Se o objetivo fosse criar o vetor sem “guardá-lo” em um objeto,
-bastaria repetir a parte do código acima que começa após o símbolo de
-atribuição. <em>c</em> ( do inglês “concatenate”) é a função do R que
-combina valores de texto, número ou lógicos (ainda não falamos destes
-últimos) em um vetor. É um função muito utilizada ao programar em R.</p>
-<pre class="r"><code>c(&quot;The Guardian&quot;, &quot;The Guardian&quot;, &quot;The Guardian&quot;, &quot;Folha de São Paulo&quot;,
-  &quot;Folha de São Paulo&quot;, &quot;Folha de São Paulo&quot;)</code></pre>
-<pre><code>## [1] &quot;The Guardian&quot;       &quot;The Guardian&quot;       &quot;The Guardian&quot;      
-## [4] &quot;Folha de São Paulo&quot; &quot;Folha de São Paulo&quot; &quot;Folha de São Paulo&quot;</code></pre>
-<p>Note que há uma quebra de linha no código. Não há problema algum. Uma
-vez que o parêntese que indica o fim do vetor não foi encontrado, o R
-entende o que estiver na próxima como continuidade do código (e,
-portanto, do vetor). Dica: quebras de linha ajudam a vizualizar o código
-e com o tempo você também usará.</p>
-<p>Vamos seguir com nossa tarefa de criar vetores. Já temos o vetor
-jornal (que você pode observar no workspace). Os demais, na minha coleta
-de dados, estão a seguir:</p>
-<pre class="r"><code># Data
-# Obs: ha uma funcao em R com nome &quot;data&quot;.
-# Evite dar a objetos nome de funcoes
-date &lt;- c(&quot;10/03/2017&quot;, &quot;10/03/2017&quot;, &quot;10/03/2017&quot;, &quot;10/03/2017&quot;, &quot;10/03/2017&quot;, &quot;10/03/2017&quot;)
-# Titulo
-titulo &lt;- c(&quot;&#39;Trump lies all the time&#39;: Bernie Sanders indicts president&#39;s assault on democracy&quot;,
-            &quot;Bruno, still guilty of murder but bafflingly welcome to walk back into football&quot;,
-            &quot;BBC interviewee interrupted by his children live on air – video&quot;,
-            &quot;Bolsista negra é hostilizada em atividade no campus da FGV de SP&quot;,
-            &quot;Meninas podem ser o que quiserem, inclusive matemáticas&quot;,
-            &quot;Favela de Paraisópolis tem novo incêndio em menos de dez dias&quot;)
-# Autor
-autor &lt;- c(&quot;Ed Pilkington &quot;, &quot;Barney Ronay&quot;, NA, &quot;Joana Cunha; Jairo Marques&quot;, &quot;Marcelo Viana&quot;, NA)
-# Numero de caracteres
-caracteres &lt;- c(5873, 6301, 358, 3644, 4086, 3454)
-# Conteudo sobre politica
-politica &lt;- c(1, 0, 0, 0, 0, 0)
-# Conteudo sobre esporte
-esporte &lt;- c(0, 1, 0, 0, 0, 0)
-# Contem video
-video &lt;- c(FALSE, FALSE, TRUE, FALSE, FALSE, TRUE)</code></pre>
-<p>Para onde vão os objetos de R criados? Para o workspace. Se quisermos
-uma fotografia do nosso workspace, usamos a função <em>ls</em>, com
-parêntese vazio (ou seja, sem argumentos além dos
-pré-estabelecidos):</p>
-<pre class="r"><code>ls()</code></pre>
-<pre><code>## [1] &quot;autor&quot;      &quot;caracteres&quot; &quot;date&quot;       &quot;esporte&quot;    &quot;jornal&quot;    
-## [6] &quot;politica&quot;   &quot;titulo&quot;     &quot;video&quot;</code></pre>
-</div>
-<div id="detalhes-importantes-nos-vetores-acima" class="section level2">
-<h2>Detalhes importantes nos vetores acima</h2>
-<p>Mais alguns detalhes importantes a serem notados no exemplo
-acima:</p>
-<ul>
-<li>O formato da data foi arbitrariamente escolhido. Por enquanto, o R
-entende apenas como texto o que foi inserido. Datas são especialmente
-chatas de se trabalhar e há funções específicas para tanto.</li>
-<li>Os textos foram inseridos entre aspas. Os números, não. Se números
-forem inseridos com aspas o R os entenderá como texto também.</li>
-<li>Além de textos e números, temos no vetor <em>vídeo</em> valores
-lógicos, TRUE e FALSE. <em>logical</em> é um tipo de dado do R (e é
-particularmente importante).</li>
-<li>O texto do primeiro título que coletei contém aspas. Como colocar
-aspas dentro de aspas sem fazer confusão? Se você delimitou o texto com
-aspas duplas, use aspas simples no texto e vice-versa.</li>
-<li>O que são os <em>NA</em> no meio do vetor <em>autor</em>? Quando
-coletei as notícias, não consegui identificar o autor(a) de algumas
-(eram notícias da redação). <em>NA</em> é o símbolo do R para
-<strong>missing values</strong> e lidar com eles é uma das grandes
-chatices em R.</li>
-</ul>
-</div>
-<div id="criando-um-data-frame-com-vetores" class="section level2">
-<h2>Criando um data frame com vetores:</h2>
-<p>Como vimos acima, <em>data frames</em> são um conjunto de vetores na
-vertical. Se você introduziu os valores em cada vetor na ordem correta
-de coleta dos dados, então eles podem ser <strong>pareados</strong> e
-<strong>combinados</strong>. No meu exemplo, a primeira posição de cada
-vetor contém as informações sobre a primeira notícia, a segunda posição
-sobre a segunda notícia e assim por diante.</p>
-<p>Obviamente, se estiverem pareados, os vetores devem ter o mesmo
-comprimento. Há uma função bastante útil para checar o comprimento:</p>
-<pre class="r"><code>length(jornal)</code></pre>
-<pre><code>## [1] 6</code></pre>
-<p>Vamos criar com os vetores que construímos um <em>data frame</em> com
-o nome <em>dados</em>. Vamos produzí-lo, discutir a função
-<em>data.frame</em> e depois examiná-lo:</p>
-<pre class="r"><code>dados &lt;- data.frame(jornal, date, titulo, autor, caracteres, politica, esporte, video)</code></pre>
-<p>A função <em>data.frame</em> cria um <em>data frame</em> a partir de
-vetores ou matrizes (que ainda não vimos). Quando criamos a partir de
-vetores, automaticamente os nomes das variáveis (colunas) no novo objeto
-serão os nomes dos vetores. Mas poderíamos querer nomes novos (por
-exemplo, em inglês). Bastaria fazer:</p>
-<pre class="r"><code>dados &lt;- data.frame(newspaper = jornal, 
-                    date = date, 
-                    title = titulo, 
-                    author = autor, 
-                    n_char = caracteres, politica, esporte, video)</code></pre>
-<p>Usando as funções que aprendemos nessa aula:</p>
-<pre class="r"><code># 6 primeiras (e unicas, no caso) linhas
-head(dados)</code></pre>
-<pre><code>##            newspaper       date
-## 1       The Guardian 10/03/2017
-## 2       The Guardian 10/03/2017
-## 3       The Guardian 10/03/2017
-## 4 Folha de São Paulo 10/03/2017
-## 5 Folha de São Paulo 10/03/2017
-## 6 Folha de São Paulo 10/03/2017
-##                                                                                title
-## 1 &#39;Trump lies all the time&#39;: Bernie Sanders indicts president&#39;s assault on democracy
-## 2    Bruno, still guilty of murder but bafflingly welcome to walk back into football
-## 3                    BBC interviewee interrupted by his children live on air – video
-## 4                   Bolsista negra é hostilizada em atividade no campus da FGV de SP
-## 5                            Meninas podem ser o que quiserem, inclusive matemáticas
-## 6                      Favela de Paraisópolis tem novo incêndio em menos de dez dias
-##                       author n_char politica esporte video
-## 1             Ed Pilkington    5873        1       0 FALSE
-## 2               Barney Ronay   6301        0       1 FALSE
-## 3                       &lt;NA&gt;    358        0       0  TRUE
-## 4 Joana Cunha; Jairo Marques   3644        0       0 FALSE
-## 5              Marcelo Viana   4086        0       0 FALSE
-## 6                       &lt;NA&gt;   3454        0       0  TRUE</code></pre>
-<pre class="r"><code># Estrutura do data frame
-str(dados)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    6 obs. of  8 variables:
-##  $ newspaper: chr  &quot;The Guardian&quot; &quot;The Guardian&quot; &quot;The Guardian&quot; &quot;Folha de São Paulo&quot; ...
-##  $ date     : chr  &quot;10/03/2017&quot; &quot;10/03/2017&quot; &quot;10/03/2017&quot; &quot;10/03/2017&quot; ...
-##  $ title    : chr  &quot;&#39;Trump lies all the time&#39;: Bernie Sanders indicts president&#39;s assault on democracy&quot; &quot;Bruno, still guilty of murder but bafflingly welcome to walk back into football&quot; &quot;BBC interviewee interrupted by his children live on air – video&quot; &quot;Bolsista negra é hostilizada em atividade no campus da FGV de SP&quot; ...
-##  $ author   : chr  &quot;Ed Pilkington &quot; &quot;Barney Ronay&quot; NA &quot;Joana Cunha; Jairo Marques&quot; ...
-##  $ n_char   : num  5873 6301 358 3644 4086 ...
-##  $ politica : num  1 0 0 0 0 0
-##  $ esporte  : num  0 1 0 0 0 0
-##  $ video    : logi  FALSE FALSE TRUE FALSE FALSE TRUE</code></pre>
-<pre class="r"><code># Nome das variaveis
-names(dados)</code></pre>
-<pre><code>## [1] &quot;newspaper&quot; &quot;date&quot;      &quot;title&quot;     &quot;author&quot;    &quot;n_char&quot;    &quot;politica&quot; 
-## [7] &quot;esporte&quot;   &quot;video&quot;</code></pre>
-<pre class="r"><code># Dimensoes do data frame
-dim(dados)</code></pre>
-<pre><code>## [1] 6 8</code></pre>
-</div>
-<div id="tipos-de-dados-em-r-e-vetores" class="section level2">
-<h2>Tipos de dados em R e vetores</h2>
-<p>Usando o que aprendemos sobre vetores, vamos examinar com cuidado os
-tipos de dados que podem ser armazenados em vetores:
-<strong>doubles</strong>, <strong>integers</strong>,
-<strong>characters</strong>, <strong>logicals</strong>,
-<strong>complex</strong>, e <strong>raw</strong>. Neste tutorial, vamos
-examinar os 3 mais comumente usados na análise de dados:
-<em>doubles</em>, <em>characters</em>, <em>logicals</em>.</p>
-<div id="doubles" class="section level3">
-<h3>Doubles</h3>
-<p><em>doubles</em> são utilizados para guardar números. Por exemplo, o
-vetor <em>caracteres</em>, que indica o número de caracteres em cada
-texto, é do tipo <em>double</em> (ops, desculpe por criar um vetor com
-este nome para números!). Vamos repetir o comando que cria este
-vetor:</p>
-<pre class="r"><code>caracteres &lt;- c(5873, 6301, 358, 3644, 4086, 3454)</code></pre>
-<p>Com a função <em>typeof</em> você consegue descobrir o tipo de cada
-vetor:</p>
-<pre class="r"><code>typeof(caracteres)</code></pre>
-<pre><code>## [1] &quot;double&quot;</code></pre>
-<p>É possível fazer operações com vetores númericos (<em>integers</em>
-também são vetores numéricos, mas vamos esquecer deles por um segundo e
-fazer <em>double</em> sinônimo de numérico). Por exemplo, podemos somar
-1 a todos os seus elementos, dobrar o valor de cada elemento ou somar
-todos:</p>
-<pre class="r"><code>caracteres + 1</code></pre>
-<pre><code>## [1] 5874 6302  359 3645 4087 3455</code></pre>
-<pre class="r"><code>caracteres * 2</code></pre>
-<pre><code>## [1] 11746 12602   716  7288  8172  6908</code></pre>
-<pre class="r"><code>sum(caracteres)</code></pre>
-<pre><code>## [1] 23716</code></pre>
-<p>Note que as duas primeiras funções retornam vetores de tamanho igual
-ao original, enquanto a aplicação da função <em>sum</em> a um vetor
-retorna apenas um número, ou melhor, um <strong>vetor atômico</strong>
-(que contém um único elemento). Tal como aplicamos as operações
-matemáticas e a função <em>sum</em>, podemos aplicar diversas outras
-operações matemáticas e funções que descrevem de forma sintética os
-dados (média, desvio padrão, etc) a vetores numéricos. Veremos operações
-e funções com calma num futuro breve.</p>
-</div>
-<div id="logicals" class="section level3">
-<h3>Logicals</h3>
-<p>Os vetores <em>politica</em> e <em>esporte</em> também são do tipo
-<em>double</em>. Mesmo registrando apenas a presença e ausência de uma
-característica, os valores inseridos são números. Mas e o vetor
-<em>video</em>? Vejamos:</p>
-<pre class="r"><code>typeof(politica)</code></pre>
-<pre><code>## [1] &quot;double&quot;</code></pre>
-<pre class="r"><code>typeof(esporte)</code></pre>
-<pre><code>## [1] &quot;double&quot;</code></pre>
-<pre class="r"><code>typeof(video)</code></pre>
-<pre><code>## [1] &quot;logical&quot;</code></pre>
-<p>Em vez de armazenarmos a sim/não, presença/ausência, etc com os
-números 0 e 1, podemos em R usar o tipo <em>logical</em>, cujos valores
-são TRUE e FALSE (ou T e F maiúsculos, para poupar tempo e dígitos).
-Diversas operações e resultados no R usam vetores lógicos (por exemplo,
-“filtrar uma base dados”) e os utilizaremos com frequência.</p>
-<p>O que acontece se fizermos operações matemáticas com vetores
-lógicos?</p>
-<pre class="r"><code>video + 1</code></pre>
-<pre><code>## [1] 1 1 2 1 1 2</code></pre>
-<pre class="r"><code>sum(video)</code></pre>
-<pre><code>## [1] 2</code></pre>
-<p>Automaticamente, o R transforma FALSE em 0 e TRUE em 1. Por exemplo,
-ao somar 4 FALSE e 2 TRUE obtemos o valor 2, que é o total de notícias
-que contêm vídeos.</p>
-</div>
-<div id="character" class="section level3">
-<h3>Character</h3>
-<p>Finalmente, vetores que contêm texto são do tipo <em>character</em>.
-O nome dos jornais, data, título e autor são informações que foram
-inseridas como texto (lembre-se, o R não sabe por enquanto que no vetor
-<em>date</em> há uma data). Operações matemáticas não valem pare estes
-vetores.</p>
-</div>
-</div>
-<div id="tipo-e-classe" class="section level2">
-<h2>Tipo e classe</h2>
-<p>Veremos em momento oportuno que os objetos em R também tem um
-atributo denominado <strong>class</strong>. A classe diz respeito às
-características dos objetos enquanto tipo diz respeito ao tipo de dado
-armazenado. No futuro ignoraremos o tipo e daremos mais atenção à
-classe, mas é sempre bom saber distinguir os tipos de dados que podemos
-inserir na memória do computador usando R.</p>
-</div>
-</div>
-<div id="parte-ii---base-externa" class="section level1">
-<h1>Parte II - Base externa</h1>
-<div id="abrindo-dados-de-fontes-externas" class="section level2">
-<h2>Abrindo dados de fontes externas</h2>
-<p>R é uma linguagem extremamente flexível quanto ao formato de dados
-que podem ser importados. Comumente, utilizaremos dados provenientes de
-arquivos de texto (.txt, .csv, .tab, etc) ou de arquivos de excel
-transformados em arquivos de texto. Mas estas estão longe de serem as
-únicas possibilidades.</p>
-<p>Com o pacote <em>rio (R Input Output)</em> abriremos arquivos
-produzidos por outros softwares – como Excel, Stata e SPSS.</p>
-<p>Vamos começar com o exemplo simples. Baixe os dados com resultados
-eleitorais (votação nominal por município e zona) do Acre em 2014
-disponíveis [aqui] (<a href="https://raw.githubusercontent.com/leobarone/FLS6397/master/data/votacao_candidato_munzona_2014_AC.txt" class="uri">https://raw.githubusercontent.com/leobarone/FLS6397/master/data/votacao_candidato_munzona_2014_AC.txt</a>)
-(clique em “Save link as” e faça o download o vá [aqui] (<a href="https://github.com/leobarone/FLS6397/blob/master/data/votacao_candidato_munzona_2014_AC.txt" class="uri">https://github.com/leobarone/FLS6397/blob/master/data/votacao_candidato_munzona_2014_AC.txt</a>)
-e clique em download). Estes dados são provenientes do [Repositório de
-Dados Eleitorais] (<a href="http://www.tse.jus.br/eleicoes/estatisticas/repositorio-de-dados-eleitorais" class="uri">http://www.tse.jus.br/eleicoes/estatisticas/repositorio-de-dados-eleitorais</a>)
-do TSE. O Tribunal disponibiliza para cada ano eleitoral arquivos por UF
-em formato de texto (.txt) e numa pasta comprimida em formato .zip.</p>
-<p>Obs: se você tiver algum problema com o download, encoding, ou outro,
-pode ir direto ao Repositório e fazer o download de lá. Quando
-aprendermos algo de github esse problema deixará de existir.</p>
-<p>Diferentemente de outros softwares, no R a “interface Windows”, aka
-“menus e janelas”, não oferece a possibilidade executar funções. Porém,
-na aba <em>environment</em> há um botão muito útil chamado “Import
-Dataset”, que serve para importar para o <em>workspace</em> arquivos em
-qualquer formato de texto (“From CSV”), MS Excel, Stata, SAS e SPSS.</p>
-<p>Use o botão e a janela para chegar ao arquivo e abrí-lo.</p>
-<p>Observe duas mudanças na sua tela. Agora você encontrará o objeto
-<em>votacao_candidato_munzona_2014_AC</em> na aba <em>Environment</em> e
-o comando de importação dos dados no console, seguido do comando
-<em>View</em> que provocou a abertura dos dados no RStudio.</p>
-<p>Um detalhe importante: agora temos dois <em>data frames</em>
-(<em>dados</em> e <em>votacao_candidato_munzona_2014_AC</em> ) em nosso
-<em>workspace</em> convivendo com os vetores que criamos. Veja:</p>
-<pre class="r"><code>ls()</code></pre>
-<pre><code>## [1] &quot;autor&quot;      &quot;caracteres&quot; &quot;dados&quot;      &quot;date&quot;       &quot;esporte&quot;   
-## [6] &quot;jornal&quot;     &quot;politica&quot;   &quot;titulo&quot;     &quot;video&quot;</code></pre>
-<p>Em outros softwares, como Stata e SPSS, costumamos trabalhar com um
-único objeto, que é o banco de dados. Apenas um <em>data frame</em> por
-vez vai para a memória do software. No R, entretanto, temos um “espaço”
-no qual vários objetos coexistem.</p>
-<p>Veja que não precisamos usar o botão de importação do RStudio para
-abrir o arquivo de dados. Podemos escrever a função <em>read.table</em>
-e todos os seus argumentos. Repetindo o comando:</p>
-<pre class="r"><code># Instale o pacote &quot;rio&quot;
-#install.packages(&quot;rio&quot;)
+<p>Agora defina o endereço da pasta onde está o arquivo com os dados e
+importe para o R.</p>
+<p>Obs.: se estiver usando windows, as barras devem ser invertidas. O R
+foi programado para Linux, pois faz parte do projeto GNU, e as barras
+que separam o endereço no sistema é “/”</p>
+<p>Você vai copiar assim no windows: G:Drive\00 GitHub-Introduction -
+Intro\00 data</p>
+<p>Deve inverter as barras para ficar assim: G:/Meu Drive/00
+GitHub/R-Introduction/A01 - Intro/00 data</p>
+<pre class="r"><code>setwd(&quot;G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/00 data&quot;)
 
-# Carregue o pacote &quot;rio&quot;
-library(rio)
+meus_dados &lt;- import(&quot;meus_dados.csv&quot;)
 
-# Carregue os dados
-enem2021_sp &lt;- import(&quot;G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/00 data/enem2021_sp.csv&quot;)</code></pre>
-</div>
-<div id="breve-exerício" class="section level2">
-<h2>Breve exerício:</h2>
-<p>1- Quantas linhas e quantas colunas têm o <em>data frame</em>
-<em>votacao_candidato_munzona_2014_AC</em>? Use as funções que você
-aprendeu no tutorial.</p>
-<p>2- Observe as 4 primeiras linhas do <em>data frame</em> com o comando
-<em>head</em> (só as 4 primeiras).</p>
-<p>3- Use o comando <em>str</em> para examinar a estrutura do <em>data
-frame</em>.</p>
-<pre class="r"><code>names(enem2021_sp)</code></pre>
-<pre><code>##  [1] &quot;NU_INSCRICAO&quot;           &quot;NU_ANO&quot;                 &quot;TP_FAIXA_ETARIA&quot;       
-##  [4] &quot;TP_SEXO&quot;                &quot;TP_ESTADO_CIVIL&quot;        &quot;TP_COR_RACA&quot;           
-##  [7] &quot;TP_NACIONALIDADE&quot;       &quot;TP_ST_CONCLUSAO&quot;        &quot;TP_ANO_CONCLUIU&quot;       
-## [10] &quot;TP_ESCOLA&quot;              &quot;TP_ENSINO&quot;              &quot;IN_TREINEIRO&quot;          
-## [13] &quot;CO_MUNICIPIO_ESC&quot;       &quot;NO_MUNICIPIO_ESC&quot;       &quot;CO_UF_ESC&quot;             
-## [16] &quot;SG_UF_ESC&quot;              &quot;TP_DEPENDENCIA_ADM_ESC&quot; &quot;TP_LOCALIZACAO_ESC&quot;    
-## [19] &quot;TP_SIT_FUNC_ESC&quot;        &quot;CO_MUNICIPIO_PROVA&quot;     &quot;NO_MUNICIPIO_PROVA&quot;    
-## [22] &quot;CO_UF_PROVA&quot;            &quot;SG_UF_PROVA&quot;            &quot;TP_PRESENCA_CN&quot;        
-## [25] &quot;TP_PRESENCA_CH&quot;         &quot;TP_PRESENCA_LC&quot;         &quot;TP_PRESENCA_MT&quot;        
-## [28] &quot;CO_PROVA_CN&quot;            &quot;CO_PROVA_CH&quot;            &quot;CO_PROVA_LC&quot;           
-## [31] &quot;CO_PROVA_MT&quot;            &quot;NU_NOTA_CN&quot;             &quot;NU_NOTA_CH&quot;            
-## [34] &quot;NU_NOTA_LC&quot;             &quot;NU_NOTA_MT&quot;             &quot;TX_RESPOSTAS_CN&quot;       
-## [37] &quot;TX_RESPOSTAS_CH&quot;        &quot;TX_RESPOSTAS_LC&quot;        &quot;TX_RESPOSTAS_MT&quot;       
-## [40] &quot;TP_LINGUA&quot;              &quot;TX_GABARITO_CN&quot;         &quot;TX_GABARITO_CH&quot;        
-## [43] &quot;TX_GABARITO_LC&quot;         &quot;TX_GABARITO_MT&quot;         &quot;TP_STATUS_REDACAO&quot;     
-## [46] &quot;NU_NOTA_COMP1&quot;          &quot;NU_NOTA_COMP2&quot;          &quot;NU_NOTA_COMP3&quot;         
-## [49] &quot;NU_NOTA_COMP4&quot;          &quot;NU_NOTA_COMP5&quot;          &quot;NU_NOTA_REDACAO&quot;       
-## [52] &quot;Q001&quot;                   &quot;Q002&quot;                   &quot;Q003&quot;                  
-## [55] &quot;Q004&quot;                   &quot;Q005&quot;                   &quot;Q006&quot;                  
-## [58] &quot;Q007&quot;                   &quot;Q008&quot;                   &quot;Q009&quot;                  
-## [61] &quot;Q010&quot;                   &quot;Q011&quot;                   &quot;Q012&quot;                  
-## [64] &quot;Q013&quot;                   &quot;Q014&quot;                   &quot;Q015&quot;                  
-## [67] &quot;Q016&quot;                   &quot;Q017&quot;                   &quot;Q018&quot;                  
-## [70] &quot;Q019&quot;                   &quot;Q020&quot;                   &quot;Q021&quot;                  
-## [73] &quot;Q022&quot;                   &quot;Q023&quot;                   &quot;Q024&quot;                  
-## [76] &quot;Q025&quot;</code></pre>
-<p>Observe que as variáveis estão todas sem rótulos. Para
-identificá-las, verifique o dicionário.</p>
-<p>No próximo tutorial aprenderemos a transformar o <em>data frame</em>
-e alterar os nomes das variáveis.</p>
-</div>
-<div id="colunas-como-vetores" class="section level2">
-<h2>Colunas como vetores</h2>
-<p>Uma vez que importamos os dados, podemos trabalhar com as colunas do
-<em>data frame</em> como se fossem vetores. Por exemplo, vamos tirar a
-média (com a função <em>mean</em>) da coluna NU_NOTA_MT, que é a coluna
-“nota em Matemática”. Veja:</p>
-<pre class="r"><code>mean(NU_NOTA_MT)</code></pre>
-<pre><code>## Error in mean(NU_NOTA_MT): objeto &#39;NU_NOTA_MT&#39; não encontrado</code></pre>
-<p>Opa! O vetor V29 não foi encontrado! Isso ocorre porque V29 não é um
-objeto no nosso <em>workspace</em>. Como podemos ter mais de um <em>data
-frame</em>, se houvesse dois <em>data frames</em> com variáveis com nome
-V29 haveria confusão. O vetor com o qual queremos trabalhar está dentro
-do objeto <em>votacao_candidato_munzona_2014_AC</em>. Indicamos sua
-localização colocando primeiro o nome do <em>data frame</em>, seguido do
-símbolo $ e depois do nome da coluna:</p>
-<pre class="r"><code>mean(enem2021_sp$NU_NOTA_MT,na.rm = T)</code></pre>
-<pre><code>## [1] 573.6965</code></pre>
-<p>Podemos também computar a frequência das categorias em variáveis
-categóricas. Para isso, usamos a função <em>table</em>, que computa a
-tabela de frequências. Veja:</p>
-<pre class="r"><code>table(enem2021_sp$TP_COR_RACA)</code></pre>
-<pre><code>## 
-##     0     1     2     3     4     5 
-##  1775 92224 10080 31708  3387   299</code></pre>
-<p>Os brancos se inscrevem mais no Enem. Curioso, não?</p>
-<p>Vamos continuar mais um pouco.</p>
-<p>Para computar uma tabela de frequência cruzada entre duas variáveis
-(tabela de contingência), basta adicionar a outra variável de interesse.
-Veja:</p>
-<pre class="r"><code>table(enem2021_sp$TP_COR_RACA,enem2021_sp$TP_SEXO)</code></pre>
-<pre><code>##    
-##         F     M
-##   0  1029   746
-##   1 51969 40255
-##   2  5895  4185
-##   3 18362 13346
-##   4  1971  1416
-##   5   159   140</code></pre>
-</div>
-<div id="paramos-por-aqui" class="section level2">
-<h2>Paramos por aqui</h2>
-<p>Fizemos neste tutorial uma rápida introdução a vetores e <em>data
-frames</em>. Vamos agora dar inúmeros passos para trás e aprender os
-fundamentos da linguagem R nos próximos tutoriais. De um forma ou de
-outra, tenha certeza de que você já começou a se acostumar com a
-linguagem, sua sintaxe, léxico e peculiaridades.</p>
+meus_dados</code></pre>
+<pre><code>##        nome idade sexo   raca renda
+## 1     Laura    33    F branca  3300
+## 2   Gabriel    17    M  preta  1220
+## 3 Alexandra    26    F  parda  1800
+## 4  Fernando    45    M branca 13000</code></pre>
+<p>Vamos parar aqui para praticar essa parte básica (que é MUITO
+importante)</p>
+<p>Tente fazer o tutorial 01 do data.frame, nele tem mais explicações
+sobre como lidar com bases de dados estruturadas.</p>
 </div>
 </div>
 
