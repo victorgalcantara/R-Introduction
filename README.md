@@ -24,6 +24,7 @@ Este repositório contém arquivos do curso organizados nas seguintes pastas:
 
 #### Programação com R
 Livros de Hadley Wichkam e Garrett Grolemund
+
 [Livro 1](https://r4ds.had.co.nz/) - Wichkam, Hadley e Grolemund, Garrett (2016). R for Data Science. Ed: O'Reilly Media.
 
 [Livro 2](http://adv-r.had.co.nz/) - Wichkam, Hadley (2014). Advanced R. Ed: Chapman and Hall/CRC.
@@ -43,9 +44,11 @@ Livros de Hadley Wichkam e Garrett Grolemund
 ### Cursos
 
 Cursos com Leonardo Barone
+
 [Curso 1](https://jonnyphillips.github.io/FLS6397_2019/index.html) - Curso organizado por Leonardo Barone e Jonathan Phillips (2019)
 
 [Curso 2](https://github.com/leobarone/FLS6397) - Curso organizado por Leonardo Barone e Fernando Limongi (2017)
 
 Cursos com Rogério Barbosa
+
 [Curso 1 e 2](https://iesp.uerj.br/disciplinas/atuais/) - Curso de Programação e Análise de Dados do IESP-UERJ ministrado por Rogério J. Barbosa (Lego I e II)
