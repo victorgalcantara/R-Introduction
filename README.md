@@ -25,12 +25,15 @@ Este repositório contém arquivos do curso organizados nas seguintes pastas:
 #### Programação com R
 Livros de Hadley Wichkam e Garrett Grolemund
 [Livro 1](https://r4ds.had.co.nz/) - Wichkam, Hadley e Grolemund, Garrett (2016). R for Data Science. Ed: O'Reilly Media.
+
 [Livro 2](http://adv-r.had.co.nz/) - Wichkam, Hadley (2014). Advanced R. Ed: Chapman and Hall/CRC.
+
 [Livro 3](https://rstudio-education.github.io/hopr/) - Grolemund, Garrett (2014). Hands-On Programming with R. Ed: O'Reilly Media.
 
 #### Análise quanti
 
 [Livro 1](https://press.princeton.edu/books/hardcover/9780691167039/quantitative-social-science) - Imai, Kosuke (2018). Quantitative Social Sciences.
+
 [Livro 2](https://press.princeton.edu/books/paperback/9780691152844/mastering-metrics) - Angrist, Joshua (2015). Mastering Metrics.
 
 #### Análise quali
@@ -41,6 +44,7 @@ Livros de Hadley Wichkam e Garrett Grolemund
 
 Cursos com Leonardo Barone
 [Curso 1](https://jonnyphillips.github.io/FLS6397_2019/index.html) - Curso organizado por Leonardo Barone e Jonathan Phillips (2019)
+
 [Curso 2](https://github.com/leobarone/FLS6397) - Curso organizado por Leonardo Barone e Fernando Limongi (2017)
 
 Cursos com Rogério Barbosa
