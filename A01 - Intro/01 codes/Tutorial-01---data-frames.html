@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Victor G Alcantara" />
+<meta name="author" content />
 
 
 <title>Tutorial 01</title>
@@ -350,8 +350,8 @@ display: none;
 
 
 <h1 class="title toc-ignore">Tutorial 01</h1>
-<h4 class="author">Victor G Alcantara</h4>
-<h4 class="date">Abril 2023</h4>
+<h4 class="author"></h4>
+<h4 class="date">Maio 2023</h4>
 
 </div>
 
@@ -429,7 +429,7 @@ ordenadas</p></li>
 </ul>
 <p>2- Contínuas, números que podem assumir valores não inteiros</p>
 <p>Se destacamos uma coluna do nosso data frame, temos um
-<strong>vetor</strong>. Por exemplo, a variável “Votos” pode ser
+<strong>vetor</strong>. Por exemplo, a variável “Desempenho” pode ser
 presentado da seguinte maneira: {350, 298, 284, 180, 230}. Um data frame
 é um conjunto de variáveis (vetores) dispostos na vertical e combinados
 um ao lado do outro.</p>
@@ -878,30 +878,18 @@ transformados em arquivos de texto. Mas estas estão longe de serem as
 únicas possibilidades.</p>
 <p>Com o pacote <em>rio (R Input Output)</em> abriremos arquivos
 produzidos por outros softwares – como Excel, Stata e SPSS.</p>
-<p>Vamos começar com o exemplo simples. Baixe os dados com resultados
-eleitorais (votação nominal por município e zona) do Acre em 2014
-disponíveis [aqui] (<a href="https://raw.githubusercontent.com/leobarone/FLS6397/master/data/votacao_candidato_munzona_2014_AC.txt" class="uri">https://raw.githubusercontent.com/leobarone/FLS6397/master/data/votacao_candidato_munzona_2014_AC.txt</a>)
-(clique em “Save link as” e faça o download o vá [aqui] (<a href="https://github.com/leobarone/FLS6397/blob/master/data/votacao_candidato_munzona_2014_AC.txt" class="uri">https://github.com/leobarone/FLS6397/blob/master/data/votacao_candidato_munzona_2014_AC.txt</a>)
-e clique em download). Estes dados são provenientes do [Repositório de
-Dados Eleitorais] (<a href="http://www.tse.jus.br/eleicoes/estatisticas/repositorio-de-dados-eleitorais" class="uri">http://www.tse.jus.br/eleicoes/estatisticas/repositorio-de-dados-eleitorais</a>)
-do TSE. O Tribunal disponibiliza para cada ano eleitoral arquivos por UF
-em formato de texto (.txt) e numa pasta comprimida em formato .zip.</p>
-<p>Obs: se você tiver algum problema com o download, encoding, ou outro,
-pode ir direto ao Repositório e fazer o download de lá. Quando
-aprendermos algo de github esse problema deixará de existir.</p>
-<p>Diferentemente de outros softwares, no R a “interface Windows”, aka
-“menus e janelas”, não oferece a possibilidade executar funções. Porém,
-na aba <em>environment</em> há um botão muito útil chamado “Import
+<p>Vamos começar com o exemplo simples. Baixe os dados com resultados do
+Enem 2021 do Estado de São Paulo (enem2021_sp.csv) disponível no moodle
+da turma e na pasta de dados desta sessão.</p>
+<p>Na aba <em>environment</em> há um botão muito útil chamado “Import
 Dataset”, que serve para importar para o <em>workspace</em> arquivos em
 qualquer formato de texto (“From CSV”), MS Excel, Stata, SAS e SPSS.</p>
-<p>Use o botão e a janela para chegar ao arquivo e abrí-lo.</p>
-<p>Observe duas mudanças na sua tela. Agora você encontrará o objeto
-<em>votacao_candidato_munzona_2014_AC</em> na aba <em>Environment</em> e
-o comando de importação dos dados no console, seguido do comando
-<em>View</em> que provocou a abertura dos dados no RStudio.</p>
-<p>Um detalhe importante: agora temos dois <em>data frames</em>
-(<em>dados</em> e <em>votacao_candidato_munzona_2014_AC</em> ) em nosso
-<em>workspace</em> convivendo com os vetores que criamos. Veja:</p>
+<p>Você pode usar o botão e a janela para chegar ao arquivo e abrí-lo,
+mas antes veremos como abrir usando comandos pela linguagem, que é mais
+usual no fluxo de trabalho por facilitar a automatização do
+processo.</p>
+<p>Observe duas mudanças na sua tela após importar a base de dados. Veja
+as mudanças na aba sobre ocupação da memória:</p>
 <pre class="r"><code>ls()</code></pre>
 <pre><code>## [1] &quot;autor&quot;      &quot;caracteres&quot; &quot;dados&quot;      &quot;date&quot;       &quot;esporte&quot;   
 ## [6] &quot;jornal&quot;     &quot;politica&quot;   &quot;titulo&quot;     &quot;video&quot;</code></pre>
@@ -910,8 +898,8 @@ o comando de importação dos dados no console, seguido do comando
 vez vai para a memória do software. No R, entretanto, temos um “espaço”
 no qual vários objetos coexistem.</p>
 <p>Veja que não precisamos usar o botão de importação do RStudio para
-abrir o arquivo de dados. Podemos escrever a função <em>read.table</em>
-e todos os seus argumentos. Repetindo o comando:</p>
+abrir o arquivo de dados. Podemos importar de modo facilitado com a
+função <em>import</em> do pacote RIO. Veja:</p>
 <pre class="r"><code># Instale o pacote &quot;rio&quot;
 #install.packages(&quot;rio&quot;)
 
@@ -970,14 +958,16 @@ média (com a função <em>mean</em>) da coluna NU_NOTA_MT, que é a coluna
 “nota em Matemática”. Veja:</p>
 <pre class="r"><code>mean(NU_NOTA_MT)</code></pre>
 <pre><code>## Error in mean(NU_NOTA_MT): objeto &#39;NU_NOTA_MT&#39; não encontrado</code></pre>
-<p>Opa! O vetor V29 não foi encontrado! Isso ocorre porque V29 não é um
-objeto no nosso <em>workspace</em>. Como podemos ter mais de um <em>data
-frame</em>, se houvesse dois <em>data frames</em> com variáveis com nome
-V29 haveria confusão. O vetor com o qual queremos trabalhar está dentro
-do objeto <em>votacao_candidato_munzona_2014_AC</em>. Indicamos sua
-localização colocando primeiro o nome do <em>data frame</em>, seguido do
-símbolo $ e depois do nome da coluna:</p>
-<pre class="r"><code>mean(enem2021_sp$NU_NOTA_MT,na.rm = T)</code></pre>
+<p>Opa! O vetor NU_NOTA_MT não foi encontrado! Isso ocorre porque
+NU_NOTA_MT não é um objeto no nosso <em>workspace</em>. Como podemos ter
+mais de um <em>data frame</em>, se houvesse dois <em>data frames</em>
+com variáveis com nome NU_NOTA_MT haveria confusão. O vetor com o qual
+queremos trabalhar está dentro do objeto <em>enem2021_sp</em>. Indicamos
+sua localização colocando primeiro o nome do <em>data frame</em>,
+seguido do símbolo $ e depois do nome da coluna. Em nosso caso,
+utilizaremos ainda um argumento para especificar que o cálculo deve ser
+feito excluindo os dados faltantes (na.rm = TRUE):</p>
+<pre class="r"><code>mean(enem2021_sp$NU_NOTA_MT,na.rm = TRUE)</code></pre>
 <pre><code>## [1] 573.6965</code></pre>
 <p>Podemos também computar a frequência das categorias em variáveis
 categóricas. Para isso, usamos a função <em>table</em>, que computa a

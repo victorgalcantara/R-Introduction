@@ -1,7 +1,7 @@
 ---
 title: "Tutorial 01"
-author: "Victor G Alcantara"
-date: "Abril 2023"
+author: ""
+date: "Maio 2023"
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -43,7 +43,7 @@ Por outro lado, em cada coluna há somente elementos de um tipo. Por exemplo, h�
 
 2- Contínuas, números que podem assumir valores não inteiros
 
-Se destacamos uma coluna do nosso data frame, temos um __vetor__. Por exemplo, a variável "Votos" pode ser presentado da seguinte maneira: {350, 298, 284, 180, 230}. Um data frame é um conjunto de variáveis (vetores) dispostos na vertical e combinados um ao lado do outro.
+Se destacamos uma coluna do nosso data frame, temos um __vetor__. Por exemplo, a variável "Desempenho" pode ser presentado da seguinte maneira: {350, 298, 284, 180, 230}. Um data frame é um conjunto de variáveis (vetores) dispostos na vertical e combinados um ao lado do outro.
 
 Data frame e vetores são __objetos__ na linguagem R.
 
@@ -343,17 +343,13 @@ R é uma linguagem extremamente flexível quanto ao formato de dados que podem s
 
 Com o pacote _rio (R Input Output)_ abriremos arquivos produzidos por outros softwares -- como Excel, Stata e SPSS.
 
-Vamos começar com o exemplo simples. Baixe os dados com resultados eleitorais (votação nominal por município e zona) do Acre em 2014 disponíveis [aqui] (https://raw.githubusercontent.com/leobarone/FLS6397/master/data/votacao_candidato_munzona_2014_AC.txt) (clique em "Save link as" e faça o download o vá [aqui] (https://github.com/leobarone/FLS6397/blob/master/data/votacao_candidato_munzona_2014_AC.txt) e clique em download). Estes dados são provenientes do [Repositório de Dados Eleitorais] (http://www.tse.jus.br/eleicoes/estatisticas/repositorio-de-dados-eleitorais) do TSE. O Tribunal disponibiliza para cada ano eleitoral arquivos por UF em formato de texto (.txt) e numa pasta comprimida em formato .zip.
+Vamos começar com o exemplo simples. Baixe os dados com resultados do Enem 2021 do Estado de São Paulo (enem2021_sp.csv) disponível no moodle da turma e na pasta de dados desta sessão.
 
-Obs: se você tiver algum problema com o download, encoding, ou outro, pode ir direto ao Repositório e fazer o download de lá. Quando aprendermos algo de github esse problema deixará de existir.
+Na aba _environment_ há um botão muito útil chamado "Import Dataset", que serve para importar para o _workspace_ arquivos em qualquer formato de texto ("From CSV"), MS Excel, Stata, SAS e SPSS.
 
-Diferentemente de outros softwares, no R a "interface Windows", aka "menus e janelas", não oferece a possibilidade executar funções. Porém, na aba _environment_ há um botão muito útil chamado "Import Dataset", que serve para importar para o _workspace_ arquivos em qualquer formato de texto ("From CSV"), MS Excel, Stata, SAS e SPSS.
+Você pode usar o botão e a janela para chegar ao arquivo e abrí-lo, mas antes veremos como abrir usando comandos pela linguagem, que é mais usual no fluxo de trabalho por facilitar a automatização do processo.
 
-Use o botão e a janela para chegar ao arquivo e abrí-lo.
-
-Observe duas mudanças na sua tela. Agora você encontrará o objeto _votacao\_candidato\_munzona\_2014\_AC_ na aba _Environment_ e o comando de importação dos dados no console, seguido do comando _View_ que provocou a abertura dos dados no RStudio.
-
-Um detalhe importante: agora temos dois _data frames_ (_dados_ e _votacao\_candidato\_munzona\_2014\_AC_ ) em nosso _workspace_ convivendo com os vetores que criamos. Veja:
+Observe duas mudanças na sua tela após importar a base de dados. Veja as mudanças na aba sobre ocupação da memória:
 
 ```{r}
 ls()
@@ -361,7 +357,7 @@ ls()
 
 Em outros softwares, como Stata e SPSS, costumamos trabalhar com um único objeto, que é o banco de dados. Apenas um _data frame_ por vez vai para a memória do software. No R, entretanto, temos um "espaço" no qual vários objetos coexistem.
 
-Veja que não precisamos usar o botão de importação do RStudio para abrir o arquivo de dados. Podemos escrever a função _read.table_ e todos os seus argumentos. Repetindo o comando:
+Veja que não precisamos usar o botão de importação do RStudio para abrir o arquivo de dados. Podemos importar de modo facilitado com a função _import_ do pacote RIO. Veja:
 
 ```{r}
 # Instale o pacote "rio"
@@ -398,10 +394,10 @@ Uma vez que importamos os dados, podemos trabalhar com as colunas do _data frame
 mean(NU_NOTA_MT)
 ```
 
-Opa! O vetor V29 não foi encontrado! Isso ocorre porque V29 não é um objeto no nosso _workspace_. Como podemos ter mais de um _data frame_, se houvesse dois _data frames_ com variáveis com nome V29 haveria confusão. O vetor com o qual queremos trabalhar está dentro do objeto _votacao\_candidato\_munzona\_2014\_AC_. Indicamos sua localização colocando primeiro o nome do _data frame_, seguido do símbolo $ e depois do nome da coluna:
+Opa! O vetor NU_NOTA_MT não foi encontrado! Isso ocorre porque NU_NOTA_MT não é um objeto no nosso _workspace_. Como podemos ter mais de um _data frame_, se houvesse dois _data frames_ com variáveis com nome NU_NOTA_MT haveria confusão. O vetor com o qual queremos trabalhar está dentro do objeto _enem2021_sp_. Indicamos sua localização colocando primeiro o nome do _data frame_, seguido do símbolo $ e depois do nome da coluna. Em nosso caso, utilizaremos ainda um argumento para especificar que o cálculo deve ser feito excluindo os dados faltantes (na.rm = TRUE):
 
 ```{r, error=TRUE}
-mean(enem2021_sp$NU_NOTA_MT,na.rm = T)
+mean(enem2021_sp$NU_NOTA_MT,na.rm = TRUE)
 ```
 
 Podemos também computar a frequência das categorias em variáveis categóricas. Para isso, usamos a função _table_, que computa a tabela de frequências. Veja:

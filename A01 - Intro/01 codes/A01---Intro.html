@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Programação e Análise de Dados com R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Victor G Alcantara (PPGS/USP)" />
+    <script src="libs/header-attrs-2.21/header-attrs.js"></script>
+    <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+    <script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+    <script src="libs/typedarray-0.1/typedarray.min.js"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+    <link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+    <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-1.3.1/leaflet.js"></script>
+    <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+    <script src="libs/proj4-2.6.2/proj4.min.js"></script>
+    <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
+    <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding-0.27/datatables.js"></script>
+    <link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Programação e Análise de Dados com R
+]
+.subtitle[
+## do básico ao intermediário
+]
+.author[
+### Victor G Alcantara (PPGS/USP)
+]
+.date[
+### última atualização: 2023-05-10
+]
+
+---
+
+
+
+## Aula 01 - Introdução
+
+##### 0. [Instruções do curso: Github](https://github.com/victorgalcantara/R-Introduction)
+##### 1. [História R e RStudio/Posit](#3)
+##### 2. [Instalação e Setup](#5)
+##### 3. Janelas e fluxo de trabalho
+##### 5. Operações básicas: lógica, cálculo e iterações
+##### 4. Vetores e data.frame
+
+---
+# História R
+
+**R CRAN**
+- R: inicialmente desenvolvido como open source por Ross
+Ihaka and Robert Gentleman na _University of Auckland (NZ)_ nos anos 90
+- Inspirações: Scheme (1975) e S language (1985)
+- S: linguagem desenvolvida no Bell Labs ~1976 por John Chambers, Rick Becker, and Allan Wilks. Primeira linguagem estatística com código aberto ( _open source_ );
+- Desde 1997 desenvolvido por R Development Core Team.
+
+Breve histórico:
+
+- 1993: first share of binary copies in mail list “s-news“
+Martin Mächler (University of Zurich)
+- jun/1995: source code available by ftp under the terms of the Free Software Foundation’s GNU general license.
+- Sep/1996: publication of “R: A Language for Data Analysis and Graphics”
+- 1997: foundation of “core group” who can make changes to the source code
+- fev/2002: R version 1.0
+
+---
+# História RStudio/Posit
+
+**RStudio/Posit**
+- Ambiente de desenvolvimento integrado ( _Integrated Development Environment - IDE_ )
+- Fundada em 2009 por [Joseph J. Allaire](https://en.wikipedia.org/wiki/Joseph_J._Allaire);
+- Em 2011 se consolidou como IDE para R e foi rapidamente incorporada pela comunidade de usuários;
+- Em 2019 passou a integrar Python e hoje está entre as mais usadas.
+- Mudança para Posit em 2022
+
+Impulsiona o uso de softwares livres para análise de dados, oferece condições, confiança e segurança para programação por humanos. Atualmente é mantida pela receita de consumidores de funções adicionais (nuvem, suportes etc.).
+
+---
+# Por quê usar R e RStudio?
+--
+
+&lt;b&gt;Potência:&lt;/b&gt; podemos fazer (quase) tudo com R, considerado uma das melhores ferramentas para estatística e análise de dados. Excel e SPSS estão anos atrás!&lt;br&gt;
+
+--
+
+&lt;b&gt;Código livre, gratuito e universal:&lt;/b&gt; não pagamos para usar e podemos ter controle sobre o que estamos fazendo em termos de processamento.&lt;br&gt;
+
+--
+
+&lt;b&gt;Popularidade:&lt;/b&gt; movido por uma comunidade internacional extensa, que desenvolve e acompanha o software constantemente. Cada vez mais adotado em instituições (principalmente públicas) e pela comunidade acadêmica&lt;br&gt;
+
+--
+
+&lt;b&gt;Ciência aberta! Replicabilidade, transparência e "fairness":&lt;/b&gt; práticas fundamentais e cada vez mais impulsionadas por revistas e instituições acadêmicas!&lt;br&gt;
+
+---
+
+# R vs Python
+
+Algumas diferenças entre **R** (esq.) e **Python** (dir.):
+
+.pull-left[
+1. Linguagem voltada para a estatística \\ Funções e sintaxe mais próximo da matemática/estatística;
+
+1. Comunidade mais acadêmica;
+
+1. Mais usado para trabalho com dados estruturados;
+
+1. Biblioteca de pacotes e funções extensa, mas com muitos inativos após atualizações;
+
+]
+
+.pull-right[
+1. Linguagem voltada para programação \\ Funções e sintaxe mais próxima da programação em Web (html, css, JS);
+
+1. Comunidade mais corporativa;
+
+1. Usado para dados estruturados, mas mais aberto para dados não estruturados e _big data_;
+
+1. Biblioteca extensa e comunidade muito ativa;&lt;sup&gt;*&lt;/sup&gt;
+
+]
+
+---
+# Instalação e setup
+
+Faça o download e instalação do R e RStudio de acordo com o seu sistema
+
+[Repositório RCRAN (Comprehensive R Archive Network)](https://cran.r-project.org/)
+
+[Plataforma Rstudio/Posit](https://posit.co/)
+
+---
+
+class: middle, center
+
+# Mão na massa!
+
+---
+# Vetores
+
+1. Por definição, vetores são colunas que guardam informações.
+
+--
+
+vetor = { 1, 2, 3, ... , n }  
+
+no R: vetor = c(1,2,3,...,n)
+
+--
+
+![vetor](../03 assets/vetor.png)
+---
+
+## Criando um vetor no R
+
+
+```r
+# Criando um vetor
+
+nome = c("Aline","Amadu","Flora","Mafougi")
+
+# Observando o vetor
+nome
+```
+
+```
+## [1] "Aline"   "Amadu"   "Flora"   "Mafougi"
+```
+
+
+```r
+# Observando um valor em uma posição
+
+nome[3]
+```
+
+```
+## [1] "Flora"
+```
+
+---
+
+3. Vetores guardam um tipo ou classe de informação
+
+É importante saber a definição da classe do vetor, pois é ela que define as possibilidades de manuseio. Como na estatística, as classes de variáveis definem o que é possível de ser feito.
+
+As mais importantes são:
+- **CHR**: “character” = caracteres/texto
+- **NUM**: “numeric” = números reais (incluso decimais)
+- **INT** : “integer” = números inteiros
+- **LOG**: “logical” = lógica Verdadeiro/Falso
+	
+- **ORD**: “ordered” = texto ordenado 
+
+---
+
+
+```r
+idade &lt;- c(22,34,30,26)
+renda &lt;- c(2500,2200,2000,1200)
+trabalha &lt;- c(T,F,T,F)
+
+class(nome)
+```
+
+```
+## [1] "character"
+```
+
+```r
+class(idade)
+```
+
+```
+## [1] "numeric"
+```
+
+```r
+class(renda)
+```
+
+```
+## [1] "numeric"
+```
+
+```r
+class(trabalha)
+```
+
+```
+## [1] "logical"
+```
+
+---
+
+![vetores](../03 assets/vetores.png)
+
+1. Data frame é um conjunto de vetores com dimensões iguais
+
+![data.frame](../03 assets/data.frame.png)
+
+---
+
+Definição de data.frame no R
+
+
+```r
+meus_dados &lt;- data.frame(nome,idade,renda,trabalha)
+
+meus_dados
+```
+
+```
+##      nome idade renda trabalha
+## 1   Aline    22  2500     TRUE
+## 2   Amadu    34  2200    FALSE
+## 3   Flora    30  2000     TRUE
+## 4 Mafougi    26  1200    FALSE
+```
+
+```r
+class(meus_dados)
+```
+
+```
+## [1] "data.frame"
+```
+
+```r
+# Acessando informações na minha base de dados
+meus_dados[1,1]
+```
+
+```
+## [1] "Aline"
+```
+
+```r
+meus_dados[1,]
+```
+
+```
+##    nome idade renda trabalha
+## 1 Aline    22  2500     TRUE
+```
+
+---
+
+
+```r
+meus_dados
+```
+
+```
+##      nome idade renda trabalha
+## 1   Aline    22  2500     TRUE
+## 2   Amadu    34  2200    FALSE
+## 3   Flora    30  2000     TRUE
+## 4 Mafougi    26  1200    FALSE
+```
+
+meus_dados[2,3] ???
+
+--
+
+
+```r
+meus_dados[2,3]
+```
+
+```
+## [1] 2200
+```
+
+---
+
+## Funções importantes
+
+**Subseting**: acessar informações em um data frame
+
+meus_dados[ **Linha**, **Coluna** ] OU meus_dados**$**Coluna
+
+
+```r
+meus_dados[1,"nome"]
+```
+
+```
+## [1] "Aline"
+```
+
+```r
+meus_dados$nome[1]
+```
+
+```
+## [1] "Aline"
+```
+
+---
+
+**Select**: selecionar variável
+
+
+```r
+meus_dados[,"nome"]
+```
+
+```
+## [1] "Aline"   "Amadu"   "Flora"   "Mafougi"
+```
+
+```r
+meus_dados$nome
+```
+
+```
+## [1] "Aline"   "Amadu"   "Flora"   "Mafougi"
+```
+
+```r
+subset(x = meus_dados,select = "nome")
+```
+
+```
+##      nome
+## 1   Aline
+## 2   Amadu
+## 3   Flora
+## 4 Mafougi
+```
+
+---
+
+**Filter**: filtrar casos
+
+```r
+subset(x = meus_dados,subset = renda &gt; 2000)
+```
+
+```
+##    nome idade renda trabalha
+## 1 Aline    22  2500     TRUE
+## 2 Amadu    34  2200    FALSE
+```
+
+```r
+meus_dados[ , "nome" ] == "Amadu"
+```
+
+```
+## [1] FALSE  TRUE FALSE FALSE
+```
+
+```r
+meus_dados$renda &gt; 2000
+```
+
+```
+## [1]  TRUE  TRUE FALSE FALSE
+```
+
+---
+
+# Pacote Tydiverse
+
+
+```r
+# install.packages(tidyverse)
+library(tidyverse)
+```
+
+```
+## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.1     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.1     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+```
+
+---
+
+## Verbos importantes
+
+### Select e Filter
+
+```r
+select(.data = meus_dados,nome)
+```
+
+```
+##      nome
+## 1   Aline
+## 2   Amadu
+## 3   Flora
+## 4 Mafougi
+```
+
+```r
+filter(.data = meus_dados,renda &gt; 2000)
+```
+
+```
+##    nome idade renda trabalha
+## 1 Aline    22  2500     TRUE
+## 2 Amadu    34  2200    FALSE
+```
+
+---
+
+## Rename e Recode
+
+
+```r
+rename(.data = meus_dados,"trab"=trabalha)
+```
+
+```
+##      nome idade renda  trab
+## 1   Aline    22  2500  TRUE
+## 2   Amadu    34  2200 FALSE
+## 3   Flora    30  2000  TRUE
+## 4 Mafougi    26  1200 FALSE
+```
+
+```r
+mutate(.data = meus_dados,ln_renda = log10(renda))
+```
+
+```
+##      nome idade renda trabalha ln_renda
+## 1   Aline    22  2500     TRUE 3.397940
+## 2   Amadu    34  2200    FALSE 3.342423
+## 3   Flora    30  2000     TRUE 3.301030
+## 4 Mafougi    26  1200    FALSE 3.079181
+```
+
+---
+
+
+
+
+```r
+Scatter
+```
+
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a6c419506b1678e8341c" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-a6c419506b1678e8341c">{"x":{"visdat":{"70b459e02127":["function () ","plotlyVisDat"]},"cur_data":"70b459e02127","attrs":{"70b459e02127":{"x":{},"y":{},"mode":"markers","color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Idade"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Renda"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[22],"y":[2500],"mode":"markers","type":"scatter","name":"Aline","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"line":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[34],"y":[2200],"mode":"markers","type":"scatter","name":"Amadu","marker":{"color":"rgba(252,141,98,1)","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"line":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[30],"y":[2000],"mode":"markers","type":"scatter","name":"Flora","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"line":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[26],"y":[1200],"mode":"markers","type":"scatter","name":"Mafougi","marker":{"color":"rgba(231,138,195,1)","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"line":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+---
+
+
+```r
+meus_dados[,"educ"] &lt;- c(12,9,16,10)
+```
+
+--
+
+
+
+
+```r
+Scatter
+```
+
+```
+## Warning: 'layout' objects don't have these attributes: 'zaxis'
+## Valid attributes include:
+## '_deprecated', 'activeshape', 'annotations', 'autosize', 'autotypenumbers', 'calendar', 'clickmode', 'coloraxis', 'colorscale', 'colorway', 'computed', 'datarevision', 'dragmode', 'editrevision', 'editType', 'font', 'geo', 'grid', 'height', 'hidesources', 'hoverdistance', 'hoverlabel', 'hovermode', 'images', 'legend', 'mapbox', 'margin', 'meta', 'metasrc', 'modebar', 'newshape', 'paper_bgcolor', 'plot_bgcolor', 'polar', 'scene', 'selectdirection', 'selectionrevision', 'separators', 'shapes', 'showlegend', 'sliders', 'smith', 'spikedistance', 'template', 'ternary', 'title', 'transition', 'uirevision', 'uniformtext', 'updatemenus', 'width', 'xaxis', 'yaxis', 'barmode', 'bargap', 'mapType'
+```
+
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-33f841472a01d6474b57" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-33f841472a01d6474b57">{"x":{"visdat":{"70b464cf6ca9":["function () ","plotlyVisDat"]},"cur_data":"70b464cf6ca9","attrs":{"70b464cf6ca9":{"x":{},"y":{},"z":{},"mode":"markers","color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"title":"Idade"},"yaxis":{"title":"Renda"},"zaxis":{"title":"Escolaridade"},"scene":{"xaxis":{"title":"idade"},"yaxis":{"title":"renda"},"zaxis":{"title":"educ"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[22],"y":[2500],"z":[12],"mode":"markers","type":"scatter3d","name":"Aline","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"line":{"color":"rgba(102,194,165,1)"},"frame":null},{"x":[34],"y":[2200],"z":[9],"mode":"markers","type":"scatter3d","name":"Amadu","marker":{"color":"rgba(252,141,98,1)","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"line":{"color":"rgba(252,141,98,1)"},"frame":null},{"x":[30],"y":[2000],"z":[16],"mode":"markers","type":"scatter3d","name":"Flora","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"line":{"color":"rgba(141,160,203,1)"},"frame":null},{"x":[26],"y":[1200],"z":[10],"mode":"markers","type":"scatter3d","name":"Mafougi","marker":{"color":"rgba(231,138,195,1)","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"line":{"color":"rgba(231,138,195,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+---
+
+
+
+
+```r
+leaflet() %&gt;% addTiles() %&gt;% setView(174.7626,-36.8524, zoom = 10)
+```
+
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a2b23213d53d46966862" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-a2b23213d53d46966862">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[-36.8524,174.7626],10,[]]},"evals":[],"jsHooks":[]}</script>
+
+---
+
+# Importando bases
+
+## Pacote RIO (R Input Output)
+
+
+
+
+```r
+bd &lt;- rio::import("G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/00 data/EF_II_sp_2019.csv")
+
+mydata &lt;- bd %&gt;% select(Escola,rede,ideb,NSE10)
+```
+
+---
+
+
+```r
+str(mydata)
+```
+
+```
+## 'data.frame':	1205 obs. of  4 variables:
+##  $ Escola: chr  "AYRES DE MOURA PROFESSOR" "GAVIAO PEIXOTO BRIGADEIRO" "JOAO SOLIMEO" "WALFREDO ARANTES CALDAS PROFESSOR" ...
+##  $ rede  : chr  "estadual" "estadual" "estadual" "estadual" ...
+##  $ ideb  : num  NA 4.4 4.8 NA NA NA 5.3 4.4 4.8 4.8 ...
+##  $ NSE10 : num  5.96 5.36 5.49 5.4 5.44 4.68 5.75 5.58 5.67 5.33 ...
+```
+
+```r
+# Removendo missing data (NA)
+mydata &lt;- na.exclude(mydata)
+
+str(mydata)
+```
+
+```
+## 'data.frame':	953 obs. of  4 variables:
+##  $ Escola: chr  "GAVIAO PEIXOTO BRIGADEIRO" "JOAO SOLIMEO" "MARIANO DE OLIVEIRA PROFESSOR" "SILVIO XAVIER ANTUNES PROFESSOR" ...
+##  $ rede  : chr  "estadual" "estadual" "estadual" "estadual" ...
+##  $ ideb  : num  4.4 4.8 5.3 4.4 4.8 4.8 5.2 4.8 5.1 4.7 ...
+##  $ NSE10 : num  5.36 5.49 5.75 5.58 5.67 5.33 5.92 5.68 5.44 6.16 ...
+##  - attr(*, "na.action")= 'exclude' Named int [1:252] 1 4 5 6 12 20 24 25 35 46 ...
+##   ..- attr(*, "names")= chr [1:252] "1" "4" "5" "6" ...
+```
+
+---
+
+
+```r
+summary(mydata)
+```
+
+```
+##     Escola              rede                ideb           NSE10      
+##  Length:953         Length:953         Min.   :2.200   Min.   :4.200  
+##  Class :character   Class :character   1st Qu.:4.600   1st Qu.:5.070  
+##  Mode  :character   Mode  :character   Median :4.900   Median :5.310  
+##                                        Mean   :4.933   Mean   :5.353  
+##                                        3rd Qu.:5.200   3rd Qu.:5.640  
+##                                        Max.   :6.600   Max.   :6.800
+```
+
+---
+
+
+```r
+DT::datatable(head(mydata, 20),
+              fillContainer = FALSE, 
+              options = list(pageLength = 3))
+```
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ffa39d92ccdc45806cfd" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ffa39d92ccdc45806cfd">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["2","3","7","8","9","10","11","13","14","15","16","17","18","19","21","22","23","26","27","28"],["GAVIAO PEIXOTO BRIGADEIRO","JOAO SOLIMEO","MARIANO DE OLIVEIRA PROFESSOR","SILVIO XAVIER ANTUNES PROFESSOR","PIO TELLES PEIXOTO PROFESSOR","ZENAIDE VILALVA DE ARAUJO PROFESSORA","ANTONIO CANDIDO CORREA GUIMARAES FILHO PROFESSOR","CANDIDO GONCALVES GOMIDE PROFESSOR","CLODOMIRO CARNEIRO","ERMANO MARCHETTI","HUMBERTO DE SOUZA MELLO GENERAL","BENEDITO TOLOSA PROFESSOR","PEDRO MONTEIRO DO AMARAL CAPITAO","MANUEL DA NOBREGA PADRE","ANTONIO JOSE LEITE PROF","ANTOINE DE SAINT EXUPERY","JOAQUIM LUIZ DE BRITO PROFESSOR","AUGUSTO RIBEIRO DE CARVALHO PROFESSOR","AUGUSTO MEIRELLES REIS FILHO PROFESSOR","LUIZ GONZAGA RIGHINI PROFESSOR"],["estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual","estadual"],[4.4,4.8,5.3,4.4,4.8,4.8,5.2,4.8,5.1,4.7,5.2,5,5.2,6,5.1,5,4.4,5.3,4.4,4.7],[5.36,5.49,5.75,5.58,5.67,5.33,5.92,5.68,5.44,6.16,5.7,5.91,5.76,5.84,5.43,5.76,5.87,6.13,5.79,5.77]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Escola<\/th>\n      <th>rede<\/th>\n      <th>ideb<\/th>\n      <th>NSE10<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+Escolas que oferecem anos finais do EF no município de SP
+
+
+
+
+```r
+Scatter
+```
+
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-2b1e47fb5589c68b5f2d" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-2b1e47fb5589c68b5f2d">{"x":{"visdat":{"70b4198a59a5":["function () ","plotlyVisDat"]},"cur_data":"70b4198a59a5","attrs":{"70b4198a59a5":{"y":{},"x":{},"text":{},"mode":"markers","color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"70b4198a59a5.1":{"y":[4.93731884751024,5.02095458498077,5.18822605992184,5.07885624938345,5.13675791378613,4.91801829270935,5.29759587046023,5.14319143205309,4.98878699364595,5.45200030886738,5.15605846858702,5.29116235219327,5.19465957818881,5.24612772432452,4.98235347537899,5.19465957818881,5.26542827912541,5.43269975406648,5.2139601329897,5.20109309645577,4.84081607350578,5.20752661472274,5.70934103954595,5.09815680418434,5.13032439551917,5.11102384071827,5.3940986444647,5.44556679060041,5.00808754844685,5.2139601329897,4.77648089083613,5.3040293887272,5.29116235219327,5.32976346179506,5.23969420605756,5.20752661472274,4.64137700722988,4.82151551870488,4.93731884751024,5.35549753486291,5.38123160793077,5.13032439551917,5.45843382713434,5.22039365125666,5.29116235219327,5.08528976765042,5.15605846858702,4.90515125617542,5.07885624938345,5.13675791378613,4.79578144563703,5.20752661472274,5.18822605992184,5.2139601329897,5.22039365125666,5.40053216273166,4.96305292057809,4.73144626296738,5.7350751126138,5.27186179739238,5.11745735898524,5.19465957818881,5.0338216215147,4.8536831100397,4.67997811683167,4.87941718310756,5.36193105312988,4.90515125617542,5.0338216215147,4.73787978123435,5.45200030886738,5.29759587046023,5.15605846858702,5.32976346179506,5.42626623579952,5.71577455781291,4.86011662830667,5.65787289341023,5.0338216215147,5.1238908772522,5.52920252807095,4.86011662830667,5.35549753486291,4.90515125617542,5.35549753486291,5.17535902338791,5.2139601329897,5.56780363767273,5.14319143205309,5.43913327233345,5.45200030886738,5.00165403017988,4.48697256882274,5.62570530207541,5.11745735898524,5.58067067420666,4.96948643884506,5.32976346179506,5.59353771074059,5.15605846858702,5.22039365125666,5.32976346179506,5.42626623579952,5.25256124259148,5.86374547795309,5.62570530207541,5.07242273111649,4.7636138543022,5.2139601329897,5.27186179739238,5.15605846858702,5.11102384071827,5.20752661472274,5.07885624938345,5.11102384071827,5.15605846858702,5.22682716952363,5.25899476085845,5.59353771074059,5.15605846858702,5.01452106671381,5.02738810324774,5.3940986444647,5.19465957818881,5.20752661472274,5.17535902338791,5.20109309645577,5.20752661472274,5.02738810324774,4.9437523657772,4.71857922643345,5.43913327233345,4.77004737256917,5.28472883392631,4.88585070137452,4.90515125617542,5.29759587046023,5.1238908772522,5.23969420605756,4.86011662830667,5.16892550512095,5.0531221763156,5.15605846858702,4.91158477444238,5.25899476085845,5.00808754844685,5.20752661472274,4.98878699364595,5.04668865804863,5.02738810324774,5.02738810324774,4.99522051191292,5.00165403017988,4.8729836648406,5.0338216215147,5.3040293887272,5.27186179739238,4.99522051191292,5.29116235219327,5.18179254165488,5.37479808966381,5.13675791378613,5.3040293887272,4.98235347537899,5.27829531565934,4.6928451533656,5.22039365125666,5.37479808966381,5.29759587046023,5.0531221763156,5.49703493673613,4.88585070137452,5.18179254165488,5.5549366011388,5.23969420605756,5.37479808966381,5.59353771074059,5.25899476085845,4.52557367842453,4.66067756203078,4.87941718310756,5.0338216215147,4.86011662830667,5.06598921284952,5.32332994352809,5.29116235219327,4.99522051191292,5.05955569458256,4.99522051191292,5.16249198685399,4.84081607350578,5.26542827912541,4.73144626296738,5.38766512619773,4.57060830629328,4.71857922643345,4.75718033603524,4.95018588404417,5.0338216215147,4.57704182456024,5.16249198685399,5.2139601329897,5.31689642526113,5.58067067420666,5.05955569458256,4.65424404376381,5.28472883392631,4.86655014657363,5.07242273111649,4.98878699364595,5.18822605992184,5.2139601329897,4.8536831100397,5.16892550512095,5.33619698006202,5.13675791378613,4.89871773790845,4.66067756203078,5.33619698006202,4.90515125617542,4.84724959177274,5.31046290699416,4.82151551870488,4.9437523657772,5.13675791378613,5.07885624938345,5.04668865804863,5.27829531565934,4.78934792737006,4.69927867163256,4.73144626296738,4.86011662830667,5.07242273111649,4.8536831100397,5.23326068779059,5.09172328591738,5.02738810324774,4.56417478802631,5.0338216215147,4.53200719669149,4.88585070137452,4.96948643884506,4.75718033603524,4.82794903697185,4.71214570816649,4.77004737256917,4.53200719669149,4.89871773790845,4.83438255523881,4.89228421964149,4.82151551870488,4.86011662830667,4.51914016015756,5.04025513978167,4.40977034961917,4.62850997069595,4.86011662830667,5.04025513978167,4.95661940231113,4.97591995711202,4.7829144091031,5.0338216215147,4.91158477444238,5.0338216215147,4.90515125617542,4.77004737256917,5.25256124259148,4.66067756203078,4.95661940231113,4.8536831100397,4.66711108029774,4.7829144091031,4.95661940231113,4.86011662830667,4.62850997069595,5.14962495032006,4.73144626296738,5.37479808966381,4.96305292057809,5.10459032245131,4.8729836648406,5.37479808966381,5.09815680418434,4.44193794095399,4.57704182456024,4.86655014657363,5.23326068779059,5.10459032245131,4.7829144091031,4.62850997069595,5.13675791378613,5.16892550512095,4.53844071495846,4.95018588404417,4.91801829270935,4.73787978123435,4.93731884751024,4.66711108029774,5.01452106671381,4.86011662830667,4.77004737256917,5.08528976765042,4.88585070137452,4.80221496390399,5.01452106671381,4.80864848217095,4.67997811683167,4.98235347537899,4.9437523657772,4.6027758976281,4.61564293416203,4.53200719669149,4.84081607350578,4.82794903697185,4.91801829270935,4.92445181097631,4.89871773790845,4.55774126975935,4.98235347537899,4.91158477444238,4.8536831100397,4.98235347537899,4.96305292057809,4.9437523657772,4.91801829270935,5.00165403017988,4.91801829270935,4.89871773790845,4.52557367842453,4.92445181097631,5.00808754844685,4.71214570816649,5.23326068779059,5.00165403017988,4.93731884751024,4.70571218989953,4.46767201402185,5.20752661472274,4.97591995711202,5.11102384071827,5.13032439551917,4.77648089083613,4.48697256882274,4.79578144563703,4.98235347537899,5.2139601329897,4.88585070137452,4.8536831100397,4.7829144091031,4.92445181097631,4.65424404376381,5.02738810324774,4.98878699364595,4.82151551870488,4.80864848217095,4.73144626296738,4.62850997069595,4.35186868521649,4.72501274470042,4.9437523657772,5.0338216215147,5.13032439551917,5.02738810324774,4.98878699364595,4.62207645242899,4.86011662830667,4.82151551870488,4.77004737256917,5.05955569458256,5.36836457139684,5.0531221763156,4.42907090442006,5.1238908772522,4.84081607350578,4.75074681776828,4.5127066418906,5.11102384071827,4.78934792737006,4.84081607350578,4.6027758976281,4.88585070137452,5.62570530207541,4.62850997069595,4.48697256882274,4.7829144091031,4.77004737256917,4.92445181097631,4.55130775149238,4.97591995711202,5.11745735898524,5.22682716952363,5.0531221763156,5.16892550512095,4.91158477444238,4.64781052549685,5.23326068779059,4.51914016015756,4.5127066418906,4.89871773790845,5.28472883392631,4.79578144563703,5.25899476085845,5.20752661472274,4.99522051191292,4.22319831987721,4.88585070137452,5.05955569458256,4.90515125617542,4.90515125617542,4.6928451533656,5.31046290699416,5.22039365125666,5.22682716952363,4.91158477444238,5.23326068779059,5.36836457139684,5.38766512619773,5.22039365125666,4.98878699364595,5.05955569458256,4.77648089083613,4.75718033603524,4.80864848217095,5.20752661472274,4.84724959177274,4.7829144091031,4.6928451533656,5.29116235219327,4.78934792737006,5.52276900980398,4.62850997069595,4.61564293416203,5.31046290699416,4.26179942947899,5.31046290699416,4.95018588404417,4.29396702081382,4.78934792737006,4.58990886109417,4.46767201402185,4.68641163509863,5.36836457139684,5.50990197327005,4.80864848217095,4.89871773790845,4.89871773790845,4.62207645242899,4.55130775149238,5.15605846858702,5.04025513978167,4.58347534282721,4.62850997069595,5.05955569458256,5.04025513978167,5.22039365125666,4.67354459856471,5.13032439551917,5.22039365125666,4.67997811683167,5.37479808966381,4.58990886109417,4.98878699364595,5.45843382713434,4.90515125617542,4.88585070137452,5.16249198685399,4.77004737256917,4.77004737256917,4.86011662830667,5.36193105312988,4.84724959177274,4.83438255523881,4.87941718310756,4.77648089083613,5.38123160793077,5.40053216273166,4.98878699364595,4.68641163509863,5.04025513978167,4.84081607350578,5.22682716952363,4.8536831100397,5.0531221763156,4.66711108029774,5.14319143205309,5.50990197327005,5.05955569458256,5.26542827912541,5.18179254165488,5.1238908772522,5.23969420605756,5.27829531565934,5.50990197327005,4.63494348896292,5.29116235219327,5.36836457139684,5.40053216273166,4.98878699364595,5.61927178380845,5.22039365125666,5.27186179739238,5.09172328591738,4.43550442268703,4.67997811683167,5.0531221763156,4.98878699364595,5.24612772432452,5.07885624938345,5.40696568099863,5.33619698006202,4.96305292057809,5.07242273111649,5.20752661472274,5.29759587046023,4.97591995711202,5.01452106671381,5.05955569458256,4.53200719669149,4.92445181097631,4.77004737256917,4.49983960535667,5.4841679002022,4.99522051191292,4.61564293416203,4.35186868521649,5.1238908772522,4.90515125617542,4.86011662830667,5.1238908772522,5.25899476085845,4.71857922643345,5.11745735898524,4.99522051191292,5.1238908772522,4.98878699364595,5.44556679060041,4.89228421964149,5.11745735898524,4.84081607350578,4.96305292057809,4.66067756203078,4.90515125617542,4.95018588404417,4.91158477444238,4.84724959177274,4.98235347537899,4.95661940231113,5.10459032245131,4.57060830629328,4.74431329950131,5.07242273111649,5.16892550512095,4.90515125617542,4.99522051191292,4.79578144563703,4.67997811683167,5.11745735898524,5.36836457139684,4.74431329950131,4.89871773790845,4.7636138543022,5.31046290699416,4.71857922643345,4.77648089083613,4.80221496390399,4.96948643884506,4.93731884751024,4.75718033603524,4.37116924001739,4.78934792737006,4.58990886109417,4.89871773790845,5.02095458498077,4.68641163509863,4.52557367842453,5.25256124259148,4.69927867163256,4.7829144091031,4.84724959177274,4.62207645242899,4.98878699364595,4.77004737256917,4.90515125617542,5.17535902338791,5.27829531565934,4.8729836648406,4.95018588404417,4.83438255523881,4.91801829270935,4.77004737256917,4.93731884751024,5.04668865804863,4.75718033603524,4.72501274470042,5.16249198685399,4.65424404376381,5.22039365125666,4.93731884751024,4.84081607350578,4.43550442268703,4.83438255523881,4.93731884751024,4.77648089083613,5.20752661472274,4.92445181097631,4.35830220348346,4.84081607350578,4.84724959177274,4.82151551870488,4.57704182456024,4.64781052549685,5.11102384071827,4.62850997069595,4.55774126975935,4.86011662830667,4.64137700722988,4.78934792737006,4.93088532924327,4.70571218989953,4.40333683135221,5.07885624938345,4.47410553228881,4.48697256882274,4.58347534282721,4.71857922643345,4.66711108029774,4.78934792737006,4.89871773790845,4.29396702081382,4.46767201402185,4.71857922643345,4.77004737256917,4.62850997069595,4.6928451533656,4.9437523657772,4.95661940231113,5.11102384071827,4.84081607350578,4.61564293416203,4.53844071495846,4.77004737256917,5.50990197327005,5.29759587046023,4.75718033603524,4.83438255523881,4.71857922643345,4.84724959177274,5.02738810324774,4.57060830629328,4.81508200043792,4.84724959177274,4.98878699364595,4.84724959177274,4.90515125617542,4.53844071495846,5.14319143205309,4.90515125617542,4.99522051191292,5.15605846858702,4.7636138543022,5.04668865804863,4.75074681776828,4.49340608708971,4.84724959177274,4.63494348896292,4.81508200043792,4.75074681776828,4.83438255523881,4.83438255523881,5.33619698006202,4.58990886109417,5.05955569458256,4.67997811683167,4.62850997069595,4.52557367842453,4.8536831100397,4.65424404376381,4.79578144563703,4.57060830629328,5.35549753486291,4.98235347537899,5.34263049832898,4.75074681776828,4.74431329950131,4.44193794095399,4.19103072854239,4.75074681776828,4.58990886109417,4.57704182456024,5.09172328591738,4.90515125617542,4.64137700722988,4.75074681776828,4.61564293416203,4.56417478802631,4.28753350254685,4.67997811683167,4.74431329950131,4.67997811683167,4.77004737256917,4.83438255523881,4.58347534282721,5.0531221763156,4.70571218989953,4.98878699364595,4.71857922643345,4.32613461214864,4.67997811683167,4.75074681776828,4.84081607350578,4.86011662830667,4.98878699364595,4.6928451533656,4.75074681776828,4.74431329950131,4.49340608708971,5.16249198685399,4.75718033603524,4.79578144563703,4.47410553228881,4.83438255523881,4.6928451533656,4.67997811683167,4.8729836648406,4.74431329950131,5.04668865804863,4.96305292057809,4.68641163509863,4.84724959177274,4.75074681776828,4.54487423322542,4.7829144091031,4.9437523657772,4.9437523657772,4.83438255523881,4.89228421964149,5.01452106671381,4.83438255523881,4.69927867163256,4.58347534282721,4.73144626296738,4.82151551870488,4.63494348896292,4.83438255523881,4.82151551870488,4.75074681776828,4.82151551870488,5.05955569458256,5.13032439551917,4.83438255523881,4.67354459856471,4.80864848217095,4.82151551870488,4.5127066418906,4.82794903697185,4.82151551870488,4.90515125617542,5.49703493673613,4.91801829270935,4.99522051191292,4.82151551870488,4.73787978123435,4.56417478802631,4.66711108029774,4.98878699364595,4.54487423322542,5.04668865804863,4.65424404376381,4.91158477444238,4.21676480161025,5.18822605992184,4.72501274470042,4.82151551870488,4.88585070137452,4.92445181097631,4.72501274470042,4.73787978123435,5.2139601329897,4.6027758976281,4.60920941589506,4.84081607350578,4.84081607350578,4.83438255523881,4.66067756203078,4.70571218989953,4.39690331308524,4.83438255523881,4.89871773790845,5.02095458498077,4.81508200043792,4.83438255523881,4.70571218989953,4.73144626296738,4.70571218989953,4.71857922643345,4.61564293416203,4.84081607350578,4.91801829270935,4.53200719669149,4.34543516694953,4.95661940231113,4.6928451533656,5.04668865804863,4.59634237936113,4.82151551870488,4.66711108029774,4.57060830629328,4.89228421964149,4.91801829270935,4.73144626296738,4.31970109388167,4.80864848217095,4.84081607350578,4.80864848217095,4.67354459856471,4.80864848217095,4.98235347537899,4.59634237936113,4.82794903697185,4.80864848217095,4.44193794095399,4.89871773790845,5.18822605992184,4.86655014657363,5.18179254165488,5.13032439551917,5.11102384071827,4.55130775149238,4.7829144091031,4.75718033603524,4.73787978123435,4.82151551870488,4.89871773790845,5.04025513978167,5.07885624938345,4.69927867163256,4.52557367842453,5.07885624938345,4.84081607350578,4.61564293416203,4.57060830629328,5.00165403017988,4.84081607350578,4.52557367842453,4.80864848217095,4.71857922643345,4.91158477444238,5.09815680418434,4.84081607350578,4.89228421964149,4.95661940231113,5.31689642526113,4.84724959177274,4.62850997069595,4.75718033603524,4.89871773790845,5.07242273111649,4.81508200043792,4.9437523657772,4.72501274470042,5.00165403017988,4.73787978123435,4.49983960535667,4.83438255523881,4.71857922643345,4.57060830629328,5.31046290699416,5.08528976765042,4.75074681776828,5.02738810324774,4.84724959177274,5.00808754844685,5.18822605992184,4.67997811683167,4.96305292057809,4.89228421964149,4.6027758976281,4.87941718310756,4.96948643884506,4.82151551870488,4.9437523657772,4.89871773790845,5.02738810324774,4.57704182456024,4.83438255523881,4.80864848217095,5.29759587046023,4.9437523657772,4.72501274470042,4.88585070137452,4.53844071495846,4.53200719669149,4.80864848217095,4.86011662830667,4.93731884751024,5.02738810324774,4.67354459856471,4.6928451533656,4.84081607350578,4.72501274470042,5.00165403017988,4.86011662830667,4.98235347537899,4.95661940231113,4.66711108029774,4.66067756203078,4.91158477444238,4.77004737256917,4.97591995711202,4.80221496390399,4.72501274470042,4.63494348896292,4.61564293416203,5.04025513978167,4.86011662830667,4.7636138543022,5.00165403017988,5.26542827912541,4.82151551870488,4.74431329950131,5.00808754844685,5.24612772432452,5.31046290699416,4.96305292057809,4.7636138543022,5.05955569458256,5.20109309645577,4.77004737256917,4.8536831100397,4.77004737256917,5.0338216215147,5.02095458498077,4.88585070137452,5.13675791378613,4.51914016015756,4.98235347537899,4.88585070137452,4.96948643884506,4.66067756203078,4.92445181097631,4.78934792737006,4.86011662830667,4.86655014657363,4.67354459856471,4.75718033603524,4.53200719669149,4.69927867163256,4.66711108029774,4.62850997069595,4.51914016015756,4.37116924001739,4.9437523657772,5.2139601329897],"x":[5.36,5.49,5.75,5.58,5.67,5.33,5.92,5.68,5.44,6.16,5.7,5.91,5.76,5.84,5.43,5.76,5.87,6.13,5.79,5.77,5.21,5.78,6.56,5.61,5.66,5.63,6.07,6.15,5.47,5.79,5.11,5.93,5.91,5.97,5.83,5.78,4.9,5.18,5.36,6.01,6.05,5.66,6.17,5.8,5.91,5.59,5.7,5.31,5.58,5.67,5.14,5.78,5.75,5.79,5.8,6.08,5.4,5.04,6.6,5.88,5.64,5.76,5.51,5.23,4.96,5.27,6.02,5.31,5.51,5.05,6.16,5.92,5.7,5.97,6.12,6.57,5.24,6.48,5.51,5.65,6.28,5.24,6.01,5.31,6.01,5.73,5.79,6.34,5.68,6.14,6.16,5.46,4.66,6.43,5.64,6.36,5.41,5.97,6.38,5.7,5.8,5.97,6.12,5.85,6.8,6.43,5.57,5.09,5.79,5.88,5.7,5.63,5.78,5.58,5.63,5.7,5.81,5.86,6.38,5.7,5.48,5.5,6.07,5.76,5.78,5.73,5.77,5.78,5.5,5.37,5.02,6.14,5.1,5.9,5.28,5.31,5.92,5.65,5.83,5.24,5.72,5.54,5.7,5.32,5.86,5.47,5.78,5.44,5.53,5.5,5.5,5.45,5.46,5.26,5.51,5.93,5.88,5.45,5.91,5.74,6.04,5.67,5.93,5.43,5.89,4.98,5.8,6.04,5.92,5.54,6.23,5.28,5.74,6.32,5.83,6.04,6.38,5.86,4.72,4.93,5.27,5.51,5.24,5.56,5.96,5.91,5.45,5.55,5.45,5.71,5.21,5.87,5.04,6.06,4.79,5.02,5.08,5.38,5.51,4.8,5.71,5.79,5.95,6.36,5.55,4.92,5.9,5.25,5.57,5.44,5.75,5.79,5.23,5.72,5.98,5.67,5.3,4.93,5.98,5.31,5.22,5.94,5.18,5.37,5.67,5.58,5.53,5.89,5.13,4.99,5.04,5.24,5.57,5.23,5.82,5.6,5.5,4.78,5.51,4.73,5.28,5.41,5.08,5.19,5.01,5.1,4.73,5.3,5.2,5.29,5.18,5.24,4.71,5.52,4.54,4.88,5.24,5.52,5.39,5.42,5.12,5.51,5.32,5.51,5.31,5.1,5.85,4.93,5.39,5.23,4.94,5.12,5.39,5.24,4.88,5.69,5.04,6.04,5.4,5.62,5.26,6.04,5.61,4.59,4.8,5.25,5.82,5.62,5.12,4.88,5.67,5.72,4.74,5.38,5.33,5.05,5.36,4.94,5.48,5.24,5.1,5.59,5.28,5.15,5.48,5.16,4.96,5.43,5.37,4.84,4.86,4.73,5.21,5.19,5.33,5.34,5.3,4.77,5.43,5.32,5.23,5.43,5.4,5.37,5.33,5.46,5.33,5.3,4.72,5.34,5.47,5.01,5.82,5.46,5.36,5,4.63,5.78,5.42,5.63,5.66,5.11,4.66,5.14,5.43,5.79,5.28,5.23,5.12,5.34,4.92,5.5,5.44,5.18,5.16,5.04,4.88,4.45,5.03,5.37,5.51,5.66,5.5,5.44,4.87,5.24,5.18,5.1,5.55,6.03,5.54,4.57,5.65,5.21,5.07,4.7,5.63,5.13,5.21,4.84,5.28,6.43,4.88,4.66,5.12,5.1,5.34,4.76,5.42,5.64,5.81,5.54,5.72,5.32,4.91,5.82,4.71,4.7,5.3,5.9,5.14,5.86,5.78,5.45,4.25,5.28,5.55,5.31,5.31,4.98,5.94,5.8,5.81,5.32,5.82,6.03,6.06,5.8,5.44,5.55,5.11,5.08,5.16,5.78,5.22,5.12,4.98,5.91,5.13,6.27,4.88,4.86,5.94,4.31,5.94,5.38,4.36,5.13,4.82,4.63,4.97,6.03,6.25,5.16,5.3,5.3,4.87,4.76,5.7,5.52,4.81,4.88,5.55,5.52,5.8,4.95,5.66,5.8,4.96,6.04,4.82,5.44,6.17,5.31,5.28,5.71,5.1,5.1,5.24,6.02,5.22,5.2,5.27,5.11,6.05,6.08,5.44,4.97,5.52,5.21,5.81,5.23,5.54,4.94,5.68,6.25,5.55,5.87,5.74,5.65,5.83,5.89,6.25,4.89,5.91,6.03,6.08,5.44,6.42,5.8,5.88,5.6,4.58,4.96,5.54,5.44,5.84,5.58,6.09,5.98,5.4,5.57,5.78,5.92,5.42,5.48,5.55,4.73,5.34,5.1,4.68,6.21,5.45,4.86,4.45,5.65,5.31,5.24,5.65,5.86,5.02,5.64,5.45,5.65,5.44,6.15,5.29,5.64,5.21,5.4,4.93,5.31,5.38,5.32,5.22,5.43,5.39,5.62,4.79,5.06,5.57,5.72,5.31,5.45,5.14,4.96,5.64,6.03,5.06,5.3,5.09,5.94,5.02,5.11,5.15,5.41,5.36,5.08,4.48,5.13,4.82,5.3,5.49,4.97,4.72,5.85,4.99,5.12,5.22,4.87,5.44,5.1,5.31,5.73,5.89,5.26,5.38,5.2,5.33,5.1,5.36,5.53,5.08,5.03,5.71,4.92,5.8,5.36,5.21,4.58,5.2,5.36,5.11,5.78,5.34,4.46,5.21,5.22,5.18,4.8,4.91,5.63,4.88,4.77,5.24,4.9,5.13,5.35,5,4.53,5.58,4.64,4.66,4.81,5.02,4.94,5.13,5.3,4.36,4.63,5.02,5.1,4.88,4.98,5.37,5.39,5.63,5.21,4.86,4.74,5.1,6.25,5.92,5.08,5.2,5.02,5.22,5.5,4.79,5.17,5.22,5.44,5.22,5.31,4.74,5.68,5.31,5.45,5.7,5.09,5.53,5.07,4.67,5.22,4.89,5.17,5.07,5.2,5.2,5.98,4.82,5.55,4.96,4.88,4.72,5.23,4.92,5.14,4.79,6.01,5.43,5.99,5.07,5.06,4.59,4.2,5.07,4.82,4.8,5.6,5.31,4.9,5.07,4.86,4.78,4.35,4.96,5.06,4.96,5.1,5.2,4.81,5.54,5,5.44,5.02,4.41,4.96,5.07,5.21,5.24,5.44,4.98,5.07,5.06,4.67,5.71,5.08,5.14,4.64,5.2,4.98,4.96,5.26,5.06,5.53,5.4,4.97,5.22,5.07,4.75,5.12,5.37,5.37,5.2,5.29,5.48,5.2,4.99,4.81,5.04,5.18,4.89,5.2,5.18,5.07,5.18,5.55,5.66,5.2,4.95,5.16,5.18,4.7,5.19,5.18,5.31,6.23,5.33,5.45,5.18,5.05,4.78,4.94,5.44,4.75,5.53,4.92,5.32,4.24,5.75,5.03,5.18,5.28,5.34,5.03,5.05,5.79,4.84,4.85,5.21,5.21,5.2,4.93,5,4.52,5.2,5.3,5.49,5.17,5.2,5,5.04,5,5.02,4.86,5.21,5.33,4.73,4.44,5.39,4.98,5.53,4.83,5.18,4.94,4.79,5.29,5.33,5.04,4.4,5.16,5.21,5.16,4.95,5.16,5.43,4.83,5.19,5.16,4.59,5.3,5.75,5.25,5.74,5.66,5.63,4.76,5.12,5.08,5.05,5.18,5.3,5.52,5.58,4.99,4.72,5.58,5.21,4.86,4.79,5.46,5.21,4.72,5.16,5.02,5.32,5.61,5.21,5.29,5.39,5.95,5.22,4.88,5.08,5.3,5.57,5.17,5.37,5.03,5.46,5.05,4.68,5.2,5.02,4.79,5.94,5.59,5.07,5.5,5.22,5.47,5.75,4.96,5.4,5.29,4.84,5.27,5.41,5.18,5.37,5.3,5.5,4.8,5.2,5.16,5.92,5.37,5.03,5.28,4.74,4.73,5.16,5.24,5.36,5.5,4.95,4.98,5.21,5.03,5.46,5.24,5.43,5.39,4.94,4.93,5.32,5.1,5.42,5.15,5.03,4.89,4.86,5.52,5.24,5.09,5.46,5.87,5.18,5.06,5.47,5.84,5.94,5.4,5.09,5.55,5.77,5.1,5.23,5.1,5.51,5.49,5.28,5.67,4.71,5.43,5.28,5.41,4.93,5.34,5.13,5.24,5.25,4.95,5.08,4.73,4.99,4.94,4.88,4.71,4.48,5.37,5.79],"text":{},"mode":"lines","color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","name":"Regression Fit","alpha":1,"line":{"color":"blue"},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"Ideb"},"xaxis":{"domain":[0,1],"automargin":true,"title":"NSE"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"y":[4.4,4.8,5.3,4.4,4.8,4.8,5.2,4.8,5.1,4.7,5.2,5,5.2,6,5.1,5,4.4,5.3,4.4,4.7,4.8,5.2,4.9,5.1,5.4,5.3,5.8,5.8,5.5,4.8,4.7,5.4,6.1,5.4,5,5.1,4.4,4.7,5.6,5.3,5.3,5.6,5.5,4.7,6.4,5.5,5.3,4.4,5.2,4.5,4.8,5.1,4.9,5.7,5.4,5,4.9,4.4,5.6,5.5,4.8,6,5.2,5,4.3,4.4,4.8,4.5,5.8,5.8,4.8,6,5.1,5.4,5.2,5.7,5.5,6,4.8,5.6,5.5,5,4.6,4.7,5.3,5.8,6,6,4.6,4.9,5.5,5.9,4.4,4.9,4.5,5.3,5.5,5.5,5.5,4.4,5.7,5.2,5.2,5.3,6.1,5.8,5.1,4.6,5.5,5.4,5.6,4.9,5.2,5.3,4.8,4.9,5.5,4.7,5.8,4.9,5.1,4.7,4.9,5.3,4.8,5.1,5.2,4.4,4.9,5,4.6,5.1,4.5,5.6,4.5,6.5,5.5,5.1,6,5.1,4.6,4.9,5.6,5.1,5.1,5.1,4.7,5.3,5.5,4.7,5.2,4.6,4.7,4.5,5.3,4.8,5.2,5.3,6.4,6,4.7,5.8,6,5.4,5.4,5.4,5.3,6.3,6.1,5.3,6.1,5.3,5.9,5.8,6.2,5.3,5.8,6.2,4.9,4.4,4.6,4.9,5.2,4.7,5.3,5.6,5.6,5.3,5.8,3.9,5.8,5.8,4.9,6.3,3.9,4.4,6,5.9,5.3,4.8,6.6,5,4.8,6.2,5.1,4.2,5.6,4.6,4.7,5.1,5.1,5,4.7,6,6.6,5,5.2,4.9,6.1,5.6,4.8,5.5,4.6,4.6,4.9,5.1,5,5.1,5,4.5,4.8,5.1,6,5.4,5.1,5.6,4.7,4.2,5.3,4.3,5.2,4.9,5.1,4.6,4.3,4.9,4.4,5.2,5.8,4.7,4.4,5.3,4.6,4.2,4.8,5.3,5,4.9,5.2,5.2,4.4,5.2,4.2,4.3,5,5.1,5.4,5.6,5,5,4.3,4.6,4.7,4.5,4.6,5.1,4.9,6.3,5.4,4.7,4.3,5.7,4.9,4.9,4.6,4.8,5.5,5.6,3.6,4.7,5,5.3,5.7,6.2,4.5,4.7,4.8,5,5,4.6,4.8,4.6,4.6,4.8,4.7,4.8,4.2,4.7,4.6,4.8,3.9,4.4,5.6,4.3,4.5,4.5,4.5,4.9,4.9,5.1,4.7,4.6,5.1,5.2,4.4,4.6,4.1,5.2,4.3,4,4.5,4.1,4.5,5.2,5.4,4.7,4.1,5.1,5.4,4.8,5.6,5.3,4.7,5.1,4.8,5.7,5,4.6,5,5.3,4.3,5.1,5.4,4.8,4.6,4.4,4.3,4.3,4.9,4.7,4.6,5.7,4.9,5.4,4.5,5,4.7,4.7,4.7,4.3,5.4,4.7,4.9,4.1,4.2,5.1,5.5,4.8,5.5,5.1,4.2,5,4.5,5.3,5,5.7,5.1,4.9,5.3,4.9,5.2,5.2,4.6,5.1,5.5,5.6,4.3,4.4,3.9,4.8,5.2,5.1,4.6,4.5,5.5,2.2,4.9,4.9,5,4.4,4.4,4.6,3.7,5.1,5,6.5,5,5.2,4.7,4.8,4.5,5.1,4.4,4.6,4.9,5.6,5.2,4.8,4.6,4.2,4.6,3.9,5.1,4.1,4.8,5.5,5,4.6,4.8,5,5.1,5.2,4.5,5.9,5.4,4.5,4.8,5,5.4,5.1,4.5,5,4.4,5.2,4.5,5,4.8,3.9,4.7,4.5,4.2,4.6,5.1,4.8,4.7,4.7,4.7,5,4.6,4.8,4.7,5,3.8,3.9,4.4,5.3,4.4,5.3,5.1,5,4.6,4.4,4.6,4.5,4.5,5.2,5.4,3.4,4.5,5.2,4.4,5.9,4.3,4.8,4.9,5.1,4.7,5.1,4.9,5.1,4.4,4.9,5.2,4.3,4.8,5,5.4,5.4,4.8,4.4,4,4.6,4.6,5.1,4.6,4.6,4.5,4.7,4.1,4.4,4.7,5.3],"x":[5.36,5.49,5.75,5.58,5.67,5.33,5.92,5.68,5.44,6.16,5.7,5.91,5.76,5.84,5.43,5.76,5.87,6.13,5.79,5.77,5.21,5.78,6.56,5.61,5.66,5.63,6.07,6.15,5.47,5.79,5.11,5.93,5.91,5.97,5.83,5.78,4.9,5.18,5.36,6.01,6.05,5.66,6.17,5.8,5.91,5.59,5.7,5.31,5.58,5.67,5.14,5.78,5.75,5.79,5.8,6.08,5.4,5.04,6.6,5.88,5.64,5.76,5.51,5.23,4.96,5.27,6.02,5.31,5.51,5.05,6.16,5.92,5.7,5.97,6.12,6.57,5.24,6.48,5.51,5.65,6.28,5.24,6.01,5.31,6.01,5.73,5.79,6.34,5.68,6.14,6.16,5.46,4.66,6.43,5.64,6.36,5.41,5.97,6.38,5.7,5.8,5.97,6.12,5.85,6.8,6.43,5.57,5.09,5.79,5.88,5.7,5.63,5.78,5.58,5.63,5.7,5.81,5.86,6.38,5.7,5.48,5.5,6.07,5.76,5.78,5.73,5.77,5.78,5.5,5.37,5.02,6.14,5.1,5.9,5.28,5.31,5.92,5.65,5.83,5.24,5.72,5.54,5.7,5.32,5.86,5.47,5.78,5.44,5.53,5.5,5.5,5.45,5.46,5.26,5.51,5.93,5.88,5.45,5.91,5.74,6.04,5.67,5.93,5.43,5.89,4.98,5.8,6.04,5.92,5.54,6.23,5.28,5.74,6.32,5.83,6.04,6.38,5.86,4.72,4.93,5.27,5.51,5.24,5.56,5.96,5.91,5.45,5.55,5.45,5.71,5.21,5.87,5.04,6.06,4.79,5.02,5.08,5.38,5.51,4.8,5.71,5.79,5.95,6.36,5.55,4.92,5.9,5.25,5.57,5.44,5.75,5.79,5.23,5.72,5.98,5.67,5.3,4.93,5.98,5.31,5.22,5.94,5.18,5.37,5.67,5.58,5.53,5.89,5.13,4.99,5.04,5.24,5.57,5.23,5.82,5.6,5.5,4.78,5.51,4.73,5.28,5.41,5.08,5.19,5.01,5.1,4.73,5.3,5.2,5.29,5.18,5.24,4.71,5.52,4.54,4.88,5.24,5.52,5.39,5.42,5.12,5.51,5.32,5.51,5.31,5.1,5.85,4.93,5.39,5.23,4.94,5.12,5.39,5.24,4.88,5.69,5.04,6.04,5.4,5.62,5.26,6.04,5.61,4.59,4.8,5.25,5.82,5.62,5.12,4.88,5.67,5.72,4.74,5.38,5.33,5.05,5.36,4.94,5.48,5.24,5.1,5.59,5.28,5.15,5.48,5.16,4.96,5.43,5.37,4.84,4.86,4.73,5.21,5.19,5.33,5.34,5.3,4.77,5.43,5.32,5.23,5.43,5.4,5.37,5.33,5.46,5.33,5.3,4.72,5.34,5.47,5.01,5.82,5.46,5.36,5,4.63,5.78,5.42,5.63,5.66,5.11,4.66,5.14,5.43,5.79,5.28,5.23,5.12,5.34,4.92,5.5,5.44,5.18,5.16,5.04,4.88,4.45,5.03,5.37,5.51,5.66,5.5,5.44,4.87,5.24,5.18,5.1,5.35,4.89,5.17,5.07,5.2,4.75,5.12,5.37,5.53,5.32,5.34,5,4.73,4.98,4.94,4.79,5.29,5.33,5.04,4.4,5.21,4.83,5.3,5.75,5.25,5.74,5.66,5.63,4.76,5.12,5.08,5.05,5.18,5.3,5.52,5.58,4.99,4.72,5.58,5.21,4.86,4.79,5.46,5.21,4.72,5.16,5.02,5.32,5.61,5.21,5.29,5.39,5.95,5.22,4.88,5.08,5.3,5.57,5.17,5.37,5.03,5.46,5.05,4.68,5.2,5.02,4.79,5.94,5.59,5.07,5.5,5.22,5.47,5.75,4.96,5.4,5.29,4.84,5.27,5.41,5.18,5.37,5.3,5.5,4.8,5.2,5.16,5.92,5.37,5.03,5.28,4.74,4.73,5.16,5.24,5.36,5.5,4.95,4.98,5.21,5.03,5.46,5.24,5.43,5.39,4.94,4.93,5.32,5.1,5.42,5.15,5.03,4.89,4.86,5.52,5.24,5.09,5.46,5.87,5.18,5.06,5.47,5.84,5.94,5.4,5.09,5.55,5.77,5.1,5.23,5.1,5.51,5.49,5.28,5.67,4.71,5.43,5.28,5.41,4.93,5.34,5.13,5.24,5.25,4.95,5.08,4.73,4.99,4.94,4.88,4.71,4.48,5.37,5.79],"text":["GAVIAO PEIXOTO BRIGADEIRO","JOAO SOLIMEO","MARIANO DE OLIVEIRA PROFESSOR","SILVIO XAVIER ANTUNES PROFESSOR","PIO TELLES PEIXOTO PROFESSOR","ZENAIDE VILALVA DE ARAUJO PROFESSORA","ANTONIO CANDIDO CORREA GUIMARAES FILHO PROFESSOR","CANDIDO GONCALVES GOMIDE PROFESSOR","CLODOMIRO CARNEIRO","ERMANO MARCHETTI","HUMBERTO DE SOUZA MELLO GENERAL","BENEDITO TOLOSA PROFESSOR","PEDRO MONTEIRO DO AMARAL CAPITAO","MANUEL DA NOBREGA PADRE","ANTONIO JOSE LEITE PROF","ANTOINE DE SAINT EXUPERY","JOAQUIM LUIZ DE BRITO PROFESSOR","AUGUSTO RIBEIRO DE CARVALHO PROFESSOR","AUGUSTO MEIRELLES REIS FILHO PROFESSOR","LUIZ GONZAGA RIGHINI PROFESSOR","COLOMBO DE ALMEIDA PROFESSOR","TARCISIO ALVARES LOBO","JACOMO STAVALE PROFESSOR","DULCE FERREIRA BOARIN PROFESSORA","PLINIO DAMASCO PENNA PROFESSOR","TITO PRATES DA FONSECA","FRONTINO GUIMARAES","ROMULO PERO PROFESSOR","PAULO EGYDIO DE OLIVEIRA CARVALHO SENADOR","TOLEDO BARBOSA","RITA BICUDO PEREIRA PROFA","NARBAL FONTES PROFESSORA","OCTAVIO MENDES DOUTOR","PAUL HUGON PROF","MARIA MONTESSORI","AFRANIO PEIXOTO","HEROIS DA FEB","RAQUEL ASSIS BARREIROS PROFA","JOAO VIEIRA DE ALMEIDA","JOAQUIM LEME DO PRADO PROFESSOR","CASTRO ALVES","CARLOS DE LAET PROF","ANTONIO LISBOA PROFESSOR","GONCALVES DIAS","CASIMIRO DE ABREU","EURICO FIGUEIREDO PROF","ALBERTO CARDOSO DE MELLO NETO DR","VICTOR DOS SANTOS CUNHA PROF","SEBASTIAO DE SOUZA BUENO PROF","JOHANN GUTENBERG","GABRIELA MISTRAL","PEDRO ALEXANDRINO","JULIO PESTANA","SILVA JARDIM","ALFREDO INACIO TRINDADE","ALBINO CESAR","PHILOMENA BAYLAO PROFA","CYRENE DE OLIVEIRA LAET DONA","RUY BARBOSA CONSELHEIRO","JOAO LIGABUE CONEGO","ANGELO BORTOLO","AMENAIDE BRAGA DE QUEIROZ PROFA","CARMOSINA MONTEIRO VIANNA PROFA","ARNALDO BARRETO","PEDRO DE MORAES VICTOR DR","JOSE DO AMARAL MELLO PROF","ANDRE XAVIER GALLICHO PROFESSOR","ANTONIO FIRMINO DE PROENCA PROF","AMADEU AMARAL","EDUARDO PRADO","ANNA TEIXEIRA PRADO ZACHARIAS PROFESSORA","ARMANDO ARAUJO","PAULO LUIG FREI","OSWALDO CRUZ","PLINIO BARRETO","WOLNY CARVALHO RAMOS PROFESSOR","ANCHIETA PADRE","MMDC","MARIA DA GLORIA COSTA E SILVA PROFESSORA","MARIO CASASSANTA PROFESSOR","BEATRIZ R BASSI ASTORINO PROFESSORA","VICTOR MIGUEL ROMANO PROF","STEFAN ZWEIG","AROLDO DE AZEVEDO PROF","SECUNDINO DOMINGUES FILHO DOUTOR","OLGA BENATTI PROFESSORA","BRISABELLA ALMEIDA NOBRE PROFESSORA","JOSE HEITOR CARUSI PROFESSOR","FRANCISCO BORGES VIEIRA DOUTOR","LUIZA MENDES CORREA SOUZA PROFESSORA","JOSE CHEDIAK","REPUBLICA DO PARAGUAY","CAROLINA AUGUSTA DA COSTA GALVAO PROFESSORA","CLEMENTE QUAGLIO PROFESSOR","JOAQUIM BRAGA DE PAULA PROFESSOR","JULIA MACEDO PANTOJA PROFESSORA","NORBERTO MAYER FILHO DEPUTADO","MOACYR CAMPOS PROFESSOR","AMELIA DE ARAUJO DONA","ARACY LEME DA VEIGA RAVACHE PROFESSORA","CONGONHAS DO CAMPO VISCONDE DE","CARAMURU","PAULO NOVAES DE CARVALHO PROFESSOR","SALVADOR ROCCO PROFESSOR","JOAO BORGES PROFESSOR","IRENE DE LIMA PAIVA PROFESSORA","BENEDITA RIBAS F SILVEIRA PROFESSORA","ALMERINDA RODRIGUES MELLO PROFESSORA","ANTONIO CANDIDO BARONE","ORVILLE DERBY","SANTOS AMARO DA CRUZ PROFESSOR","PILAR GARCIA VIDAL DONA","MARIA LOURDES N ALBERGARIA PROFA","JAMIL PEDRO SAWAYA PROF","ZALINA ROLIM DONA","ANTAO PADRE","ADELAIDE FERRAZ DE OLIVEIRA PROFA","MARIA DE CARVALHO SENNE PROFESSORA","CUSTODIO JOSE DE MELLO ALMIRANTE","BARAO DE RAMALHO","ASTOLFO ARAUJO DEPUTADO","MARIA AUGUSTA DE AVILA PROFA","INFANTE DOM HENRIQUE","AFONSO PENNA JUNIOR PROF","JOSE TALARICO","JOAO RAMACCIOTTI PROF","VITAL FOGACA DE ALMEIDA DOUTOR","CAETANO MIELE PROFESSOR","IRENE BRANCO DA SILVA PROFESSORA","BENEDITA DE REZENDE PROFESSORA","REPUBLICA DO URUGUAI","SILVA PRADO DEPUTADO","ERMELINO MATARAZZO","MIGUEL DE CERVANTES Y SAAVEDRA DOM","MARIO KOZEL FILHO","RAUL PILLA DEPUTADO","CARLOS GOMES","ARMANDO GOMES DE ARAUJO PROF","MANOEL DE NOBREGA DEPUTADO","JOSE BONIFACIO ANDRADA E SILVA JARDIM PROF","SHINQUICHI AGARI","DARIO DE QUEIROZ PROF","ATAULPHO ALVES","ELIZA RAQUEL MACEDO DE SOUZA PROFA","EMILIA DE PAIVA MEIRA PROFESSORA","HELENA LOMBARDI BRAGA PROFESSORA","CIDADE DE HIROSHIMA","LUIZ ROSANOVA PROFESSOR","LUZIA DE QUEIROZ E OLIVEIRA PROFA","MILTON CRUZEIRO PROFESSOR","ADELINO JOSE DA SILVA D AZEVEDO PROF","ADHEMAR ANTONIO PRADO PROFESSOR","PEDRO TAQUES","SEBASTIAO FARIA ZIMBRES PROFESSOR","SAO JOAO EVANGELISTA","ROMEU DE MORAES","ANHANGUERA","CANUTO DO VAL","REINALDO RIBEIRO DA SILVA DOUTOR","JOSE CANDIDO DE SOUZA","JOSE MONTEIRO BOANOVA PROFESSOR","MISS BROWNE","EMILIANO AUGUSTO CAVALCANTI DE ALBUQUERQUE E MELO","FIDELINO DE FIGUEIREDO PROFESSOR","FERNAO DIAS PAES","MARINA CINTRA PROFESSORA","ROLDAO LOPES DE BARROS PROFESSOR","ARCY MAJOR","FABIANO LOZANO MAESTRO","RODRIGUES ALVES","CARLOS MAXIMILIANO PEREIRA DOS SANTOS","CAETANO DE CAMPOS CONSOLACAO","ARISTIDES DE CASTRO","NAPOLEAO DE CARVALHO FREIRE PROFESSOR","OSWALDO ARANHA","KEIZO ISHIHARA","KYRILLOS DOUTOR","LOURENCO FILHO PROFESSOR","MARIA EUGENIA MARTINS PROFESSORA","FLAVIA VIZIBELI PIRRO PROFESSORA","GUIOMAR ROCHA RINALDI PROFESSORA","ARCHITICLINO SANTOS PROFESSOR","DANIEL PAULO VERANO PONTES PROFESSOR","EMYGDIO DE BARROS PROFESSOR","ENNIO VOSS PROFESSOR","ANA ROSA DE ARAUJO DONA","PEDRO FONSECA PROFESSOR","THOMAZIA MONTORO","JACQUES MARITAIN","MURTINHO NOBRE DOUTOR","JULIO DE MESQUITA FILHO","ITAUNA VISCONDE DE","ASTROGILDO SILVA PROFESSOR","SEMINARIO NOSSA SENHORA DA GLORIA","NOSSA SENHORA APARECIDA","MANUELA LACERDA VERGUEIRO","ODON CAVALCANTI PROFESSOR","OSCAR THOMPSON","EURYDICE ZERBINI PROFESSORA","GUALTER DA SILVA PROFESSOR","TEOTONIO ALVES PEREIRA","RAUL CARDOSO DE ALMEIDA PROFESSOR","RAUL FONSECA","PAULO ROSSI PROFESSOR","LYGIA DE AZEVEDO SOUZA E SA PROFESSORA","MARIA AUGUSTA DE MORAES NEVES PROFESSORA","MARIA RIBEIRO GUIMARAES BUENO PROFESSORA","HELOISA CARNEIRO PROFESSORA","JOAO AMOS COMENIUS","JULIO RIBEIRO","ANTONIO ALCANTARA MACHADO","DOMINGOS QUIRINO FERREIRA CORONEL","LEONOR QUADROS","ISABEL PRINCESA","LASAR SEGALL","RENATO BRAGA PROFESSOR","JOAO SILVA PROFESSOR","NEYDE APPARECIDA SOLLITTO PROFESSORA","MARIA PETRONILA LIMEIRA DOS MILAGRES MONTEIRO PROFESSORA","BEATRIZ DE QUADROS LEME PROFESSORA","BENTO PEREIRA DA ROCHA PROFESSOR","JOAQUIM ADOLFO ARAUJO PROFESSOR","HUGO LACORTE VITALE DEPUTADO","MEXICO","ZENAIDE LOPES DE OLIVEIRA GODOY PROFESSORA","JOAO EVANGELISTA COSTA PROFESSOR","LUIZ GONZAGA PINTO E SILVA PROFESSOR","PLINIO NEGRAO","MARIA PECCIOLI GIANNASI PROFESSORA","PAULO OCTAVIO DE AZEVEDO PROFESSOR","ORLANDO MENDES DE MORAES PROFESSOR","LEVI CARNEIRO","PAULINO NUNES ESPOSO","HILTON REIS SANTOS PROF","DUARTE LEOPOLDO E SILVA DOM","JOSE GERALDO DE LIMA PROF EE","ADOLFO CASAIS MONTEIRO PROF","JUVENTINA MARCONDES DOMINGUES DE CASTRO PROFA","ALFREDO VIANELLO GREGORIO COMENDADOR","AMELIA KERR NOGUEIRA PROFESSORA","MARIA AMELIA BRAZ PROFA","HERBERT BALDUS","SINHA PANTOJA","JOAO BATISTA DE CARVALHO MONSENHOR","FRANCISCO ANTONIO MARTINS JUNIOR PROFESSOR","HUMBERTO ALFREDO PUCCA PROFESSOR","RENATA GRAZIANO DE OLIVEIRA PRADO PROFESSORA","OCTALLES MARCONDES FERREIRA","FRANCISCO ROSWELL FREIRE","EULALIA SILVA PROFESSORA","LAURO PEREIRA TRAVASSOS PROFESSOR DOUTOR","JOAO SUSSUMU HIRATA DEPUTADO","GENESIO DE ALMEIDA MOURA DOUTOR","MIGUEL OLIVA FEITOSA PROFESSOR","HONORIO MONTEIRO DOUTOR","FRANCISCO DE PAULA VICENTE DE AZEVEDO","CARLOS DE MORAES ANDRADE PROF","CARLOS AYRES PROF","GIULIO DAVID LEONE PROF","MIGUEL KRUSE DOM","FRANCISCO MESQUITA JORNALISTA","PEDRO VIRIATO PARIGOT DE SOUZA ENGENHEIRO","PAULO SARASATE GOVERNADOR","GUILHERME DE ALMEIDA","MANUEL BANDEIRA","MOZART TAVARES DE LIMA PROFESSOR","BRANCA CASTRO CANTO E MELO PROFESSORA","ANNE FRANK","GERALDO CAMPOS MOREIRA PROFESSOR DOUTOR","HECKEL TAVARES","ROCCA DORDALL","JOAQUIM EUGENIO LIMA NETO","ERNESTINA DEL BUONO TRAMA PROFESSORA","COSME DE FARIA MAJOR","HENRIQUE SMITH BAYMA DR","FRANCISCO DA COSTA GUEDES","ELZA SARAIVA MONTEIRO PROFA","FRANCISCO JOAO DE AZEVEDO PADRE","OSWALD DE ANDRADE","LOURIVAL GOMES MACHADO PROFESSOR","ALMEIDA JUNIOR PROFESSOR","LAERTE RAMOS DE CARVALHO PROF DR","LUIZ SIMIONI SOBRINHO PROFESSOR","MESSIAS FREIRE PROFESSOR","SAMUEL MORSE PROFESSOR","CAFE FILHO PRESIDENTE","ANTONIO CARLOS FERREIRA NOBRE PROFESSOR","ANA SIQUEIRA DA SILVA","CARLOS FREDERICO WERNECK LACERDA JORNALISTA","VERIDIANA CAMACHO CARVALHO GOMES PROFA","JUSTINO CARDOSO DR","ITALO BETARELLO","MARIA AUGUSTA SARAIVA DOUTORA","AUGUSTO DO AMARAL DEPUTADO","CAETANO DE CAMPOS","CARLOS PASQUALE PROFESSOR","FRANCISCO DE PAULA CONCEICAO JUNIOR PROFESSOR","ADRIAO BERNARDES PROF","CALLIA MAESTRO","MARIA LUIZA DE ANDRADE MARTINS ROQUE PROFA","VERA ATHAYDE PEREIRA PROFA","CHARLES DE GAULLE","MARTHA FIGUEIRA NETTO DA SILVA PROFESSORA","ANA LUIZA FLORENCE BORGES PROFA","QUINTILIANO JOSE SITRANGULO PROF","CARLOS HENRIQUE LIBERALLI PROFESSOR","CHIBATA MIYAKOSHI","AYRES NETO DOUTOR","FRANCISCO BRASILIENSE FUSCO DOUTOR","JOSE OSCAR ABREU SAMPAIO","BENEDITO FERREIRA DE ALBUQUERQUE PROF","REGINA MIRANDA BRANT DE CARVALHO PROFA","ALFREDO GOMES PROF","ARLINDO PINTO DA SILVA PROF","LEONOR RENDESI PROFESSORA","MARIA AUGUSTA CORREA PROFESSORA","CLOVIS DE OLIVEIRA PROFESSOR DOUTOR","RONALDO GARIBALDI PERETTI PROFESSOR","ANTONIO MANOEL ALVES DE LIMA","MANOEL TABACOW HIDAL PROFESSOR","CAROLINA CINTRA DA SILVEIRA PROFESSORA","SANTO DIAS DA SILVA","GUILHERME GIORGI COMENDADOR","JOSE DE OLIVEIRA ORLANDI","MARIA FERRAZ DE CAMPOS PROFA","DUGLAS TEIXEIRA MONTEIRO PROFESSOR","MARIA JUVENAL HOMEM DE MELLO PROFA","EMILIO WARWICK KERR PASTOR","JOSEPHINA CINTRA DAMIAO PROFESSORA","ERODICE PONTES DE QUEIROZ REV","SAMUEL WAINER","MATTATHIAS GOMES DOS SANTOS REV","FRANCISCO DE ASSIS PIRES CORREA PROFESSOR","JORGE DUPRAT FIGUEIREDO","MARIO LOPES LEAO DR","HERCULANO DE FREITAS PROFESSOR","ZORAIDE DE CAMPOS HELU PROFESSORA","ORESTES ROSOLIA PROF","JOAO PRADO MARGARIDO PROF","SALIM FARAH MALUF PROFESSOR","FADLO HAIDAR","SAMUEL KLABIN","JOAO ERNESTO FAGGIN DOUTOR","DAVID NASSER JORNALISTA","ANTONIO BERNARDES DE OLIVEIRA PROFESSOR","CARLOS CATTONY","EURIPEDES SIMOES DE PAULA PROF","MARIO ARMINANTE PROF","ANTONIO PEREIRA LIMA DR","ARGEO PINTO DIAS ENG","FLAMINIO FAVERO PROFESSOR","ANTONIO SYLVIO DA CUNHA BUENO","FRANCISCO PEREIRA DE SOUZA FILHO PROF","ARNALDO LAURINDO PROFESSOR","TIAGO ALBERIONE PADRE","ESTHER GARCIA PROFA EE","MARIA DE LOURDES ALMEIDA SINISGALLI PROFA","PAULO LEIVAS MACALAO PASTOR","JOAO BAPTISTA ALVES SILVA PROF","PAULO LAURO DR","MOACYR AMARAL DOS SANTOS","JOAQUIM SILVERIO GOMES DOS REIS PROFESSOR","RUTH CABRAL TRONCARELLI PROFESSORA","JOSE RIGHETTO SOBRINHO PROF","CICERO CANUTO DE LIMA PASTOR","ARISTON DE OLIVEIRA PROFESSOR TENENTE","HOMERO VAZ DO AMARAL","SOICHI MABE","ELIZABETH APARECIDA SIMOES MESQUITA PROFESSORA","REPUBLICA DA COLOMBIA","JARDIM CAPELA IV","EUDORO VILLELA","MARILSA GARBOSSA FRANCISCO PROFESSORA","PAULO KOBAYASHI","LUIS AMBRA DESEMBARGADOR","REPUBLICA DO PANAMA","TERUKO UEDA YAMAGUTI PROFESSORA","JUAN CARLOS ONETTI ESCRITOR","JOSE EPHIM MINDLIN","CARLOS ESTEVAM ALDO MARTINS PROFESSOR","SITIO CONCEICAO","BERNARDO O HIGGINS DOM","JARDIM SANTO ANDRE III","MORRO DOCE","RAIMUNDO SERAFIM DE LIMA INSPETOR","BERNADETE APARECIDA PEREIRA GODOI PROFA","JARDIM NORONHA V","CYNIRA STOCCO FAUSTO PROFESSORA","CANDIDA RITA DA SILVA PAULO","WALTER LERNER PROFESSOR","EUNICE MARQUES MOURA BASTOS PROFA","LEILA SABINO PROFESSORA","EDUARDO GOMES BRIGADEIRO COHAB","MIGUEL SANSIGOLO PROF","CAMILO MARIA CAVALHEIRO DOM","AMADOR E CATHARINA SAPORITO AUGUSTO","JOSE PORPHYRIO DA PAZ","HERMINIO SACCHETTA","SHIRO KYONO DEPUTADO","MARGARIDA MARIA ALVES","IRMA CHARLITA","FRANCISCO ALVES MOURAO PROFESSOR","MIGUEL MUNHOZ FILHO","PAULO ROBERTO FAGGIONI PROFESSOR","NEYDY DE CAMPOS MELGES PROF","ANTONIETA DE SOUZA ALCANTARA","CESAR DONATO CALABREZ","JOAO CAMARGO PROF","ROSA PAVONE PIMONT DOUTORA","FERNANDO MAURO PIRES DA ROCHA DEPUTADO","JULIETA FARAO PROFA","ARTHUR CHAGAS JUNIOR PROF","JOZINEIDE PEREIRA GAUDINO","MARCELO TULMAN NETO","SAID MURAD","JOAO BATISTA VILANOVA ARTIGAS PROF","FRANCISCO PARENTE","PEDRO BRASIL BANDECCHI PROF","TANCREDO DE ALMEIDA NEVES PRES","CHRISTIANO ALTENFELDER SILVA DOUTOR","CALHIM MANOEL ABUD","JOAO XXIII","MARILENA PIUMBATO CHAPARRO PROFESSORA","AQUILINO RIBEIRO","GUERRA JUNQUEIRO","TANCREDO NEVES PRESIDENTE","MARTINHO DA SILVA","MARIA ANTONIETA FERRAZ BIBLIOTECARIA","WASHINGTON ALVES NATEL","NILDO DO AMARAL JUNIOR PADRE","GIL VICENTE","ASSIS JOSE AMBROSIO","FRANCISCO MIGNONE","OSCAR PEREIRA MACHADO","LEONOR FERNANDES COSTA ZACHARIAS","LEONIDAS PAIVA PROF","MARIA DE LOURDES ARANHA DE ASSIS PACHECO PROFESSORA","JORGE LUIS BORGES","SERGIO DA SILVA NOBREZA PROF","CAETANO ZAMITTI MAMMANA PROF","AFRANIO DE OLIVEIRA","MIGUEL MALUHY COMENDADOR","OSWALDO GAGLIARDI","MAUD SA DE MIRANDA MONTEIRO PROFESSORA","JOSE DUARTE JUNIOR PROFESSOR","LIBERATO GROSSI PROF","LOURENCO ZANELATTI","WILFREDO PINHEIRO PROF","VALDIR FERNANDES PINTO PROF","ISAAC SCHRAIBER PROFESSOR","SUMIE IWATA PROFESSORA","INAH JACY DE CASTRO AGUIAR","MARIA LUCIA AMBROZIO PROFA","CARMELINDA MARQUES PEREIRA PROFESSORA","SATURNINO PEREIRA PROFESSOR","MARIA VERA LOMBARDI SIQUEIRA PROFA","MARIA REGINA MACHADO DE CASTRO GUIMARAES PROFA","WALDEMAR RODRIGUES DA SILVA PASTOR","ARCANGELO SFORCIM","GERALDINO DOS SANTOS DEPUTADO","DILSON FUNARO MINISTRO","IRINEU MONTEIRO DE PINHO REV","LIVIO XAVIER","ARACI ZEBRAL TEIXEIRA","ZIPORA RUBINSTEIN PROFESSORA","FLAVIO LA SELVA PROFESSOR","NORBERTO ALVES RODRIGUES PROFESSOR","MARLY DIVA BONFANTI PROFA","EUNICE TEREZINHA DE OLIVEIRA FRAGOAS PROFA","HERMINIA DE ANDRADE PFUHL NEVES PROFESSORA","ZILDA ARNS NEUMANN","JACQUES ORLANDO CAMINHA D AVILA REVERENDO","JULIO DE CARVALHO BARATA","EDER BERNARDES DOS SANTOS SOLDADO PM","GUSTAVO BARROSO","BRENNO ROSSI MAESTRO","PEDRO GERALDO COSTA DEPUTADO","AFIZ GEBARA DOUTOR","JOSE RAUL POLETTO","PAULINA MADRE","MARLENE ADUA FORTUNATO PROFESSORA","JESUS JOSE ATTAB PROFESSOR","ALVARO SIMOES","LUCAS ROSCHEL RASQUINHO","HAYDEE HIDALGO PROFESSORA","OSCAR BLOIS","SAPOPEMBA","JARDIM WILMA FLOR","VILA BELA","LEDA GUIMARAES NATAL","JAIR TOLEDO XAVIER PROFESSOR","JARDIM IGUATEMI","SILVANA EVANGELISTA PROFESSORA","NANCY DE OLIVEIRA FIDALGO PROFA","HEITOR VILLA LOBOS MAESTRO","CARAN APPARECIDO GONCALVES PROFESSOR","DOGIVAL BARROS GOMES PROFESSOR","AMADOR DOS SANTOS FERNANDES PROF","MARIA DE LOURDES VIEIRA","WILSON RACHID","PARQUE ANHANGUERA","EVANDRO CAVALCANTI LINS E SILVA","CLARICE SEIKO IKEDA CHAGAS","MARCOS ANTONIO COSTA PROFESSOR","REPUBLICA DO SURINAME","CLEISE MARISA SIQUEIRA PROFA","REPUBLICA DO HAITI","PARQUE ECOLOGICO","REPUBLICA ARGENTINA","SERGIO MURILLO RADUAN PROFESSOR","JOAO DORIA DEPUTADO","CONDOMINIO VARGEM GRANDE II","SERGIO DA COSTA PROF","UMBERTO LUIZ D URSO DR","MARIAZINHA CONGILIO","CLAUDIRENE APARECIDA JOSE DA SILVA","REPUBLICA DA GUATEMALA","ODAIR MARTINIANO DA SILVA MANDELA","JOSE DE SAN MARTIN","MARIA ZILDA GAMBA NATEL","FLORESTAN FERNANDES","RAUL CORTEZ RAUL CRISTIANO MACHADO CORTEZ"],"mode":"markers","type":"scatter","name":"estadual","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"line":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[5.1,5.5,5.6,4.6,4.9,4.6,4.2,3.5,4.8,4.9,3.8,3.8,4.2,5.4,4.5,4.1,3.2,5,4.9,4.5,4.6,5.2,4.4,5.5,4.4,4.2,4.1,5.7,4.7,3.6,4.9,5.1,4.8,4.9,5.2,5.5,5,4.6,5,4.5,4.8,4.3,4.6,5.4,5,4.6,4.7,5.1,5.4,5.3,5.1,5.2,4.7,4.9,4.7,5.6,5.2,4.1,4,5.3,4.9,5.4,4.8,4.3,5.3,4.9,5.7,5,4.4,5,4.8,4.5,4.8,5.4,5.8,4.7,4.7,4.8,4.8,4.8,4.6,5,4.8,4.4,4.6,4.9,4.6,4.5,5.5,5.6,4.9,5.7,4.1,5,5.4,5.2,4.9,5.1,5.1,4.8,4.6,6,4.9,5.1,5.2,5.1,5,5.3,5.2,4.4,5.2,5.3,5.6,4.6,4.3,4.6,5.2,5.6,4.6,5,5.1,5.5,5.2,4.9,6.1,6,6.2,5.4,5.5,5.4,5.6,4.2,4.3,4.9,3.8,5,5,5.3,4.9,5.1,5.1,5.1,4.5,5.2,5.7,4.9,4.7,4.5,5.3,4.7,4.9,4.4,3.8,5.2,5.3,4.8,4.6,5.3,5,4.8,5.1,5.5,5,5.2,4.8,5.8,4.6,5.4,5.2,4.7,4.6,5.3,4.7,5.1,4.7,4.2,4.6,4.7,4.1,4.9,4.2,5.2,5.3,5,4,4.7,4.9,4.1,5,5.3,4.5,4.7,4.8,5.2,4.7,5.1,4.7,4.8,4.7,4.5,2.9,4.8,3.9,5.3,5,4.6,4.8,5.7,4.6,5.4,5.4,4.4,5.2,5.1,4.7,5.4,5.8,4.7,4.6,5.5,3.4,4.4,4.7,5.2,5.3,4.4,5.2,4.8,5,4.8,5,3.8,5.1,5.3,4.7,4.6,4.9,4.5,5,4.8,5.1,4.8,4.5,5.1,4.6,5.1,4.6,4.5,5.1,5,4,5.4,4.6,5.3,3.9,4.7,4.6,4.9,4.5,4.5,4.6,4.8,4.8,4.8,4.7,5,4.1,4.5,4.5,4.9,5.4,5,5.6,5.1,5.1,4.8,4.4,4.7,5.9,4.9,5.5,4,5.5,5.2,5.1,4.7,4.8,5.5,5,5.2,5,5.2,5.4,5.2,4.8,4.7,4.7,4.4,4.9,4.1,5.5,4.7,5.3,4.7,5.1,5.1,4.7,4.4,5.8,5.6,4.5,4.4,4.2,4.7,4.7,5.2,4.8,4.9,4.8,4.8,4.4,4.7,4.6,4.6,4.8,4.9,5.2,4.9,4.9,4.9,5,5.1,5.4,4.2,5,5.2,4.6,5.6,4.5,4.7,4.7,5.1,4.2,5.1,5.5,5.2,4.7,4.5,5.1,4.7,5.1,5,5.8,4.9,5.3,5.2,5.3,4.8,4.7,4.6,4.5,4.8,4.9,4.7,4.4,4.8,4.8,5,4.7,4.8,5.7,5,5.4,5.1,5.3,4.6,4.3,3.9,4.6,4.6,5.5,5,4.6,5.3,4.8,5.2,4.5,4.9,4.6,4.7,4.9,4.8,5,5.1,4.4,4.5,4.8,5.2,5.4,3.6,4.4,4.8,3.9,4.2,4.8,5.4,4.6,4.9,5.3,4.2,4.6,4.9,5.3,4.6,4,4.7,4.7,5,5,4.7,4.8,4.7,4.8,4.7,4.9,4.7,4.7,5.2,4.6,5.7,3.7],"x":[5.55,6.03,5.54,4.57,5.65,5.21,5.07,4.7,5.63,5.13,5.21,4.84,5.28,6.43,4.88,4.66,5.12,5.1,5.34,4.76,5.42,5.64,5.81,5.54,5.72,5.32,4.91,5.82,4.71,4.7,5.3,5.9,5.14,5.86,5.78,5.45,4.25,5.28,5.55,5.31,5.31,4.98,5.94,5.8,5.81,5.32,5.82,6.03,6.06,5.8,5.44,5.55,5.11,5.08,5.16,5.78,5.22,5.12,4.98,5.91,5.13,6.27,4.88,4.86,5.94,4.31,5.94,5.38,4.36,5.13,4.82,4.63,4.97,6.03,6.25,5.16,5.3,5.3,4.87,4.76,5.7,5.52,4.81,4.88,5.55,5.52,5.8,4.95,5.66,5.8,4.96,6.04,4.82,5.44,6.17,5.31,5.28,5.71,5.1,5.1,5.24,6.02,5.22,5.2,5.27,5.11,6.05,6.08,5.44,4.97,5.52,5.21,5.81,5.23,5.54,4.94,5.68,6.25,5.55,5.87,5.74,5.65,5.83,5.89,6.25,4.89,5.91,6.03,6.08,5.44,6.42,5.8,5.88,5.6,4.58,4.96,5.54,5.44,5.84,5.58,6.09,5.98,5.4,5.57,5.78,5.92,5.42,5.48,5.55,4.73,5.34,5.1,4.68,6.21,5.45,4.86,4.45,5.65,5.31,5.24,5.65,5.86,5.02,5.64,5.45,5.65,5.44,6.15,5.29,5.64,5.21,5.4,4.93,5.31,5.38,5.32,5.22,5.43,5.39,5.62,4.79,5.06,5.57,5.72,5.31,5.45,5.14,4.96,5.64,6.03,5.06,5.3,5.09,5.94,5.02,5.11,5.15,5.41,5.36,5.08,4.48,5.13,4.82,5.3,5.49,4.97,4.72,5.85,4.99,5.12,5.22,4.87,5.44,5.1,5.31,5.73,5.89,5.26,5.38,5.2,5.33,5.1,5.36,5.53,5.08,5.03,5.71,4.92,5.8,5.36,5.21,4.58,5.2,5.36,5.11,5.78,5.34,4.46,5.21,5.22,5.18,4.8,4.91,5.63,4.88,4.77,5.24,4.9,5.13,5,4.53,5.58,4.64,4.66,4.81,5.02,4.94,5.13,5.3,4.36,4.63,5.02,5.1,4.88,4.98,5.37,5.39,5.63,5.21,4.86,4.74,5.1,6.25,5.92,5.08,5.2,5.02,5.22,5.5,4.79,5.17,5.22,5.44,5.22,5.31,4.74,5.68,5.31,5.45,5.7,5.09,5.53,5.07,4.67,5.22,5.2,5.98,4.82,5.55,4.96,4.88,4.72,5.23,4.92,5.14,4.79,6.01,5.43,5.99,5.07,5.06,4.59,4.2,5.07,4.82,4.8,5.6,5.31,4.9,5.07,4.86,4.78,4.35,4.96,5.06,4.96,5.1,5.2,4.81,5.54,5,5.44,5.02,4.41,4.96,5.07,5.21,5.24,5.44,4.98,5.07,5.06,4.67,5.71,5.08,5.14,4.64,5.2,4.98,4.96,5.26,5.06,5.53,5.4,4.97,5.22,5.07,5.37,5.2,5.29,5.48,5.2,4.99,4.81,5.04,5.18,4.89,5.2,5.18,5.07,5.18,5.55,5.66,5.2,4.95,5.16,5.18,4.7,5.19,5.18,5.31,6.23,5.33,5.45,5.18,5.05,4.78,4.94,5.44,4.75,4.92,4.24,5.75,5.03,5.18,5.28,5.03,5.05,5.79,4.84,4.85,5.21,5.21,5.2,4.93,5,4.52,5.2,5.3,5.49,5.17,5.2,5,5.04,5.02,4.86,5.21,5.33,4.44,5.39,5.53,4.83,5.18,5.16,5.16,4.95,5.16,5.43,5.19,5.16,4.59],"text":["EMEF FARIA LIMA BRIG","EMEF EMILIANO DI CAVALCANTI","EMEF LEONOR MENDES DE BARROS","EMEF CASTRO ALVES","EMEF SEBASTIAO NOGUEIRA DE LIMA DES","EMEF RAUL FERNANDES EMB","EMEF THEO DUTRA","EMEF BRASIL-JAPAO","EMEF ARTHUR WHITAKER DES","EMEF ALCIDES GONCALVES ETCHEGOYEN GEN","EMEF ALVARO SILVA BRAGA GEN","EMEF IBRAHIM NOBRE","EMEF JOAO XXIII","EMEF DEODORO DA FONSECA MAL","EMEF LUIZ EDUARDO MATARAZZO CDE","EMEF ROBERTO MANGE PROF","EMEF TARSILA DO AMARAL","EMEF ALIPIO ANDRADA SERPA TTE","EMEF CECILIA MEIRELES","EMEF EDGARD CAVALHEIRO","EMEF ROQUETTE PINTO","EMEF GARCIA DAVILA CTE","EMEF ANGELINA MAFFEI VITA DA","EMEF PAULO NOGUEIRA FILHO","EMEF BERNARDO O HIGGINS","EMEF CHIQUINHA RODRIGUES","EMEF CALOGERAS MIN","EMEF JOAO CARLOS DA SILVA BORGES PROF","CEU EMEF CAMPOS SALLES PRES","EMEF ARY PARREIRAS ALM","EMEF ARMANDO ARRUDA PEREIRA","EMEF CACILDA BECKER","EMEF MARINA VIEIRA DE CARVALHO MESQUITA","EMEF NELSON PIMENTEL QUEIROZ PROF","EMEF MARIA ANTONIETA DALKIMIN BASTO PROFA","EMEF ANIBAL FREIRE MIN","EMEF CAXIAS DUQUE DE","EMEF AROLDO DE AZEVEDO PROF","EMEF FABIO DA SILVA PRADO DR","EMEF NILO PECANHA PRES","EMEF ERICO VERISSIMO","EMEF HENRIQUE INFANTE D","EMEF FRANCISCO DE MONT ALVERNE FREI","EMEF JOSE MARIA PINTO DUARTE TTE","EMEF LIBERATO BITTENCOURT GEN","EMEF LEOPOLDINA IMP","EMEF MARIO KOSEL FILHO","EMEF MONTEIRO LOBATO","EMEF GASTAO MOUTINHO CTE","EMEF MARCILIO DIAS","EMEF MARCOS MELEGA","EMEF ADOLPHO OTTO DE LAET PROF","EMEF TIRADENTES ALF","EMEF ANTENOR NASCENTES","EMEF MARIO MOURA E ALBUQUERQUE BEL","EMEF CARLOS DE ANDRADE RIZZINI","EMEF LUIZ TENORIO DE BRITO CEL","EMEF MARIO RANGEL CEL","EMEF PALIMERCIO DE REZENDE CEL","EMEF PEREIRA CARNEIRO CDE","EMEF JOAO SUSSUMU HIRATA DEP","EMEF JOAQUIM CANDIDO DE AZEVEDO MARQUES DES","EMEF MANOEL CARLOS DE FIGUEIREDO FERRAZ DES","EMEF PAULO COLOMBO PEREIRA DE QUEIROZ DES","EMEF ANTONIO CARLOS DE ABREU SODRE DR","EMEF DE GAULLE GEN","EMEF HEITOR DE ANDRADE","EMEF ADHEMAR DE BARROS PREF","EMEF OTONIEL MOTA","EMEF FAGUNDES VARELLA","EMEF IRACEMA MARQUES DA SILVEIRA PROFA","EMEF PROCOPIO FERREIRA","EMEF MANOEL DE ABREU DR","EMEF JOAO GUALBERTO DO AMARAL CARVALHO","EMEF LAERTE RAMOS DE CARVALHO PROF","EMEF LEONARDO VILLAS BOAS","EMEF MAURICIO SIMAO","EMEF SYNESIO ROCHA MIN","EMEF JORGE AMERICANO PROF","EMEF LEVY DE AZEVEDO SODRE PROF","EMEFM LINNEU PRESTES PROF","EMEF MARIO MARQUES DE OLIVEIRA PROF","EMEF OLIVEIRA VIANA","EMEF ZULMIRA CAVALHEIRO FAUSTINO","EMEF CASSIANO RICARDO","EMEF JOSE DO PATROCINIO","EMEF JOSE MARIA LISBOA","EMEF EURICO GASPAR DUTRA MAL","EMEF ANTONIO DE ALCANTARA MACHADO","EMEF SYLVIA MARTIN PIRES PROFA","EMEF OLAVO FONTOURA","EMEF LEAO MACHADO PROF","EMEF TEODOMIRO TOLEDO PIZA DES","EMEF AFRANIO DE MELLO FRANCO DR","EMEF MIGUEL VIEIRA FERREIRA DR","EMEF JOSE AMADEI ENG","EMEF ELIZA RACHEL MACEDO DE SOUZA PROFA","EMEF JOAO DE DEUS CARDOSO DE MELLO","EMEF JOAQUIM BENTO ALVES DE LIMA NETO","EMEF PAULO SETUBAL","EMEF PLACIDO DE CASTRO","EMEF ALMEIDA JUNIOR PROF","EMEF CAROLINA RENNO RIBEIRO DE OLIVEIRA PROFA","EMEF MILTON FERREIRA DE ALBUQUERQUE PROF","EMEF OLEGARIO MARIANO","EMEF ARTHUR AZEVEDO","EMEF JACKSON DE FIGUEIREDO","EMEF OTHELO FRANCO GEN","EMEF EDSON RODRIGUES","EMEF ENEAS CARVALHO DE AGUIAR","EMEF JULIO MARCONDES SALGADO GEN","EMEF JOAO RAMOS - PERNAMBUCO - ABOLICIONISTA","EMEF LOURENCO FILHO","EMEF RONDON MAL","EMEF OCTAVIO PEREIRA LOPES","EMEF ESMERALDA SALLES PEREIRA RAMOS PROFA","EMEF FRANKLIN AUGUSTO DE MOURA CAMPOS PROF","EMEF MAXIMO DE MOURA SANTOS PROF","EMEF MARIA HELENA FARIA LIMA PROFA","EMEF NOE AZEVEDO PROF","EMEF RODRIGUES ALVES","EMEF MARTIN FRANCISCO RIBEIRO DE ANDRADA","EMEF JOAO NAOKI SUMITA DR","EMEF KENNEDY PRES","EMEF BARTOLOMEU LOURENCO DE GUSMAO","EMEF OLIVA IRENE BAYERLEIN SILVA","EMEF HELENA LOMBARDI BRAGA PROFA","EMEF RUY BARBOSA","EMEF EUCLIDES CUSTODIO DA SILVEIRA DES","EMEF PAULO PRADO","EMEF AMADEU MENDES PROF","EMEF JOSE FERRAZ DE CAMPOS PROF","EMEF OLAVO PEZZOTTI PROF","EMEF TAMANDARE ALM","EMEF ARY GOMES CEL","EMEF PEDRO I D","EMEF JOAO DOMINGUES SAMPAIO","EMEF SHIRLEY GUIO PROFA","EMEF JEAN MERMOZ","EMEF MANOEL DE PAIVA PE","EMEF CAIRU VISC DE","EMEF FIRMINO TIBURCIO DA COSTA","EMEF 19 DE NOVEMBRO","EMEF HUMBERTO DE CAMPOS","EMEF JOSE BONIFACIO","EMEF JOAO PINHEIRO PRES","EMEF ABRAO DE MORAES PROF","EMEF ANTONIO PRUDENTE PROF","EMEF RAUL DE LEONI","EMEF OSVALDO QUIRINO SIMOES","EMEF FREDERICO GUSTAVO DOS SANTOS TTE AVIADOR","EMEF ALTINO ARANTES","EMEF BRASILIO MACHADO NETO","EMEF MASCARENHAS DE MORAES MAL","EMEF QUEIROZ FILHO PROF","EMEF FLORES DA CUNHA DEP","EMEF IRINEU MARINHO","EMEF EMILIO RIBAS","EMEF ALVARES DE AZEVEDO","EMEF ARMANDO DE SALLES OLIVEIRA","EMEF SILVIO FLEMING MJ","EMEF MAUA BR DE","EMEF HERALDO BARBUY","EMEF AUREA RIBEIRO XAVIER LOPES PROFA","EMEF MARLENE RONDELLI PROFA","EMEF RUTH LOPES ANDRADE PROFA","EMEF AMADEU AMARAL","EMEF GUILHERME DE ALMEIDA","EMEF ANTONIO VIEIRA PE","EMEF JENNY GOMES DA","EMEF OCTAVIO MANGABEIRA","EMEF HENRIQUE PEGADO PROF","EMEF WANNY SALGADO ROCHA PROFA","EMEF BENEDITO CALIXTO","EMEF JOAO DE LIMA PAIVA PROF","EMEF ARTUR NEIVA","EMEF JOAO RIBEIRO DE BARROS","EMEF ALEXANDRE DE GUSMAO","EMEF JOSE DE ANCHIETA PE","EMEF FERNANDO DE AZEVEDO PROF","EMEF SATURNINO PEREIRA","EMEF JOAO AUGUSTO BREVES DR","EMEF VINTE E CINCO DE JANEIRO","EMEF AYRES MARTINS TORRES","EMEF CORREIA DE MELLO BRIG","EMEF HAROLDO VELOSO BRIG","EMEF JOSE LINS DO REGO","EMEF DANYLO JOSE FERNANDES","EMEF CARLOS CHAGAS","EMEF EDUARDO PRADO","EMEF 8 DE MAIO","EMEF OLIVAL COSTA","EMEF ANTONIO DUARTE DE ALMEIDA PROF","EMEF AURELIO ARROBAS MARTINS PROF","EMEF HENRIQUE MELEGA PROF","EMEF RIVADAVIA MARQUES JUNIOR PROF","EMEF RODRIGUES DE CARVALHO","EMEF HENRIQUE RAYMUNDO DYOTT FONTENELLE BRIG","EMEF HENRIQUE GEISEL GEN","EMEF LUIZ DAVID SOBRINHO PROF","EMEF RENATO ANTONIO CHECCHIA PROF","EMEF CANDIDO PORTINARI","EMEF LEONEL FRANCA PE","EMEF JULIO DE OLIVEIRA","EMEF PEDRO DE FRONTIN ALM","EMEF ANTONIA E ARTUR BEGBIE","EMEF ARMANDO CRIDEY RIGHETTI","EMEF LUIS SAIA ARQ","EMEF CAPISTRANO DE ABREU","EMEF EZEQUIEL RAMOS JUNIOR","EMEF NEWTON REIS GEN","EMEF SUD MENNUCCI","EMEF MARIA IMILDA DO SANTISSIMO SACRAMENTO ME","EMEF RAIMUNDO CORREIA","EMEF PEDRO TEIXEIRA","EMEF EPITACIO PESSOA PRES","EMEF CARLOS PASQUALE PROF","EMEF JOSE BENTO DE ASSIS PROF","EMEF ANTONIO CARLOS DE ANDRADA E SILVA","CEU EMEF PAULO GONCALO DOS SANTOS PROF","CEU EMEF BUTANTA","CEU EMEF INACIO MONTEIRO","CEU EMEF JAMBEIRO","CEU EMEF PERA MARMELO","CEU EMEF PERUS","CEU EMEF VILA ATLANTICA","CEU EMEF VILA CURUCA","CEU EMEF TRES LAGOS","CEU EMEF CASA BLANCA","CEU EMEF HERMES FERREIRA DE SOUZA","EMEF ANTONIO DAVILA PROF","EMEF FLAVIO AUGUSTO ROSA PROF","EMEF ERNESTO DE MORAES LEME PROF","EMEF HENRIQUE SOUZA FILHO - HENFIL","EMEF ALDO RIBEIRO LUZ PROF","EMEF IRENE GARCIA COSTA DE SOUZA PROFA DRA","EMEF NILDO DO AMARAL JUNIOR PE","EMEF SEBASTIAO FRANCISCO O NEGRO","EMEF ALEXANDRE VANNUCHI LEME","EMEF IDEMIA DE GODOY PROFA","EMEF LUIS CARLOS PRESTES SEN","EMEF QUIRINO CARNEIRO RENNO PROF","EMEF MARIA RITA LOPES PONTES - IRMA DULCE","EMEF CYRO ALBUQUERQUE DEP","EMEF MARIO SCHENBERG PROF","EMEF CARLOS AUGUSTO DE QUEIROZ ROCHA","EMEF ELZA MAIA COSTA FREIRE PROFA","EMEF LORENCO MANOEL SPARAPAN PROF","EMEF ANTONIO ESTANISLAU DO AMARAL","EMEF OLINDA MENEZES SERRA VIDAL PROFA","EMEF JULIO DE GRAMMONT","EMEF ANALIA FRANCO BASTOS","EMEF FRANCISCO DA SILVEIRA BUENO PROF","EMEF BENEDITO DE JESUS BATISTA LAURINDO - PE BATISTA","EMEF ELIAS SHAMMASS","EMEF JOSE OLYMPIO PEREIRA FILHO","EMEF ULYSSES DA SYLVEIRA GUIMARAES","EMEF JOSE AMERICO DE ALMEIDA","EMEF HENRIQUE FELIPE DA COSTA - HENRICAO","EMEF ARLINDO CAETANO FILHO PROF","EMEF ALCEU AMOROSO LIMA","EMEF AIRTON ARANTES RIBEIRO PROF","EMEF GREGORIO WESTRUPP PE","EMEF IVETE VARGAS DEP","EMEF VILANOVA ARTIGAS ARQ","EMEF PAULO DUARTE","EMEFM OSWALDO ARANHA BANDEIRA DE MELLO","EMEFM ANTONIO ALVES VERISSIMO","EMEF ANTONIO PEREIRA IGNACIO","EMEF JOSE PEDRO LEITE CORDEIRO DR","EMEF HIPOLITO JOSE DA COSTA","CEU EMEF DOMINGOS RUBINO PROF","EMEF TEOFILO BENEDITO OTTONI","EMEF ROBERTO PATRICIO PROF","EMEF HELIO FRANCO CHAVES CEL","EMEF ALIPIO CORREA NETO PROF","EMEF EDA TEREZINHA CHICA MEDEIROS PROFA","EMEF PLINIO SALGADO","EMEF JOAO DE SOUZA FERRAZ PROF","EMEF SYLVIO HECK ALM","EMEF DEZOITO DO FORTE","EMEF MODESTO SCAGLIUSI","EMEF PRACINHAS DA FEB","EMEF RICARDO VITIELLO PROF","EMEF VERA LUCIA FUSCO BORBA PROFA","EMEF ANTONIO ALVES DA SILVA SG","EMEF JOAO PEDRO DE CARVALHO NETO DR","EMEF ASSAD ABDALA","EMEF MALLET MAL","EMEF AMELIA IMP DA","EMEF BENEDITO MONTENEGRO PROF","EMEF JOSE ERMIRIO DE MORAIS SEN","EMEF JOSE HONORIO RODRIGUES","EMEF VIRGILIO DE MELLO FRANCO","EMEF PHILO GONCALVES DOS SANTOS PROFA","EMEF ERNANI SILVA BRUNO","EMEF JOSE CARLOS DE FIGUEIREDO FERRAZ PREF","EMEF EUZEBIO ROCHA FILHO","EMEF JOAO FRANZOLIN NETO PROF","EMEF CAIO SERGIO POMPEU DE TOLEDO DEP","EMEF PRESTES MAIA","EMEF FERNANDO GRACIOSO","EMEFM RUBENS PAIVA","EMEF CLAUDIA BARTOLOMAZI PROFA","EMEF FLORESTAN FERNANDES PROF","EMEF ANNA SILVEIRA PEDREIRA","EMEFM GUIOMAR CABRAL","EMEFM ANTONIO SAMPAIO VER","EMEFM DARCY RIBEIRO","EMEF VICENTE AMATO SOBRINHO COM","EMEF CLOTILDE ROSA HENRIQUES ELIAS PROFA","EMEF PERICLES EUGENIO DA SILVA RAMOS","EMEF PAULO FREIRE PROF","EMEF DAMIAO FREI","EMEF JAIRO DE ALMEIDA PROF","EMEF LINO DE MATTOS SEN","EMEF JOSE QUERINO RIBEIRO","EMEF ILEUSA CAETANO DA SILVA PROFA","EMEF MILENA BENEDICTO PROFA","EMEF HELLIO TAVARES DR","EMEF MARIA RITA DE CASSIA PINHEIRO SIMOES BRAGA PROFA","EMEF JOSE BLOTA JUNIOR DEP","EMEF FRANCISCO REBOLO","EMEF VARGEM GRANDE","EMEF FAZENDA DA JUTA","EMEF JOAO DA SILVA","CEU EMEF MANOEL VIEIRA DE QUEIROZ FILHO","EMEF GIANFRANCESCO GUARNIERI","EMEF CHACARA SONHO AZUL","EMEF JANUARIO MANTELLI NETO DEP","EMEF ZILKA SALABERRY DE CARVALHO","EMEF ROGE FERREIRA DEP","EMEF HERBERT DE SOUZA - BETINHO","EMEF PAULO CARNEIRO THOMAZ ALVES GEN","CEU EMEF CESAR ARRUDA CASTANHO DEP","EMEF WLADIMIR DE TOLEDO PIZA PREF","EMEF ANTONIO RODRIGUES DE CAMPOS PROF","EMEF DIRCE GENESIO DOS SANTOS PROFA","EMEF NILCE CRUZ FIGUEIREDO PROFA","EMEF MARIO COVAS GOV","CEU EMEF JARDIM ELIANA","CEU EMEF MARIA LISBOA DA SILVA PROFA","EMEF JOSE KAUFFMANN DR","EMEF REMO RINALDI NADDEO PROF","EMEF JARDIM MONTE BELO","EMEF JOSUE DE CASTRO PROF","EMEF RECANTO DOS HUMILDES","CEU EMEF CONCEICAO APARECIDA DE JESUS PROFA","EMEF JARDIM DAS LARANJEIRAS","EMEF WANDA OVIDIO GONCALVES PROFA","CEU EMEF MARIA CLARA MACHADO","EMEF JOSE PEGORARO PE","EMEF EDGARD CARONE","EMEF MARINA MELANDER COUTINHO PROFA","EMEF GIUSEPPE TAVOLARO PROF","EMEF TEREZINHA MOTA DE FIGUEIREDO","EMEF ALDO DA TOFORI PE","CEU EMEF AGUA AZUL","CEU EMEF FEITICO DA VILA","CEU EMEF JACANA","CEU EMEF VILA RUBI","EMEF JARDIM GUARANI - JOSE ALFREDO APOLINARIO PROF","EMEF JARDIM DA CONQUISTA","EMEF JARDIM DAMASCENO I","EMEF JOSE HERMINIO RODRIGUES CEL PM","EMEF MARILI DIAS PROFA","CEU EMEF VILA DO SOL","CEU EMEF CANTOS DO AMANHECER","CEU EMEF MARIO FITTIPALDI","CEU EMEF JARDIM PAULISTANO","CEU EMEF LAJEADO","CEU EMEF ROSANGELA RODRIGUES VIEIRA PROFA","CEU EMEF TATIANA BELINKY","EMEF JARDIM MITSUTANI I - PAULO PATARRA JORNALISTA","EMEF NEIR AUGUSTO LOPES PROF","CEU EMEF MARA CRISTINA TARTAGLIA SENA PROFA","CEU EMEF VALTER PAULINO ESTEVAM PROF DR","CEU EMEF JAGUARE","CEU EMEF JOSE SARAMAGO","EMEF CAIRA ALAYDE ALVARENGA MEDEA PROFA","EMEF AGUAS DE MARCO","EMEF GILMAR TACCOLA PROF","EMEF DAMA ENTRE RIOS VERDES","EMEF SERAFIN MARTINEZ GUTIERREZ PE","EMEF HERCILIA DE CAMPOS COSTA","EMEF NEUZA AVELINO DA SILVA MELO","EMEF JOSEFA NICACIO ARAUJO PROFA","EMEF MURURES","EMEF IZABEL APARECIDA CRISTOVAO DA LUZ PROFA","EMEF MARISA MORETTI CAMARA PROFA","EMEF MARIA LUCIA DOS SANTOS PROFA","CEU EMEF PARAISOPOLIS","EMEF ALEX MARTINS COSTA PROF MAESTRO","EMEF CONSTELACAO DO INDIO","EMEF CARLOS FRANCISCO GASPAR","EMEF GENY MARIA MUNIZ ALMEIDA KLEIN PUSSINELLI PROFA","EMEF MARTIN LUTHER KING JR","EMEF PARQUE BOA ESPERANCA II","EMEF VIRGINIA LORISA ZEITOUNIAN CAMARGO PROFA","EMEF SOCRATES BRASILEIRO SAMPAIO DE SOUSA VIEIRA DE OLIVEIRA","EMEF CAMPO LIMPO II","EMEF CAMPO LIMPO III -LUISA ROSARIA DE OLIVEIRA DIAS","EMEF MARLI FERRAZ TORRES BONFIM","EMEF M BOI MIRIM I","EMEF MILLOR FERNANDES JORNALISTA","EMEF JURANDI GOMES DE ARAUJO PROF","EMEF BADRA","EMEF JOSE FRANCISCO CAVALCANTE PROF","EMEF ALDINA ANALIA AGOSTINHA TADDEO CONDE PROFA","EMEF GILBERTO DUPAS PROF","EMEF ELIANE BENUTE LESSA AYRES GONCALVES PROFESSORA- NANY BENUTE","EMEF ALICE MEIRELLES REIS PROFA","EMEF VILA MUNCK","EMEF M BOI MIRIM II","EMEF MOISES ELIAS DE SOUZA TTE","EMEF HELINA COUTINHO LOURENCO ALVES PROFESSORA","EMEF CELIA REGINA ANDERY BRAGA PROF","EMEF BARTOLOMEU CAMPOS DE QUEIROS","EMEF JOSE CARLOS NICOLETO - ZITO PROFESSOR","EMEF MARIA APARECIDA RODRIGUES CINTRA PROFA","EMEF ESTACAO JARAGUA","EMEF LILIAN MASO PROFA","EMEF AMELIA RODRIGUES DE OLIVEIRA PROFA","EMEF FORTE DOS REIS MAGOS","EMEF EDIVALDO DOS SANTOS DANTAS PROF","EMEF PEDRO FUKUYEI YAMAGUCHI FERREIRA","EMEF JOSE MARIO PIRES AZANHA PROF","EMEF MILTON PEREIRA COSTA","EMEF CHACARA TURISTICA","EMEF ACLAMADO","EMEF JARDIM SILVA TELES"],"mode":"markers","type":"scatter","name":"municipal","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"line":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[4.93731884751024,5.02095458498077,5.18822605992184,5.07885624938345,5.13675791378613,4.91801829270935,5.29759587046023,5.14319143205309,4.98878699364595,5.45200030886738,5.15605846858702,5.29116235219327,5.19465957818881,5.24612772432452,4.98235347537899,5.19465957818881,5.26542827912541,5.43269975406648,5.2139601329897,5.20109309645577,4.84081607350578,5.20752661472274,5.70934103954595,5.09815680418434,5.13032439551917,5.11102384071827,5.3940986444647,5.44556679060041,5.00808754844685,5.2139601329897,4.77648089083613,5.3040293887272,5.29116235219327,5.32976346179506,5.23969420605756,5.20752661472274,4.64137700722988,4.82151551870488,4.93731884751024,5.35549753486291,5.38123160793077,5.13032439551917,5.45843382713434,5.22039365125666,5.29116235219327,5.08528976765042,5.15605846858702,4.90515125617542,5.07885624938345,5.13675791378613,4.79578144563703,5.20752661472274,5.18822605992184,5.2139601329897,5.22039365125666,5.40053216273166,4.96305292057809,4.73144626296738,5.7350751126138,5.27186179739238,5.11745735898524,5.19465957818881,5.0338216215147,4.8536831100397,4.67997811683167,4.87941718310756,5.36193105312988,4.90515125617542,5.0338216215147,4.73787978123435,5.45200030886738,5.29759587046023,5.15605846858702,5.32976346179506,5.42626623579952,5.71577455781291,4.86011662830667,5.65787289341023,5.0338216215147,5.1238908772522,5.52920252807095,4.86011662830667,5.35549753486291,4.90515125617542,5.35549753486291,5.17535902338791,5.2139601329897,5.56780363767273,5.14319143205309,5.43913327233345,5.45200030886738,5.00165403017988,4.48697256882274,5.62570530207541,5.11745735898524,5.58067067420666,4.96948643884506,5.32976346179506,5.59353771074059,5.15605846858702,5.22039365125666,5.32976346179506,5.42626623579952,5.25256124259148,5.86374547795309,5.62570530207541,5.07242273111649,4.7636138543022,5.2139601329897,5.27186179739238,5.15605846858702,5.11102384071827,5.20752661472274,5.07885624938345,5.11102384071827,5.15605846858702,5.22682716952363,5.25899476085845,5.59353771074059,5.15605846858702,5.01452106671381,5.02738810324774,5.3940986444647,5.19465957818881,5.20752661472274,5.17535902338791,5.20109309645577,5.20752661472274,5.02738810324774,4.9437523657772,4.71857922643345,5.43913327233345,4.77004737256917,5.28472883392631,4.88585070137452,4.90515125617542,5.29759587046023,5.1238908772522,5.23969420605756,4.86011662830667,5.16892550512095,5.0531221763156,5.15605846858702,4.91158477444238,5.25899476085845,5.00808754844685,5.20752661472274,4.98878699364595,5.04668865804863,5.02738810324774,5.02738810324774,4.99522051191292,5.00165403017988,4.8729836648406,5.0338216215147,5.3040293887272,5.27186179739238,4.99522051191292,5.29116235219327,5.18179254165488,5.37479808966381,5.13675791378613,5.3040293887272,4.98235347537899,5.27829531565934,4.6928451533656,5.22039365125666,5.37479808966381,5.29759587046023,5.0531221763156,5.49703493673613,4.88585070137452,5.18179254165488,5.5549366011388,5.23969420605756,5.37479808966381,5.59353771074059,5.25899476085845,4.52557367842453,4.66067756203078,4.87941718310756,5.0338216215147,4.86011662830667,5.06598921284952,5.32332994352809,5.29116235219327,4.99522051191292,5.05955569458256,4.99522051191292,5.16249198685399,4.84081607350578,5.26542827912541,4.73144626296738,5.38766512619773,4.57060830629328,4.71857922643345,4.75718033603524,4.95018588404417,5.0338216215147,4.57704182456024,5.16249198685399,5.2139601329897,5.31689642526113,5.58067067420666,5.05955569458256,4.65424404376381,5.28472883392631,4.86655014657363,5.07242273111649,4.98878699364595,5.18822605992184,5.2139601329897,4.8536831100397,5.16892550512095,5.33619698006202,5.13675791378613,4.89871773790845,4.66067756203078,5.33619698006202,4.90515125617542,4.84724959177274,5.31046290699416,4.82151551870488,4.9437523657772,5.13675791378613,5.07885624938345,5.04668865804863,5.27829531565934,4.78934792737006,4.69927867163256,4.73144626296738,4.86011662830667,5.07242273111649,4.8536831100397,5.23326068779059,5.09172328591738,5.02738810324774,4.56417478802631,5.0338216215147,4.53200719669149,4.88585070137452,4.96948643884506,4.75718033603524,4.82794903697185,4.71214570816649,4.77004737256917,4.53200719669149,4.89871773790845,4.83438255523881,4.89228421964149,4.82151551870488,4.86011662830667,4.51914016015756,5.04025513978167,4.40977034961917,4.62850997069595,4.86011662830667,5.04025513978167,4.95661940231113,4.97591995711202,4.7829144091031,5.0338216215147,4.91158477444238,5.0338216215147,4.90515125617542,4.77004737256917,5.25256124259148,4.66067756203078,4.95661940231113,4.8536831100397,4.66711108029774,4.7829144091031,4.95661940231113,4.86011662830667,4.62850997069595,5.14962495032006,4.73144626296738,5.37479808966381,4.96305292057809,5.10459032245131,4.8729836648406,5.37479808966381,5.09815680418434,4.44193794095399,4.57704182456024,4.86655014657363,5.23326068779059,5.10459032245131,4.7829144091031,4.62850997069595,5.13675791378613,5.16892550512095,4.53844071495846,4.95018588404417,4.91801829270935,4.73787978123435,4.93731884751024,4.66711108029774,5.01452106671381,4.86011662830667,4.77004737256917,5.08528976765042,4.88585070137452,4.80221496390399,5.01452106671381,4.80864848217095,4.67997811683167,4.98235347537899,4.9437523657772,4.6027758976281,4.61564293416203,4.53200719669149,4.84081607350578,4.82794903697185,4.91801829270935,4.92445181097631,4.89871773790845,4.55774126975935,4.98235347537899,4.91158477444238,4.8536831100397,4.98235347537899,4.96305292057809,4.9437523657772,4.91801829270935,5.00165403017988,4.91801829270935,4.89871773790845,4.52557367842453,4.92445181097631,5.00808754844685,4.71214570816649,5.23326068779059,5.00165403017988,4.93731884751024,4.70571218989953,4.46767201402185,5.20752661472274,4.97591995711202,5.11102384071827,5.13032439551917,4.77648089083613,4.48697256882274,4.79578144563703,4.98235347537899,5.2139601329897,4.88585070137452,4.8536831100397,4.7829144091031,4.92445181097631,4.65424404376381,5.02738810324774,4.98878699364595,4.82151551870488,4.80864848217095,4.73144626296738,4.62850997069595,4.35186868521649,4.72501274470042,4.9437523657772,5.0338216215147,5.13032439551917,5.02738810324774,4.98878699364595,4.62207645242899,4.86011662830667,4.82151551870488,4.77004737256917,4.93088532924327,4.63494348896292,4.81508200043792,4.75074681776828,4.83438255523881,4.54487423322542,4.7829144091031,4.9437523657772,5.04668865804863,4.91158477444238,4.92445181097631,4.70571218989953,4.53200719669149,4.6928451533656,4.66711108029774,4.57060830629328,4.89228421964149,4.91801829270935,4.73144626296738,4.31970109388167,4.84081607350578,4.59634237936113,4.89871773790845,5.18822605992184,4.86655014657363,5.18179254165488,5.13032439551917,5.11102384071827,4.55130775149238,4.7829144091031,4.75718033603524,4.73787978123435,4.82151551870488,4.89871773790845,5.04025513978167,5.07885624938345,4.69927867163256,4.52557367842453,5.07885624938345,4.84081607350578,4.61564293416203,4.57060830629328,5.00165403017988,4.84081607350578,4.52557367842453,4.80864848217095,4.71857922643345,4.91158477444238,5.09815680418434,4.84081607350578,4.89228421964149,4.95661940231113,5.31689642526113,4.84724959177274,4.62850997069595,4.75718033603524,4.89871773790845,5.07242273111649,4.81508200043792,4.9437523657772,4.72501274470042,5.00165403017988,4.73787978123435,4.49983960535667,4.83438255523881,4.71857922643345,4.57060830629328,5.31046290699416,5.08528976765042,4.75074681776828,5.02738810324774,4.84724959177274,5.00808754844685,5.18822605992184,4.67997811683167,4.96305292057809,4.89228421964149,4.6027758976281,4.87941718310756,4.96948643884506,4.82151551870488,4.9437523657772,4.89871773790845,5.02738810324774,4.57704182456024,4.83438255523881,4.80864848217095,5.29759587046023,4.9437523657772,4.72501274470042,4.88585070137452,4.53844071495846,4.53200719669149,4.80864848217095,4.86011662830667,4.93731884751024,5.02738810324774,4.67354459856471,4.6928451533656,4.84081607350578,4.72501274470042,5.00165403017988,4.86011662830667,4.98235347537899,4.95661940231113,4.66711108029774,4.66067756203078,4.91158477444238,4.77004737256917,4.97591995711202,4.80221496390399,4.72501274470042,4.63494348896292,4.61564293416203,5.04025513978167,4.86011662830667,4.7636138543022,5.00165403017988,5.26542827912541,4.82151551870488,4.74431329950131,5.00808754844685,5.24612772432452,5.31046290699416,4.96305292057809,4.7636138543022,5.05955569458256,5.20109309645577,4.77004737256917,4.8536831100397,4.77004737256917,5.0338216215147,5.02095458498077,4.88585070137452,5.13675791378613,4.51914016015756,4.98235347537899,4.88585070137452,4.96948643884506,4.66067756203078,4.92445181097631,4.78934792737006,4.86011662830667,4.86655014657363,4.67354459856471,4.75718033603524,4.53200719669149,4.69927867163256,4.66711108029774,4.62850997069595,4.51914016015756,4.37116924001739,4.9437523657772,5.2139601329897],"x":[5.36,5.49,5.75,5.58,5.67,5.33,5.92,5.68,5.44,6.16,5.7,5.91,5.76,5.84,5.43,5.76,5.87,6.13,5.79,5.77,5.21,5.78,6.56,5.61,5.66,5.63,6.07,6.15,5.47,5.79,5.11,5.93,5.91,5.97,5.83,5.78,4.9,5.18,5.36,6.01,6.05,5.66,6.17,5.8,5.91,5.59,5.7,5.31,5.58,5.67,5.14,5.78,5.75,5.79,5.8,6.08,5.4,5.04,6.6,5.88,5.64,5.76,5.51,5.23,4.96,5.27,6.02,5.31,5.51,5.05,6.16,5.92,5.7,5.97,6.12,6.57,5.24,6.48,5.51,5.65,6.28,5.24,6.01,5.31,6.01,5.73,5.79,6.34,5.68,6.14,6.16,5.46,4.66,6.43,5.64,6.36,5.41,5.97,6.38,5.7,5.8,5.97,6.12,5.85,6.8,6.43,5.57,5.09,5.79,5.88,5.7,5.63,5.78,5.58,5.63,5.7,5.81,5.86,6.38,5.7,5.48,5.5,6.07,5.76,5.78,5.73,5.77,5.78,5.5,5.37,5.02,6.14,5.1,5.9,5.28,5.31,5.92,5.65,5.83,5.24,5.72,5.54,5.7,5.32,5.86,5.47,5.78,5.44,5.53,5.5,5.5,5.45,5.46,5.26,5.51,5.93,5.88,5.45,5.91,5.74,6.04,5.67,5.93,5.43,5.89,4.98,5.8,6.04,5.92,5.54,6.23,5.28,5.74,6.32,5.83,6.04,6.38,5.86,4.72,4.93,5.27,5.51,5.24,5.56,5.96,5.91,5.45,5.55,5.45,5.71,5.21,5.87,5.04,6.06,4.79,5.02,5.08,5.38,5.51,4.8,5.71,5.79,5.95,6.36,5.55,4.92,5.9,5.25,5.57,5.44,5.75,5.79,5.23,5.72,5.98,5.67,5.3,4.93,5.98,5.31,5.22,5.94,5.18,5.37,5.67,5.58,5.53,5.89,5.13,4.99,5.04,5.24,5.57,5.23,5.82,5.6,5.5,4.78,5.51,4.73,5.28,5.41,5.08,5.19,5.01,5.1,4.73,5.3,5.2,5.29,5.18,5.24,4.71,5.52,4.54,4.88,5.24,5.52,5.39,5.42,5.12,5.51,5.32,5.51,5.31,5.1,5.85,4.93,5.39,5.23,4.94,5.12,5.39,5.24,4.88,5.69,5.04,6.04,5.4,5.62,5.26,6.04,5.61,4.59,4.8,5.25,5.82,5.62,5.12,4.88,5.67,5.72,4.74,5.38,5.33,5.05,5.36,4.94,5.48,5.24,5.1,5.59,5.28,5.15,5.48,5.16,4.96,5.43,5.37,4.84,4.86,4.73,5.21,5.19,5.33,5.34,5.3,4.77,5.43,5.32,5.23,5.43,5.4,5.37,5.33,5.46,5.33,5.3,4.72,5.34,5.47,5.01,5.82,5.46,5.36,5,4.63,5.78,5.42,5.63,5.66,5.11,4.66,5.14,5.43,5.79,5.28,5.23,5.12,5.34,4.92,5.5,5.44,5.18,5.16,5.04,4.88,4.45,5.03,5.37,5.51,5.66,5.5,5.44,4.87,5.24,5.18,5.1,5.35,4.89,5.17,5.07,5.2,4.75,5.12,5.37,5.53,5.32,5.34,5,4.73,4.98,4.94,4.79,5.29,5.33,5.04,4.4,5.21,4.83,5.3,5.75,5.25,5.74,5.66,5.63,4.76,5.12,5.08,5.05,5.18,5.3,5.52,5.58,4.99,4.72,5.58,5.21,4.86,4.79,5.46,5.21,4.72,5.16,5.02,5.32,5.61,5.21,5.29,5.39,5.95,5.22,4.88,5.08,5.3,5.57,5.17,5.37,5.03,5.46,5.05,4.68,5.2,5.02,4.79,5.94,5.59,5.07,5.5,5.22,5.47,5.75,4.96,5.4,5.29,4.84,5.27,5.41,5.18,5.37,5.3,5.5,4.8,5.2,5.16,5.92,5.37,5.03,5.28,4.74,4.73,5.16,5.24,5.36,5.5,4.95,4.98,5.21,5.03,5.46,5.24,5.43,5.39,4.94,4.93,5.32,5.1,5.42,5.15,5.03,4.89,4.86,5.52,5.24,5.09,5.46,5.87,5.18,5.06,5.47,5.84,5.94,5.4,5.09,5.55,5.77,5.1,5.23,5.1,5.51,5.49,5.28,5.67,4.71,5.43,5.28,5.41,4.93,5.34,5.13,5.24,5.25,4.95,5.08,4.73,4.99,4.94,4.88,4.71,4.48,5.37,5.79],"text":["GAVIAO PEIXOTO BRIGADEIRO","JOAO SOLIMEO","MARIANO DE OLIVEIRA PROFESSOR","SILVIO XAVIER ANTUNES PROFESSOR","PIO TELLES PEIXOTO PROFESSOR","ZENAIDE VILALVA DE ARAUJO PROFESSORA","ANTONIO CANDIDO CORREA GUIMARAES FILHO PROFESSOR","CANDIDO GONCALVES GOMIDE PROFESSOR","CLODOMIRO CARNEIRO","ERMANO MARCHETTI","HUMBERTO DE SOUZA MELLO GENERAL","BENEDITO TOLOSA PROFESSOR","PEDRO MONTEIRO DO AMARAL CAPITAO","MANUEL DA NOBREGA PADRE","ANTONIO JOSE LEITE PROF","ANTOINE DE SAINT EXUPERY","JOAQUIM LUIZ DE BRITO PROFESSOR","AUGUSTO RIBEIRO DE CARVALHO PROFESSOR","AUGUSTO MEIRELLES REIS FILHO PROFESSOR","LUIZ GONZAGA RIGHINI PROFESSOR","COLOMBO DE ALMEIDA PROFESSOR","TARCISIO ALVARES LOBO","JACOMO STAVALE PROFESSOR","DULCE FERREIRA BOARIN PROFESSORA","PLINIO DAMASCO PENNA PROFESSOR","TITO PRATES DA FONSECA","FRONTINO GUIMARAES","ROMULO PERO PROFESSOR","PAULO EGYDIO DE OLIVEIRA CARVALHO SENADOR","TOLEDO BARBOSA","RITA BICUDO PEREIRA PROFA","NARBAL FONTES PROFESSORA","OCTAVIO MENDES DOUTOR","PAUL HUGON PROF","MARIA MONTESSORI","AFRANIO PEIXOTO","HEROIS DA FEB","RAQUEL ASSIS BARREIROS PROFA","JOAO VIEIRA DE ALMEIDA","JOAQUIM LEME DO PRADO PROFESSOR","CASTRO ALVES","CARLOS DE LAET PROF","ANTONIO LISBOA PROFESSOR","GONCALVES DIAS","CASIMIRO DE ABREU","EURICO FIGUEIREDO PROF","ALBERTO CARDOSO DE MELLO NETO DR","VICTOR DOS SANTOS CUNHA PROF","SEBASTIAO DE SOUZA BUENO PROF","JOHANN GUTENBERG","GABRIELA MISTRAL","PEDRO ALEXANDRINO","JULIO PESTANA","SILVA JARDIM","ALFREDO INACIO TRINDADE","ALBINO CESAR","PHILOMENA BAYLAO PROFA","CYRENE DE OLIVEIRA LAET DONA","RUY BARBOSA CONSELHEIRO","JOAO LIGABUE CONEGO","ANGELO BORTOLO","AMENAIDE BRAGA DE QUEIROZ PROFA","CARMOSINA MONTEIRO VIANNA PROFA","ARNALDO BARRETO","PEDRO DE MORAES VICTOR DR","JOSE DO AMARAL MELLO PROF","ANDRE XAVIER GALLICHO PROFESSOR","ANTONIO FIRMINO DE PROENCA PROF","AMADEU AMARAL","EDUARDO PRADO","ANNA TEIXEIRA PRADO ZACHARIAS PROFESSORA","ARMANDO ARAUJO","PAULO LUIG FREI","OSWALDO CRUZ","PLINIO BARRETO","WOLNY CARVALHO RAMOS PROFESSOR","ANCHIETA PADRE","MMDC","MARIA DA GLORIA COSTA E SILVA PROFESSORA","MARIO CASASSANTA PROFESSOR","BEATRIZ R BASSI ASTORINO PROFESSORA","VICTOR MIGUEL ROMANO PROF","STEFAN ZWEIG","AROLDO DE AZEVEDO PROF","SECUNDINO DOMINGUES FILHO DOUTOR","OLGA BENATTI PROFESSORA","BRISABELLA ALMEIDA NOBRE PROFESSORA","JOSE HEITOR CARUSI PROFESSOR","FRANCISCO BORGES VIEIRA DOUTOR","LUIZA MENDES CORREA SOUZA PROFESSORA","JOSE CHEDIAK","REPUBLICA DO PARAGUAY","CAROLINA AUGUSTA DA COSTA GALVAO PROFESSORA","CLEMENTE QUAGLIO PROFESSOR","JOAQUIM BRAGA DE PAULA PROFESSOR","JULIA MACEDO PANTOJA PROFESSORA","NORBERTO MAYER FILHO DEPUTADO","MOACYR CAMPOS PROFESSOR","AMELIA DE ARAUJO DONA","ARACY LEME DA VEIGA RAVACHE PROFESSORA","CONGONHAS DO CAMPO VISCONDE DE","CARAMURU","PAULO NOVAES DE CARVALHO PROFESSOR","SALVADOR ROCCO PROFESSOR","JOAO BORGES PROFESSOR","IRENE DE LIMA PAIVA PROFESSORA","BENEDITA RIBAS F SILVEIRA PROFESSORA","ALMERINDA RODRIGUES MELLO PROFESSORA","ANTONIO CANDIDO BARONE","ORVILLE DERBY","SANTOS AMARO DA CRUZ PROFESSOR","PILAR GARCIA VIDAL DONA","MARIA LOURDES N ALBERGARIA PROFA","JAMIL PEDRO SAWAYA PROF","ZALINA ROLIM DONA","ANTAO PADRE","ADELAIDE FERRAZ DE OLIVEIRA PROFA","MARIA DE CARVALHO SENNE PROFESSORA","CUSTODIO JOSE DE MELLO ALMIRANTE","BARAO DE RAMALHO","ASTOLFO ARAUJO DEPUTADO","MARIA AUGUSTA DE AVILA PROFA","INFANTE DOM HENRIQUE","AFONSO PENNA JUNIOR PROF","JOSE TALARICO","JOAO RAMACCIOTTI PROF","VITAL FOGACA DE ALMEIDA DOUTOR","CAETANO MIELE PROFESSOR","IRENE BRANCO DA SILVA PROFESSORA","BENEDITA DE REZENDE PROFESSORA","REPUBLICA DO URUGUAI","SILVA PRADO DEPUTADO","ERMELINO MATARAZZO","MIGUEL DE CERVANTES Y SAAVEDRA DOM","MARIO KOZEL FILHO","RAUL PILLA DEPUTADO","CARLOS GOMES","ARMANDO GOMES DE ARAUJO PROF","MANOEL DE NOBREGA DEPUTADO","JOSE BONIFACIO ANDRADA E SILVA JARDIM PROF","SHINQUICHI AGARI","DARIO DE QUEIROZ PROF","ATAULPHO ALVES","ELIZA RAQUEL MACEDO DE SOUZA PROFA","EMILIA DE PAIVA MEIRA PROFESSORA","HELENA LOMBARDI BRAGA PROFESSORA","CIDADE DE HIROSHIMA","LUIZ ROSANOVA PROFESSOR","LUZIA DE QUEIROZ E OLIVEIRA PROFA","MILTON CRUZEIRO PROFESSOR","ADELINO JOSE DA SILVA D AZEVEDO PROF","ADHEMAR ANTONIO PRADO PROFESSOR","PEDRO TAQUES","SEBASTIAO FARIA ZIMBRES PROFESSOR","SAO JOAO EVANGELISTA","ROMEU DE MORAES","ANHANGUERA","CANUTO DO VAL","REINALDO RIBEIRO DA SILVA DOUTOR","JOSE CANDIDO DE SOUZA","JOSE MONTEIRO BOANOVA PROFESSOR","MISS BROWNE","EMILIANO AUGUSTO CAVALCANTI DE ALBUQUERQUE E MELO","FIDELINO DE FIGUEIREDO PROFESSOR","FERNAO DIAS PAES","MARINA CINTRA PROFESSORA","ROLDAO LOPES DE BARROS PROFESSOR","ARCY MAJOR","FABIANO LOZANO MAESTRO","RODRIGUES ALVES","CARLOS MAXIMILIANO PEREIRA DOS SANTOS","CAETANO DE CAMPOS CONSOLACAO","ARISTIDES DE CASTRO","NAPOLEAO DE CARVALHO FREIRE PROFESSOR","OSWALDO ARANHA","KEIZO ISHIHARA","KYRILLOS DOUTOR","LOURENCO FILHO PROFESSOR","MARIA EUGENIA MARTINS PROFESSORA","FLAVIA VIZIBELI PIRRO PROFESSORA","GUIOMAR ROCHA RINALDI PROFESSORA","ARCHITICLINO SANTOS PROFESSOR","DANIEL PAULO VERANO PONTES PROFESSOR","EMYGDIO DE BARROS PROFESSOR","ENNIO VOSS PROFESSOR","ANA ROSA DE ARAUJO DONA","PEDRO FONSECA PROFESSOR","THOMAZIA MONTORO","JACQUES MARITAIN","MURTINHO NOBRE DOUTOR","JULIO DE MESQUITA FILHO","ITAUNA VISCONDE DE","ASTROGILDO SILVA PROFESSOR","SEMINARIO NOSSA SENHORA DA GLORIA","NOSSA SENHORA APARECIDA","MANUELA LACERDA VERGUEIRO","ODON CAVALCANTI PROFESSOR","OSCAR THOMPSON","EURYDICE ZERBINI PROFESSORA","GUALTER DA SILVA PROFESSOR","TEOTONIO ALVES PEREIRA","RAUL CARDOSO DE ALMEIDA PROFESSOR","RAUL FONSECA","PAULO ROSSI PROFESSOR","LYGIA DE AZEVEDO SOUZA E SA PROFESSORA","MARIA AUGUSTA DE MORAES NEVES PROFESSORA","MARIA RIBEIRO GUIMARAES BUENO PROFESSORA","HELOISA CARNEIRO PROFESSORA","JOAO AMOS COMENIUS","JULIO RIBEIRO","ANTONIO ALCANTARA MACHADO","DOMINGOS QUIRINO FERREIRA CORONEL","LEONOR QUADROS","ISABEL PRINCESA","LASAR SEGALL","RENATO BRAGA PROFESSOR","JOAO SILVA PROFESSOR","NEYDE APPARECIDA SOLLITTO PROFESSORA","MARIA PETRONILA LIMEIRA DOS MILAGRES MONTEIRO PROFESSORA","BEATRIZ DE QUADROS LEME PROFESSORA","BENTO PEREIRA DA ROCHA PROFESSOR","JOAQUIM ADOLFO ARAUJO PROFESSOR","HUGO LACORTE VITALE DEPUTADO","MEXICO","ZENAIDE LOPES DE OLIVEIRA GODOY PROFESSORA","JOAO EVANGELISTA COSTA PROFESSOR","LUIZ GONZAGA PINTO E SILVA PROFESSOR","PLINIO NEGRAO","MARIA PECCIOLI GIANNASI PROFESSORA","PAULO OCTAVIO DE AZEVEDO PROFESSOR","ORLANDO MENDES DE MORAES PROFESSOR","LEVI CARNEIRO","PAULINO NUNES ESPOSO","HILTON REIS SANTOS PROF","DUARTE LEOPOLDO E SILVA DOM","JOSE GERALDO DE LIMA PROF EE","ADOLFO CASAIS MONTEIRO PROF","JUVENTINA MARCONDES DOMINGUES DE CASTRO PROFA","ALFREDO VIANELLO GREGORIO COMENDADOR","AMELIA KERR NOGUEIRA PROFESSORA","MARIA AMELIA BRAZ PROFA","HERBERT BALDUS","SINHA PANTOJA","JOAO BATISTA DE CARVALHO MONSENHOR","FRANCISCO ANTONIO MARTINS JUNIOR PROFESSOR","HUMBERTO ALFREDO PUCCA PROFESSOR","RENATA GRAZIANO DE OLIVEIRA PRADO PROFESSORA","OCTALLES MARCONDES FERREIRA","FRANCISCO ROSWELL FREIRE","EULALIA SILVA PROFESSORA","LAURO PEREIRA TRAVASSOS PROFESSOR DOUTOR","JOAO SUSSUMU HIRATA DEPUTADO","GENESIO DE ALMEIDA MOURA DOUTOR","MIGUEL OLIVA FEITOSA PROFESSOR","HONORIO MONTEIRO DOUTOR","FRANCISCO DE PAULA VICENTE DE AZEVEDO","CARLOS DE MORAES ANDRADE PROF","CARLOS AYRES PROF","GIULIO DAVID LEONE PROF","MIGUEL KRUSE DOM","FRANCISCO MESQUITA JORNALISTA","PEDRO VIRIATO PARIGOT DE SOUZA ENGENHEIRO","PAULO SARASATE GOVERNADOR","GUILHERME DE ALMEIDA","MANUEL BANDEIRA","MOZART TAVARES DE LIMA PROFESSOR","BRANCA CASTRO CANTO E MELO PROFESSORA","ANNE FRANK","GERALDO CAMPOS MOREIRA PROFESSOR DOUTOR","HECKEL TAVARES","ROCCA DORDALL","JOAQUIM EUGENIO LIMA NETO","ERNESTINA DEL BUONO TRAMA PROFESSORA","COSME DE FARIA MAJOR","HENRIQUE SMITH BAYMA DR","FRANCISCO DA COSTA GUEDES","ELZA SARAIVA MONTEIRO PROFA","FRANCISCO JOAO DE AZEVEDO PADRE","OSWALD DE ANDRADE","LOURIVAL GOMES MACHADO PROFESSOR","ALMEIDA JUNIOR PROFESSOR","LAERTE RAMOS DE CARVALHO PROF DR","LUIZ SIMIONI SOBRINHO PROFESSOR","MESSIAS FREIRE PROFESSOR","SAMUEL MORSE PROFESSOR","CAFE FILHO PRESIDENTE","ANTONIO CARLOS FERREIRA NOBRE PROFESSOR","ANA SIQUEIRA DA SILVA","CARLOS FREDERICO WERNECK LACERDA JORNALISTA","VERIDIANA CAMACHO CARVALHO GOMES PROFA","JUSTINO CARDOSO DR","ITALO BETARELLO","MARIA AUGUSTA SARAIVA DOUTORA","AUGUSTO DO AMARAL DEPUTADO","CAETANO DE CAMPOS","CARLOS PASQUALE PROFESSOR","FRANCISCO DE PAULA CONCEICAO JUNIOR PROFESSOR","ADRIAO BERNARDES PROF","CALLIA MAESTRO","MARIA LUIZA DE ANDRADE MARTINS ROQUE PROFA","VERA ATHAYDE PEREIRA PROFA","CHARLES DE GAULLE","MARTHA FIGUEIRA NETTO DA SILVA PROFESSORA","ANA LUIZA FLORENCE BORGES PROFA","QUINTILIANO JOSE SITRANGULO PROF","CARLOS HENRIQUE LIBERALLI PROFESSOR","CHIBATA MIYAKOSHI","AYRES NETO DOUTOR","FRANCISCO BRASILIENSE FUSCO DOUTOR","JOSE OSCAR ABREU SAMPAIO","BENEDITO FERREIRA DE ALBUQUERQUE PROF","REGINA MIRANDA BRANT DE CARVALHO PROFA","ALFREDO GOMES PROF","ARLINDO PINTO DA SILVA PROF","LEONOR RENDESI PROFESSORA","MARIA AUGUSTA CORREA PROFESSORA","CLOVIS DE OLIVEIRA PROFESSOR DOUTOR","RONALDO GARIBALDI PERETTI PROFESSOR","ANTONIO MANOEL ALVES DE LIMA","MANOEL TABACOW HIDAL PROFESSOR","CAROLINA CINTRA DA SILVEIRA PROFESSORA","SANTO DIAS DA SILVA","GUILHERME GIORGI COMENDADOR","JOSE DE OLIVEIRA ORLANDI","MARIA FERRAZ DE CAMPOS PROFA","DUGLAS TEIXEIRA MONTEIRO PROFESSOR","MARIA JUVENAL HOMEM DE MELLO PROFA","EMILIO WARWICK KERR PASTOR","JOSEPHINA CINTRA DAMIAO PROFESSORA","ERODICE PONTES DE QUEIROZ REV","SAMUEL WAINER","MATTATHIAS GOMES DOS SANTOS REV","FRANCISCO DE ASSIS PIRES CORREA PROFESSOR","JORGE DUPRAT FIGUEIREDO","MARIO LOPES LEAO DR","HERCULANO DE FREITAS PROFESSOR","ZORAIDE DE CAMPOS HELU PROFESSORA","ORESTES ROSOLIA PROF","JOAO PRADO MARGARIDO PROF","SALIM FARAH MALUF PROFESSOR","FADLO HAIDAR","SAMUEL KLABIN","JOAO ERNESTO FAGGIN DOUTOR","DAVID NASSER JORNALISTA","ANTONIO BERNARDES DE OLIVEIRA PROFESSOR","CARLOS CATTONY","EURIPEDES SIMOES DE PAULA PROF","MARIO ARMINANTE PROF","ANTONIO PEREIRA LIMA DR","ARGEO PINTO DIAS ENG","FLAMINIO FAVERO PROFESSOR","ANTONIO SYLVIO DA CUNHA BUENO","FRANCISCO PEREIRA DE SOUZA FILHO PROF","ARNALDO LAURINDO PROFESSOR","TIAGO ALBERIONE PADRE","ESTHER GARCIA PROFA EE","MARIA DE LOURDES ALMEIDA SINISGALLI PROFA","PAULO LEIVAS MACALAO PASTOR","JOAO BAPTISTA ALVES SILVA PROF","PAULO LAURO DR","MOACYR AMARAL DOS SANTOS","JOAQUIM SILVERIO GOMES DOS REIS PROFESSOR","RUTH CABRAL TRONCARELLI PROFESSORA","JOSE RIGHETTO SOBRINHO PROF","CICERO CANUTO DE LIMA PASTOR","ARISTON DE OLIVEIRA PROFESSOR TENENTE","HOMERO VAZ DO AMARAL","SOICHI MABE","ELIZABETH APARECIDA SIMOES MESQUITA PROFESSORA","REPUBLICA DA COLOMBIA","JARDIM CAPELA IV","EUDORO VILLELA","MARILSA GARBOSSA FRANCISCO PROFESSORA","PAULO KOBAYASHI","LUIS AMBRA DESEMBARGADOR","REPUBLICA DO PANAMA","TERUKO UEDA YAMAGUTI PROFESSORA","JUAN CARLOS ONETTI ESCRITOR","JOSE EPHIM MINDLIN","CARLOS ESTEVAM ALDO MARTINS PROFESSOR","SITIO CONCEICAO","BERNARDO O HIGGINS DOM","JARDIM SANTO ANDRE III","MORRO DOCE","RAIMUNDO SERAFIM DE LIMA INSPETOR","BERNADETE APARECIDA PEREIRA GODOI PROFA","JARDIM NORONHA V","CYNIRA STOCCO FAUSTO PROFESSORA","CANDIDA RITA DA SILVA PAULO","WALTER LERNER PROFESSOR","EUNICE MARQUES MOURA BASTOS PROFA","LEILA SABINO PROFESSORA","EDUARDO GOMES BRIGADEIRO COHAB","MIGUEL SANSIGOLO PROF","CAMILO MARIA CAVALHEIRO DOM","AMADOR E CATHARINA SAPORITO AUGUSTO","JOSE PORPHYRIO DA PAZ","HERMINIO SACCHETTA","SHIRO KYONO DEPUTADO","MARGARIDA MARIA ALVES","IRMA CHARLITA","FRANCISCO ALVES MOURAO PROFESSOR","MIGUEL MUNHOZ FILHO","PAULO ROBERTO FAGGIONI PROFESSOR","NEYDY DE CAMPOS MELGES PROF","ANTONIETA DE SOUZA ALCANTARA","CESAR DONATO CALABREZ","JOAO CAMARGO PROF","ROSA PAVONE PIMONT DOUTORA","FERNANDO MAURO PIRES DA ROCHA DEPUTADO","JULIETA FARAO PROFA","ARTHUR CHAGAS JUNIOR PROF","JOZINEIDE PEREIRA GAUDINO","MARCELO TULMAN NETO","SAID MURAD","JOAO BATISTA VILANOVA ARTIGAS PROF","FRANCISCO PARENTE","PEDRO BRASIL BANDECCHI PROF","TANCREDO DE ALMEIDA NEVES PRES","CHRISTIANO ALTENFELDER SILVA DOUTOR","CALHIM MANOEL ABUD","JOAO XXIII","MARILENA PIUMBATO CHAPARRO PROFESSORA","AQUILINO RIBEIRO","GUERRA JUNQUEIRO","TANCREDO NEVES PRESIDENTE","MARTINHO DA SILVA","MARIA ANTONIETA FERRAZ BIBLIOTECARIA","WASHINGTON ALVES NATEL","NILDO DO AMARAL JUNIOR PADRE","GIL VICENTE","ASSIS JOSE AMBROSIO","FRANCISCO MIGNONE","OSCAR PEREIRA MACHADO","LEONOR FERNANDES COSTA ZACHARIAS","LEONIDAS PAIVA PROF","MARIA DE LOURDES ARANHA DE ASSIS PACHECO PROFESSORA","JORGE LUIS BORGES","SERGIO DA SILVA NOBREZA PROF","CAETANO ZAMITTI MAMMANA PROF","AFRANIO DE OLIVEIRA","MIGUEL MALUHY COMENDADOR","OSWALDO GAGLIARDI","MAUD SA DE MIRANDA MONTEIRO PROFESSORA","JOSE DUARTE JUNIOR PROFESSOR","LIBERATO GROSSI PROF","LOURENCO ZANELATTI","WILFREDO PINHEIRO PROF","VALDIR FERNANDES PINTO PROF","ISAAC SCHRAIBER PROFESSOR","SUMIE IWATA PROFESSORA","INAH JACY DE CASTRO AGUIAR","MARIA LUCIA AMBROZIO PROFA","CARMELINDA MARQUES PEREIRA PROFESSORA","SATURNINO PEREIRA PROFESSOR","MARIA VERA LOMBARDI SIQUEIRA PROFA","MARIA REGINA MACHADO DE CASTRO GUIMARAES PROFA","WALDEMAR RODRIGUES DA SILVA PASTOR","ARCANGELO SFORCIM","GERALDINO DOS SANTOS DEPUTADO","DILSON FUNARO MINISTRO","IRINEU MONTEIRO DE PINHO REV","LIVIO XAVIER","ARACI ZEBRAL TEIXEIRA","ZIPORA RUBINSTEIN PROFESSORA","FLAVIO LA SELVA PROFESSOR","NORBERTO ALVES RODRIGUES PROFESSOR","MARLY DIVA BONFANTI PROFA","EUNICE TEREZINHA DE OLIVEIRA FRAGOAS PROFA","HERMINIA DE ANDRADE PFUHL NEVES PROFESSORA","ZILDA ARNS NEUMANN","JACQUES ORLANDO CAMINHA D AVILA REVERENDO","JULIO DE CARVALHO BARATA","EDER BERNARDES DOS SANTOS SOLDADO PM","GUSTAVO BARROSO","BRENNO ROSSI MAESTRO","PEDRO GERALDO COSTA DEPUTADO","AFIZ GEBARA DOUTOR","JOSE RAUL POLETTO","PAULINA MADRE","MARLENE ADUA FORTUNATO PROFESSORA","JESUS JOSE ATTAB PROFESSOR","ALVARO SIMOES","LUCAS ROSCHEL RASQUINHO","HAYDEE HIDALGO PROFESSORA","OSCAR BLOIS","SAPOPEMBA","JARDIM WILMA FLOR","VILA BELA","LEDA GUIMARAES NATAL","JAIR TOLEDO XAVIER PROFESSOR","JARDIM IGUATEMI","SILVANA EVANGELISTA PROFESSORA","NANCY DE OLIVEIRA FIDALGO PROFA","HEITOR VILLA LOBOS MAESTRO","CARAN APPARECIDO GONCALVES PROFESSOR","DOGIVAL BARROS GOMES PROFESSOR","AMADOR DOS SANTOS FERNANDES PROF","MARIA DE LOURDES VIEIRA","WILSON RACHID","PARQUE ANHANGUERA","EVANDRO CAVALCANTI LINS E SILVA","CLARICE SEIKO IKEDA CHAGAS","MARCOS ANTONIO COSTA PROFESSOR","REPUBLICA DO SURINAME","CLEISE MARISA SIQUEIRA PROFA","REPUBLICA DO HAITI","PARQUE ECOLOGICO","REPUBLICA ARGENTINA","SERGIO MURILLO RADUAN PROFESSOR","JOAO DORIA DEPUTADO","CONDOMINIO VARGEM GRANDE II","SERGIO DA COSTA PROF","UMBERTO LUIZ D URSO DR","MARIAZINHA CONGILIO","CLAUDIRENE APARECIDA JOSE DA SILVA","REPUBLICA DA GUATEMALA","ODAIR MARTINIANO DA SILVA MANDELA","JOSE DE SAN MARTIN","MARIA ZILDA GAMBA NATEL","FLORESTAN FERNANDES","RAUL CORTEZ RAUL CRISTIANO MACHADO CORTEZ"],"mode":"lines","type":"scatter","name":"Regression Fit","line":{"color":"blue"},"marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":[5.05955569458256,5.36836457139684,5.0531221763156,4.42907090442006,5.1238908772522,4.84081607350578,4.75074681776828,4.5127066418906,5.11102384071827,4.78934792737006,4.84081607350578,4.6027758976281,4.88585070137452,5.62570530207541,4.62850997069595,4.48697256882274,4.7829144091031,4.77004737256917,4.92445181097631,4.55130775149238,4.97591995711202,5.11745735898524,5.22682716952363,5.0531221763156,5.16892550512095,4.91158477444238,4.64781052549685,5.23326068779059,4.51914016015756,4.5127066418906,4.89871773790845,5.28472883392631,4.79578144563703,5.25899476085845,5.20752661472274,4.99522051191292,4.22319831987721,4.88585070137452,5.05955569458256,4.90515125617542,4.90515125617542,4.6928451533656,5.31046290699416,5.22039365125666,5.22682716952363,4.91158477444238,5.23326068779059,5.36836457139684,5.38766512619773,5.22039365125666,4.98878699364595,5.05955569458256,4.77648089083613,4.75718033603524,4.80864848217095,5.20752661472274,4.84724959177274,4.7829144091031,4.6928451533656,5.29116235219327,4.78934792737006,5.52276900980398,4.62850997069595,4.61564293416203,5.31046290699416,4.26179942947899,5.31046290699416,4.95018588404417,4.29396702081382,4.78934792737006,4.58990886109417,4.46767201402185,4.68641163509863,5.36836457139684,5.50990197327005,4.80864848217095,4.89871773790845,4.89871773790845,4.62207645242899,4.55130775149238,5.15605846858702,5.04025513978167,4.58347534282721,4.62850997069595,5.05955569458256,5.04025513978167,5.22039365125666,4.67354459856471,5.13032439551917,5.22039365125666,4.67997811683167,5.37479808966381,4.58990886109417,4.98878699364595,5.45843382713434,4.90515125617542,4.88585070137452,5.16249198685399,4.77004737256917,4.77004737256917,4.86011662830667,5.36193105312988,4.84724959177274,4.83438255523881,4.87941718310756,4.77648089083613,5.38123160793077,5.40053216273166,4.98878699364595,4.68641163509863,5.04025513978167,4.84081607350578,5.22682716952363,4.8536831100397,5.0531221763156,4.66711108029774,5.14319143205309,5.50990197327005,5.05955569458256,5.26542827912541,5.18179254165488,5.1238908772522,5.23969420605756,5.27829531565934,5.50990197327005,4.63494348896292,5.29116235219327,5.36836457139684,5.40053216273166,4.98878699364595,5.61927178380845,5.22039365125666,5.27186179739238,5.09172328591738,4.43550442268703,4.67997811683167,5.0531221763156,4.98878699364595,5.24612772432452,5.07885624938345,5.40696568099863,5.33619698006202,4.96305292057809,5.07242273111649,5.20752661472274,5.29759587046023,4.97591995711202,5.01452106671381,5.05955569458256,4.53200719669149,4.92445181097631,4.77004737256917,4.49983960535667,5.4841679002022,4.99522051191292,4.61564293416203,4.35186868521649,5.1238908772522,4.90515125617542,4.86011662830667,5.1238908772522,5.25899476085845,4.71857922643345,5.11745735898524,4.99522051191292,5.1238908772522,4.98878699364595,5.44556679060041,4.89228421964149,5.11745735898524,4.84081607350578,4.96305292057809,4.66067756203078,4.90515125617542,4.95018588404417,4.91158477444238,4.84724959177274,4.98235347537899,4.95661940231113,5.10459032245131,4.57060830629328,4.74431329950131,5.07242273111649,5.16892550512095,4.90515125617542,4.99522051191292,4.79578144563703,4.67997811683167,5.11745735898524,5.36836457139684,4.74431329950131,4.89871773790845,4.7636138543022,5.31046290699416,4.71857922643345,4.77648089083613,4.80221496390399,4.96948643884506,4.93731884751024,4.75718033603524,4.37116924001739,4.78934792737006,4.58990886109417,4.89871773790845,5.02095458498077,4.68641163509863,4.52557367842453,5.25256124259148,4.69927867163256,4.7829144091031,4.84724959177274,4.62207645242899,4.98878699364595,4.77004737256917,4.90515125617542,5.17535902338791,5.27829531565934,4.8729836648406,4.95018588404417,4.83438255523881,4.91801829270935,4.77004737256917,4.93731884751024,5.04668865804863,4.75718033603524,4.72501274470042,5.16249198685399,4.65424404376381,5.22039365125666,4.93731884751024,4.84081607350578,4.43550442268703,4.83438255523881,4.93731884751024,4.77648089083613,5.20752661472274,4.92445181097631,4.35830220348346,4.84081607350578,4.84724959177274,4.82151551870488,4.57704182456024,4.64781052549685,5.11102384071827,4.62850997069595,4.55774126975935,4.86011662830667,4.64137700722988,4.78934792737006,4.70571218989953,4.40333683135221,5.07885624938345,4.47410553228881,4.48697256882274,4.58347534282721,4.71857922643345,4.66711108029774,4.78934792737006,4.89871773790845,4.29396702081382,4.46767201402185,4.71857922643345,4.77004737256917,4.62850997069595,4.6928451533656,4.9437523657772,4.95661940231113,5.11102384071827,4.84081607350578,4.61564293416203,4.53844071495846,4.77004737256917,5.50990197327005,5.29759587046023,4.75718033603524,4.83438255523881,4.71857922643345,4.84724959177274,5.02738810324774,4.57060830629328,4.81508200043792,4.84724959177274,4.98878699364595,4.84724959177274,4.90515125617542,4.53844071495846,5.14319143205309,4.90515125617542,4.99522051191292,5.15605846858702,4.7636138543022,5.04668865804863,4.75074681776828,4.49340608708971,4.84724959177274,4.83438255523881,5.33619698006202,4.58990886109417,5.05955569458256,4.67997811683167,4.62850997069595,4.52557367842453,4.8536831100397,4.65424404376381,4.79578144563703,4.57060830629328,5.35549753486291,4.98235347537899,5.34263049832898,4.75074681776828,4.74431329950131,4.44193794095399,4.19103072854239,4.75074681776828,4.58990886109417,4.57704182456024,5.09172328591738,4.90515125617542,4.64137700722988,4.75074681776828,4.61564293416203,4.56417478802631,4.28753350254685,4.67997811683167,4.74431329950131,4.67997811683167,4.77004737256917,4.83438255523881,4.58347534282721,5.0531221763156,4.70571218989953,4.98878699364595,4.71857922643345,4.32613461214864,4.67997811683167,4.75074681776828,4.84081607350578,4.86011662830667,4.98878699364595,4.6928451533656,4.75074681776828,4.74431329950131,4.49340608708971,5.16249198685399,4.75718033603524,4.79578144563703,4.47410553228881,4.83438255523881,4.6928451533656,4.67997811683167,4.8729836648406,4.74431329950131,5.04668865804863,4.96305292057809,4.68641163509863,4.84724959177274,4.75074681776828,4.9437523657772,4.83438255523881,4.89228421964149,5.01452106671381,4.83438255523881,4.69927867163256,4.58347534282721,4.73144626296738,4.82151551870488,4.63494348896292,4.83438255523881,4.82151551870488,4.75074681776828,4.82151551870488,5.05955569458256,5.13032439551917,4.83438255523881,4.67354459856471,4.80864848217095,4.82151551870488,4.5127066418906,4.82794903697185,4.82151551870488,4.90515125617542,5.49703493673613,4.91801829270935,4.99522051191292,4.82151551870488,4.73787978123435,4.56417478802631,4.66711108029774,4.98878699364595,4.54487423322542,4.65424404376381,4.21676480161025,5.18822605992184,4.72501274470042,4.82151551870488,4.88585070137452,4.72501274470042,4.73787978123435,5.2139601329897,4.6027758976281,4.60920941589506,4.84081607350578,4.84081607350578,4.83438255523881,4.66067756203078,4.70571218989953,4.39690331308524,4.83438255523881,4.89871773790845,5.02095458498077,4.81508200043792,4.83438255523881,4.70571218989953,4.73144626296738,4.71857922643345,4.61564293416203,4.84081607350578,4.91801829270935,4.34543516694953,4.95661940231113,5.04668865804863,4.59634237936113,4.82151551870488,4.80864848217095,4.80864848217095,4.67354459856471,4.80864848217095,4.98235347537899,4.82794903697185,4.80864848217095,4.44193794095399],"x":[5.55,6.03,5.54,4.57,5.65,5.21,5.07,4.7,5.63,5.13,5.21,4.84,5.28,6.43,4.88,4.66,5.12,5.1,5.34,4.76,5.42,5.64,5.81,5.54,5.72,5.32,4.91,5.82,4.71,4.7,5.3,5.9,5.14,5.86,5.78,5.45,4.25,5.28,5.55,5.31,5.31,4.98,5.94,5.8,5.81,5.32,5.82,6.03,6.06,5.8,5.44,5.55,5.11,5.08,5.16,5.78,5.22,5.12,4.98,5.91,5.13,6.27,4.88,4.86,5.94,4.31,5.94,5.38,4.36,5.13,4.82,4.63,4.97,6.03,6.25,5.16,5.3,5.3,4.87,4.76,5.7,5.52,4.81,4.88,5.55,5.52,5.8,4.95,5.66,5.8,4.96,6.04,4.82,5.44,6.17,5.31,5.28,5.71,5.1,5.1,5.24,6.02,5.22,5.2,5.27,5.11,6.05,6.08,5.44,4.97,5.52,5.21,5.81,5.23,5.54,4.94,5.68,6.25,5.55,5.87,5.74,5.65,5.83,5.89,6.25,4.89,5.91,6.03,6.08,5.44,6.42,5.8,5.88,5.6,4.58,4.96,5.54,5.44,5.84,5.58,6.09,5.98,5.4,5.57,5.78,5.92,5.42,5.48,5.55,4.73,5.34,5.1,4.68,6.21,5.45,4.86,4.45,5.65,5.31,5.24,5.65,5.86,5.02,5.64,5.45,5.65,5.44,6.15,5.29,5.64,5.21,5.4,4.93,5.31,5.38,5.32,5.22,5.43,5.39,5.62,4.79,5.06,5.57,5.72,5.31,5.45,5.14,4.96,5.64,6.03,5.06,5.3,5.09,5.94,5.02,5.11,5.15,5.41,5.36,5.08,4.48,5.13,4.82,5.3,5.49,4.97,4.72,5.85,4.99,5.12,5.22,4.87,5.44,5.1,5.31,5.73,5.89,5.26,5.38,5.2,5.33,5.1,5.36,5.53,5.08,5.03,5.71,4.92,5.8,5.36,5.21,4.58,5.2,5.36,5.11,5.78,5.34,4.46,5.21,5.22,5.18,4.8,4.91,5.63,4.88,4.77,5.24,4.9,5.13,5,4.53,5.58,4.64,4.66,4.81,5.02,4.94,5.13,5.3,4.36,4.63,5.02,5.1,4.88,4.98,5.37,5.39,5.63,5.21,4.86,4.74,5.1,6.25,5.92,5.08,5.2,5.02,5.22,5.5,4.79,5.17,5.22,5.44,5.22,5.31,4.74,5.68,5.31,5.45,5.7,5.09,5.53,5.07,4.67,5.22,5.2,5.98,4.82,5.55,4.96,4.88,4.72,5.23,4.92,5.14,4.79,6.01,5.43,5.99,5.07,5.06,4.59,4.2,5.07,4.82,4.8,5.6,5.31,4.9,5.07,4.86,4.78,4.35,4.96,5.06,4.96,5.1,5.2,4.81,5.54,5,5.44,5.02,4.41,4.96,5.07,5.21,5.24,5.44,4.98,5.07,5.06,4.67,5.71,5.08,5.14,4.64,5.2,4.98,4.96,5.26,5.06,5.53,5.4,4.97,5.22,5.07,5.37,5.2,5.29,5.48,5.2,4.99,4.81,5.04,5.18,4.89,5.2,5.18,5.07,5.18,5.55,5.66,5.2,4.95,5.16,5.18,4.7,5.19,5.18,5.31,6.23,5.33,5.45,5.18,5.05,4.78,4.94,5.44,4.75,4.92,4.24,5.75,5.03,5.18,5.28,5.03,5.05,5.79,4.84,4.85,5.21,5.21,5.2,4.93,5,4.52,5.2,5.3,5.49,5.17,5.2,5,5.04,5.02,4.86,5.21,5.33,4.44,5.39,5.53,4.83,5.18,5.16,5.16,4.95,5.16,5.43,5.19,5.16,4.59],"text":["EMEF FARIA LIMA BRIG","EMEF EMILIANO DI CAVALCANTI","EMEF LEONOR MENDES DE BARROS","EMEF CASTRO ALVES","EMEF SEBASTIAO NOGUEIRA DE LIMA DES","EMEF RAUL FERNANDES EMB","EMEF THEO DUTRA","EMEF BRASIL-JAPAO","EMEF ARTHUR WHITAKER DES","EMEF ALCIDES GONCALVES ETCHEGOYEN GEN","EMEF ALVARO SILVA BRAGA GEN","EMEF IBRAHIM NOBRE","EMEF JOAO XXIII","EMEF DEODORO DA FONSECA MAL","EMEF LUIZ EDUARDO MATARAZZO CDE","EMEF ROBERTO MANGE PROF","EMEF TARSILA DO AMARAL","EMEF ALIPIO ANDRADA SERPA TTE","EMEF CECILIA MEIRELES","EMEF EDGARD CAVALHEIRO","EMEF ROQUETTE PINTO","EMEF GARCIA DAVILA CTE","EMEF ANGELINA MAFFEI VITA DA","EMEF PAULO NOGUEIRA FILHO","EMEF BERNARDO O HIGGINS","EMEF CHIQUINHA RODRIGUES","EMEF CALOGERAS MIN","EMEF JOAO CARLOS DA SILVA BORGES PROF","CEU EMEF CAMPOS SALLES PRES","EMEF ARY PARREIRAS ALM","EMEF ARMANDO ARRUDA PEREIRA","EMEF CACILDA BECKER","EMEF MARINA VIEIRA DE CARVALHO MESQUITA","EMEF NELSON PIMENTEL QUEIROZ PROF","EMEF MARIA ANTONIETA DALKIMIN BASTO PROFA","EMEF ANIBAL FREIRE MIN","EMEF CAXIAS DUQUE DE","EMEF AROLDO DE AZEVEDO PROF","EMEF FABIO DA SILVA PRADO DR","EMEF NILO PECANHA PRES","EMEF ERICO VERISSIMO","EMEF HENRIQUE INFANTE D","EMEF FRANCISCO DE MONT ALVERNE FREI","EMEF JOSE MARIA PINTO DUARTE TTE","EMEF LIBERATO BITTENCOURT GEN","EMEF LEOPOLDINA IMP","EMEF MARIO KOSEL FILHO","EMEF MONTEIRO LOBATO","EMEF GASTAO MOUTINHO CTE","EMEF MARCILIO DIAS","EMEF MARCOS MELEGA","EMEF ADOLPHO OTTO DE LAET PROF","EMEF TIRADENTES ALF","EMEF ANTENOR NASCENTES","EMEF MARIO MOURA E ALBUQUERQUE BEL","EMEF CARLOS DE ANDRADE RIZZINI","EMEF LUIZ TENORIO DE BRITO CEL","EMEF MARIO RANGEL CEL","EMEF PALIMERCIO DE REZENDE CEL","EMEF PEREIRA CARNEIRO CDE","EMEF JOAO SUSSUMU HIRATA DEP","EMEF JOAQUIM CANDIDO DE AZEVEDO MARQUES DES","EMEF MANOEL CARLOS DE FIGUEIREDO FERRAZ DES","EMEF PAULO COLOMBO PEREIRA DE QUEIROZ DES","EMEF ANTONIO CARLOS DE ABREU SODRE DR","EMEF DE GAULLE GEN","EMEF HEITOR DE ANDRADE","EMEF ADHEMAR DE BARROS PREF","EMEF OTONIEL MOTA","EMEF FAGUNDES VARELLA","EMEF IRACEMA MARQUES DA SILVEIRA PROFA","EMEF PROCOPIO FERREIRA","EMEF MANOEL DE ABREU DR","EMEF JOAO GUALBERTO DO AMARAL CARVALHO","EMEF LAERTE RAMOS DE CARVALHO PROF","EMEF LEONARDO VILLAS BOAS","EMEF MAURICIO SIMAO","EMEF SYNESIO ROCHA MIN","EMEF JORGE AMERICANO PROF","EMEF LEVY DE AZEVEDO SODRE PROF","EMEFM LINNEU PRESTES PROF","EMEF MARIO MARQUES DE OLIVEIRA PROF","EMEF OLIVEIRA VIANA","EMEF ZULMIRA CAVALHEIRO FAUSTINO","EMEF CASSIANO RICARDO","EMEF JOSE DO PATROCINIO","EMEF JOSE MARIA LISBOA","EMEF EURICO GASPAR DUTRA MAL","EMEF ANTONIO DE ALCANTARA MACHADO","EMEF SYLVIA MARTIN PIRES PROFA","EMEF OLAVO FONTOURA","EMEF LEAO MACHADO PROF","EMEF TEODOMIRO TOLEDO PIZA DES","EMEF AFRANIO DE MELLO FRANCO DR","EMEF MIGUEL VIEIRA FERREIRA DR","EMEF JOSE AMADEI ENG","EMEF ELIZA RACHEL MACEDO DE SOUZA PROFA","EMEF JOAO DE DEUS CARDOSO DE MELLO","EMEF JOAQUIM BENTO ALVES DE LIMA NETO","EMEF PAULO SETUBAL","EMEF PLACIDO DE CASTRO","EMEF ALMEIDA JUNIOR PROF","EMEF CAROLINA RENNO RIBEIRO DE OLIVEIRA PROFA","EMEF MILTON FERREIRA DE ALBUQUERQUE PROF","EMEF OLEGARIO MARIANO","EMEF ARTHUR AZEVEDO","EMEF JACKSON DE FIGUEIREDO","EMEF OTHELO FRANCO GEN","EMEF EDSON RODRIGUES","EMEF ENEAS CARVALHO DE AGUIAR","EMEF JULIO MARCONDES SALGADO GEN","EMEF JOAO RAMOS - PERNAMBUCO - ABOLICIONISTA","EMEF LOURENCO FILHO","EMEF RONDON MAL","EMEF OCTAVIO PEREIRA LOPES","EMEF ESMERALDA SALLES PEREIRA RAMOS PROFA","EMEF FRANKLIN AUGUSTO DE MOURA CAMPOS PROF","EMEF MAXIMO DE MOURA SANTOS PROF","EMEF MARIA HELENA FARIA LIMA PROFA","EMEF NOE AZEVEDO PROF","EMEF RODRIGUES ALVES","EMEF MARTIN FRANCISCO RIBEIRO DE ANDRADA","EMEF JOAO NAOKI SUMITA DR","EMEF KENNEDY PRES","EMEF BARTOLOMEU LOURENCO DE GUSMAO","EMEF OLIVA IRENE BAYERLEIN SILVA","EMEF HELENA LOMBARDI BRAGA PROFA","EMEF RUY BARBOSA","EMEF EUCLIDES CUSTODIO DA SILVEIRA DES","EMEF PAULO PRADO","EMEF AMADEU MENDES PROF","EMEF JOSE FERRAZ DE CAMPOS PROF","EMEF OLAVO PEZZOTTI PROF","EMEF TAMANDARE ALM","EMEF ARY GOMES CEL","EMEF PEDRO I D","EMEF JOAO DOMINGUES SAMPAIO","EMEF SHIRLEY GUIO PROFA","EMEF JEAN MERMOZ","EMEF MANOEL DE PAIVA PE","EMEF CAIRU VISC DE","EMEF FIRMINO TIBURCIO DA COSTA","EMEF 19 DE NOVEMBRO","EMEF HUMBERTO DE CAMPOS","EMEF JOSE BONIFACIO","EMEF JOAO PINHEIRO PRES","EMEF ABRAO DE MORAES PROF","EMEF ANTONIO PRUDENTE PROF","EMEF RAUL DE LEONI","EMEF OSVALDO QUIRINO SIMOES","EMEF FREDERICO GUSTAVO DOS SANTOS TTE AVIADOR","EMEF ALTINO ARANTES","EMEF BRASILIO MACHADO NETO","EMEF MASCARENHAS DE MORAES MAL","EMEF QUEIROZ FILHO PROF","EMEF FLORES DA CUNHA DEP","EMEF IRINEU MARINHO","EMEF EMILIO RIBAS","EMEF ALVARES DE AZEVEDO","EMEF ARMANDO DE SALLES OLIVEIRA","EMEF SILVIO FLEMING MJ","EMEF MAUA BR DE","EMEF HERALDO BARBUY","EMEF AUREA RIBEIRO XAVIER LOPES PROFA","EMEF MARLENE RONDELLI PROFA","EMEF RUTH LOPES ANDRADE PROFA","EMEF AMADEU AMARAL","EMEF GUILHERME DE ALMEIDA","EMEF ANTONIO VIEIRA PE","EMEF JENNY GOMES DA","EMEF OCTAVIO MANGABEIRA","EMEF HENRIQUE PEGADO PROF","EMEF WANNY SALGADO ROCHA PROFA","EMEF BENEDITO CALIXTO","EMEF JOAO DE LIMA PAIVA PROF","EMEF ARTUR NEIVA","EMEF JOAO RIBEIRO DE BARROS","EMEF ALEXANDRE DE GUSMAO","EMEF JOSE DE ANCHIETA PE","EMEF FERNANDO DE AZEVEDO PROF","EMEF SATURNINO PEREIRA","EMEF JOAO AUGUSTO BREVES DR","EMEF VINTE E CINCO DE JANEIRO","EMEF AYRES MARTINS TORRES","EMEF CORREIA DE MELLO BRIG","EMEF HAROLDO VELOSO BRIG","EMEF JOSE LINS DO REGO","EMEF DANYLO JOSE FERNANDES","EMEF CARLOS CHAGAS","EMEF EDUARDO PRADO","EMEF 8 DE MAIO","EMEF OLIVAL COSTA","EMEF ANTONIO DUARTE DE ALMEIDA PROF","EMEF AURELIO ARROBAS MARTINS PROF","EMEF HENRIQUE MELEGA PROF","EMEF RIVADAVIA MARQUES JUNIOR PROF","EMEF RODRIGUES DE CARVALHO","EMEF HENRIQUE RAYMUNDO DYOTT FONTENELLE BRIG","EMEF HENRIQUE GEISEL GEN","EMEF LUIZ DAVID SOBRINHO PROF","EMEF RENATO ANTONIO CHECCHIA PROF","EMEF CANDIDO PORTINARI","EMEF LEONEL FRANCA PE","EMEF JULIO DE OLIVEIRA","EMEF PEDRO DE FRONTIN ALM","EMEF ANTONIA E ARTUR BEGBIE","EMEF ARMANDO CRIDEY RIGHETTI","EMEF LUIS SAIA ARQ","EMEF CAPISTRANO DE ABREU","EMEF EZEQUIEL RAMOS JUNIOR","EMEF NEWTON REIS GEN","EMEF SUD MENNUCCI","EMEF MARIA IMILDA DO SANTISSIMO SACRAMENTO ME","EMEF RAIMUNDO CORREIA","EMEF PEDRO TEIXEIRA","EMEF EPITACIO PESSOA PRES","EMEF CARLOS PASQUALE PROF","EMEF JOSE BENTO DE ASSIS PROF","EMEF ANTONIO CARLOS DE ANDRADA E SILVA","CEU EMEF PAULO GONCALO DOS SANTOS PROF","CEU EMEF BUTANTA","CEU EMEF INACIO MONTEIRO","CEU EMEF JAMBEIRO","CEU EMEF PERA MARMELO","CEU EMEF PERUS","CEU EMEF VILA ATLANTICA","CEU EMEF VILA CURUCA","CEU EMEF TRES LAGOS","CEU EMEF CASA BLANCA","CEU EMEF HERMES FERREIRA DE SOUZA","EMEF ANTONIO DAVILA PROF","EMEF FLAVIO AUGUSTO ROSA PROF","EMEF ERNESTO DE MORAES LEME PROF","EMEF HENRIQUE SOUZA FILHO - HENFIL","EMEF ALDO RIBEIRO LUZ PROF","EMEF IRENE GARCIA COSTA DE SOUZA PROFA DRA","EMEF NILDO DO AMARAL JUNIOR PE","EMEF SEBASTIAO FRANCISCO O NEGRO","EMEF ALEXANDRE VANNUCHI LEME","EMEF IDEMIA DE GODOY PROFA","EMEF LUIS CARLOS PRESTES SEN","EMEF QUIRINO CARNEIRO RENNO PROF","EMEF MARIA RITA LOPES PONTES - IRMA DULCE","EMEF CYRO ALBUQUERQUE DEP","EMEF MARIO SCHENBERG PROF","EMEF CARLOS AUGUSTO DE QUEIROZ ROCHA","EMEF ELZA MAIA COSTA FREIRE PROFA","EMEF LORENCO MANOEL SPARAPAN PROF","EMEF ANTONIO ESTANISLAU DO AMARAL","EMEF OLINDA MENEZES SERRA VIDAL PROFA","EMEF JULIO DE GRAMMONT","EMEF ANALIA FRANCO BASTOS","EMEF FRANCISCO DA SILVEIRA BUENO PROF","EMEF BENEDITO DE JESUS BATISTA LAURINDO - PE BATISTA","EMEF ELIAS SHAMMASS","EMEF JOSE OLYMPIO PEREIRA FILHO","EMEF ULYSSES DA SYLVEIRA GUIMARAES","EMEF JOSE AMERICO DE ALMEIDA","EMEF HENRIQUE FELIPE DA COSTA - HENRICAO","EMEF ARLINDO CAETANO FILHO PROF","EMEF ALCEU AMOROSO LIMA","EMEF AIRTON ARANTES RIBEIRO PROF","EMEF GREGORIO WESTRUPP PE","EMEF IVETE VARGAS DEP","EMEF VILANOVA ARTIGAS ARQ","EMEF PAULO DUARTE","EMEFM OSWALDO ARANHA BANDEIRA DE MELLO","EMEFM ANTONIO ALVES VERISSIMO","EMEF ANTONIO PEREIRA IGNACIO","EMEF JOSE PEDRO LEITE CORDEIRO DR","EMEF HIPOLITO JOSE DA COSTA","CEU EMEF DOMINGOS RUBINO PROF","EMEF TEOFILO BENEDITO OTTONI","EMEF ROBERTO PATRICIO PROF","EMEF HELIO FRANCO CHAVES CEL","EMEF ALIPIO CORREA NETO PROF","EMEF EDA TEREZINHA CHICA MEDEIROS PROFA","EMEF PLINIO SALGADO","EMEF JOAO DE SOUZA FERRAZ PROF","EMEF SYLVIO HECK ALM","EMEF DEZOITO DO FORTE","EMEF MODESTO SCAGLIUSI","EMEF PRACINHAS DA FEB","EMEF RICARDO VITIELLO PROF","EMEF VERA LUCIA FUSCO BORBA PROFA","EMEF ANTONIO ALVES DA SILVA SG","EMEF JOAO PEDRO DE CARVALHO NETO DR","EMEF ASSAD ABDALA","EMEF MALLET MAL","EMEF AMELIA IMP DA","EMEF BENEDITO MONTENEGRO PROF","EMEF JOSE ERMIRIO DE MORAIS SEN","EMEF JOSE HONORIO RODRIGUES","EMEF VIRGILIO DE MELLO FRANCO","EMEF PHILO GONCALVES DOS SANTOS PROFA","EMEF ERNANI SILVA BRUNO","EMEF JOSE CARLOS DE FIGUEIREDO FERRAZ PREF","EMEF EUZEBIO ROCHA FILHO","EMEF JOAO FRANZOLIN NETO PROF","EMEF CAIO SERGIO POMPEU DE TOLEDO DEP","EMEF PRESTES MAIA","EMEF FERNANDO GRACIOSO","EMEFM RUBENS PAIVA","EMEF CLAUDIA BARTOLOMAZI PROFA","EMEF FLORESTAN FERNANDES PROF","EMEF ANNA SILVEIRA PEDREIRA","EMEFM GUIOMAR CABRAL","EMEFM ANTONIO SAMPAIO VER","EMEFM DARCY RIBEIRO","EMEF VICENTE AMATO SOBRINHO COM","EMEF CLOTILDE ROSA HENRIQUES ELIAS PROFA","EMEF PERICLES EUGENIO DA SILVA RAMOS","EMEF PAULO FREIRE PROF","EMEF DAMIAO FREI","EMEF JAIRO DE ALMEIDA PROF","EMEF LINO DE MATTOS SEN","EMEF JOSE QUERINO RIBEIRO","EMEF ILEUSA CAETANO DA SILVA PROFA","EMEF MILENA BENEDICTO PROFA","EMEF HELLIO TAVARES DR","EMEF MARIA RITA DE CASSIA PINHEIRO SIMOES BRAGA PROFA","EMEF JOSE BLOTA JUNIOR DEP","EMEF FRANCISCO REBOLO","EMEF VARGEM GRANDE","EMEF FAZENDA DA JUTA","EMEF JOAO DA SILVA","CEU EMEF MANOEL VIEIRA DE QUEIROZ FILHO","EMEF GIANFRANCESCO GUARNIERI","EMEF CHACARA SONHO AZUL","EMEF JANUARIO MANTELLI NETO DEP","EMEF ZILKA SALABERRY DE CARVALHO","EMEF ROGE FERREIRA DEP","EMEF HERBERT DE SOUZA - BETINHO","EMEF PAULO CARNEIRO THOMAZ ALVES GEN","CEU EMEF CESAR ARRUDA CASTANHO DEP","EMEF WLADIMIR DE TOLEDO PIZA PREF","EMEF ANTONIO RODRIGUES DE CAMPOS PROF","EMEF DIRCE GENESIO DOS SANTOS PROFA","EMEF NILCE CRUZ FIGUEIREDO PROFA","EMEF MARIO COVAS GOV","CEU EMEF JARDIM ELIANA","CEU EMEF MARIA LISBOA DA SILVA PROFA","EMEF JOSE KAUFFMANN DR","EMEF REMO RINALDI NADDEO PROF","EMEF JARDIM MONTE BELO","EMEF JOSUE DE CASTRO PROF","EMEF RECANTO DOS HUMILDES","CEU EMEF CONCEICAO APARECIDA DE JESUS PROFA","EMEF JARDIM DAS LARANJEIRAS","EMEF WANDA OVIDIO GONCALVES PROFA","CEU EMEF MARIA CLARA MACHADO","EMEF JOSE PEGORARO PE","EMEF EDGARD CARONE","EMEF MARINA MELANDER COUTINHO PROFA","EMEF GIUSEPPE TAVOLARO PROF","EMEF TEREZINHA MOTA DE FIGUEIREDO","EMEF ALDO DA TOFORI PE","CEU EMEF AGUA AZUL","CEU EMEF FEITICO DA VILA","CEU EMEF JACANA","CEU EMEF VILA RUBI","EMEF JARDIM GUARANI - JOSE ALFREDO APOLINARIO PROF","EMEF JARDIM DA CONQUISTA","EMEF JARDIM DAMASCENO I","EMEF JOSE HERMINIO RODRIGUES CEL PM","EMEF MARILI DIAS PROFA","CEU EMEF VILA DO SOL","CEU EMEF CANTOS DO AMANHECER","CEU EMEF MARIO FITTIPALDI","CEU EMEF JARDIM PAULISTANO","CEU EMEF LAJEADO","CEU EMEF ROSANGELA RODRIGUES VIEIRA PROFA","CEU EMEF TATIANA BELINKY","EMEF JARDIM MITSUTANI I - PAULO PATARRA JORNALISTA","EMEF NEIR AUGUSTO LOPES PROF","CEU EMEF MARA CRISTINA TARTAGLIA SENA PROFA","CEU EMEF VALTER PAULINO ESTEVAM PROF DR","CEU EMEF JAGUARE","CEU EMEF JOSE SARAMAGO","EMEF CAIRA ALAYDE ALVARENGA MEDEA PROFA","EMEF AGUAS DE MARCO","EMEF GILMAR TACCOLA PROF","EMEF DAMA ENTRE RIOS VERDES","EMEF SERAFIN MARTINEZ GUTIERREZ PE","EMEF HERCILIA DE CAMPOS COSTA","EMEF NEUZA AVELINO DA SILVA MELO","EMEF JOSEFA NICACIO ARAUJO PROFA","EMEF MURURES","EMEF IZABEL APARECIDA CRISTOVAO DA LUZ PROFA","EMEF MARISA MORETTI CAMARA PROFA","EMEF MARIA LUCIA DOS SANTOS PROFA","CEU EMEF PARAISOPOLIS","EMEF ALEX MARTINS COSTA PROF MAESTRO","EMEF CONSTELACAO DO INDIO","EMEF CARLOS FRANCISCO GASPAR","EMEF GENY MARIA MUNIZ ALMEIDA KLEIN PUSSINELLI PROFA","EMEF MARTIN LUTHER KING JR","EMEF PARQUE BOA ESPERANCA II","EMEF VIRGINIA LORISA ZEITOUNIAN CAMARGO PROFA","EMEF SOCRATES BRASILEIRO SAMPAIO DE SOUSA VIEIRA DE OLIVEIRA","EMEF CAMPO LIMPO II","EMEF CAMPO LIMPO III -LUISA ROSARIA DE OLIVEIRA DIAS","EMEF MARLI FERRAZ TORRES BONFIM","EMEF M BOI MIRIM I","EMEF MILLOR FERNANDES JORNALISTA","EMEF JURANDI GOMES DE ARAUJO PROF","EMEF BADRA","EMEF JOSE FRANCISCO CAVALCANTE PROF","EMEF ALDINA ANALIA AGOSTINHA TADDEO CONDE PROFA","EMEF GILBERTO DUPAS PROF","EMEF ELIANE BENUTE LESSA AYRES GONCALVES PROFESSORA- NANY BENUTE","EMEF ALICE MEIRELLES REIS PROFA","EMEF VILA MUNCK","EMEF M BOI MIRIM II","EMEF MOISES ELIAS DE SOUZA TTE","EMEF HELINA COUTINHO LOURENCO ALVES PROFESSORA","EMEF CELIA REGINA ANDERY BRAGA PROF","EMEF BARTOLOMEU CAMPOS DE QUEIROS","EMEF JOSE CARLOS NICOLETO - ZITO PROFESSOR","EMEF MARIA APARECIDA RODRIGUES CINTRA PROFA","EMEF ESTACAO JARAGUA","EMEF LILIAN MASO PROFA","EMEF AMELIA RODRIGUES DE OLIVEIRA PROFA","EMEF FORTE DOS REIS MAGOS","EMEF EDIVALDO DOS SANTOS DANTAS PROF","EMEF PEDRO FUKUYEI YAMAGUCHI FERREIRA","EMEF JOSE MARIO PIRES AZANHA PROF","EMEF MILTON PEREIRA COSTA","EMEF CHACARA TURISTICA","EMEF ACLAMADO","EMEF JARDIM SILVA TELES"],"mode":"lines","type":"scatter","name":"Regression Fit","line":{"color":"blue"},"marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
