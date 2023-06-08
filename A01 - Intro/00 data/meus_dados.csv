@@ -1,5 +1,6 @@
-nome,idade,sexo,raca,renda
-"Laura",33,"F","branca",3300
-"Gabriel",17,"M","preta",1220
-"Alexandra",26,"F","parda",1800
-"Fernando",45,"M","branca",13000
+Aluno,Escola,Desempenho
+Breatriz,Escola01,350
+Danilo,Escola01,298
+Flora,Escola02,284
+Lara,Escola02,180
+Mateus,Escola03,230

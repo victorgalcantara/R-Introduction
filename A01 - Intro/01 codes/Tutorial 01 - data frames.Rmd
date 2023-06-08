@@ -29,7 +29,51 @@ As principais características de um data frame são: (1) cada coluna representa
 | Lara      |Escola02 |       180  | 
 | Mateus    |Escola03 |       230  | 
 
-Note que em uma linha os elementos são de tipos de diferentes: na primeira coluna há nomes (texto), na segunda uma identificação das escolas (texto) e na terceira desempenho em uma avaliação (número contínuos). 
+No R, cada coluna representa um vetor e os data frames são conjunto de vetores/colunas. Vejamos abaixo como construir um data frame conforme o exemplo.
+
+```{r}
+Aluno  <- c("Beatriz","Danilo","Flora","Lara","Mateus")
+Escola <- c("Escola01","Escola01","Escola02","Escola02","Escola03")
+Desempenho <- c(350,298,284,180,230)
+
+dados <- data.frame(Aluno,Escola,Desempenho)
+dados
+```
+
+O mesmo procedimento pode ser feito fora do R e importado. Por exemplo, o formato mais utilizado para a escrita de base de dados são arquivos de valores separados por vírgula (Comma Separated Values - CSV). Você pode abrir um bloco de notas e escrever os dados do exemplo da seguinte forma:
+
+Aluno,Escola,Desempenho
+Breatriz,Escola01,350
+Danilo,Escola01,298
+Flora,Escola02,284
+Lara,Escola02,180
+Mateus,Escola03,230
+
+Salve o arquivo inserindo ".csv" no final, para que seja salvo registrado no formato adequado ao que utilizamos.
+
+Agora vamos importar a base utilizando funções do R. A primeira é a função padrão de base do R, a segunda é uma função que facilita nossa vida e vem do pacote RIO (R Input Output).
+
+```{r}
+read.table(file="G:\\Meu Drive\\00 GitHub\\R-Introduction\\A01 - Intro\\00 data\\meus_dados.csv",
+           sep = ",", # Especifique o separador
+           header = T # Especifique que a primeira linha é o nome das variáveis
+           )
+
+# install.packages("rio")
+library(rio)
+
+import(file="G:\\Meu Drive\\00 GitHub\\R-Introduction\\A01 - Intro\\00 data\\meus_dados.csv")
+```
+
+Note que a função apenas abre os dados. Para registrar na memória, é preciso atribuir a um objeto.
+
+```{r}
+meus_dados <- import(file="G:\\Meu Drive\\00 GitHub\\R-Introduction\\A01 - Intro\\00 data\\meus_dados.csv")
+
+meus_dados
+```
+
+Note que em uma linha os elementos são de tipos de diferentes: na primeira coluna há nomes (texto), na segunda uma identificação das escolas (texto) e na terceira desempenho em uma avaliação (número contínuos).
 
 Por outro lado, em cada coluna há somente elementos de um tipo. Por exemplo, há apenas números contínuos na coluna desempenho. Colunas são variáveis e por isso aceitam registros de um único tipo. Se você já fez um curso de estatísticas básica ou de métodos quantitativos deve se lembrar que as variáveis são classificadas da seguinte maneira:
 
@@ -47,7 +91,15 @@ Se destacamos uma coluna do nosso data frame, temos um __vetor__. Por exemplo, a
 
 Data frame e vetores são __objetos__ na linguagem R.
 
-Vamos ver como o R representa vetores e data frames na tela. Antes disso, é preciso "abrir" um data frame.
+Para saber o tipo ou classe dos vetores/colunas no data frame, pode usar as funções:
+
+```{r}
+str(meus_dados) # Estrutura dos dados
+
+class(meus_dados$Aluno) # Classe da variável aluno
+
+typeof(meus_dados$Aluno) # Quase o mesmo que class
+```
 
 ## Pausa para pacotes
 

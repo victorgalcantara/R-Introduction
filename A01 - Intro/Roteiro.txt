@@ -1,0 +1,7 @@
+1. Proposta do curso
+2. Organização dos materiais (Github)
+3. Dinâmica (apresentação, tutoriais e monitoria)
+4. Instalação R
+5. Conteúdo geral R
+6. Setup, janelas e workflow
+7. Script e Rmarckdown
