@@ -3,11 +3,39 @@ title: "Tutorial 00 - Operações Básicas"
 author: "Victor G Alcantara"
 date: "2023-04-26"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+## O uso de linguagem de programação para analisar dados nas Ciências Sociais
+
+Dados e metodologias são os principais elementos para o trabalho com pesquisa e operacionalização de teorias. Em geral, formulamos hipóteses sobre o mundo informadas por literaturas específicas, e testamos essas hipóteses coletando dados e utilizando metodologias. As linguagens de programação nos ajudam no tratamento e análise dos dados e na aplicação de metodologias. Ou seja, nos ajuda na operacionalização.
+
+Nos últimos anos estamos experimentando uma mudança no paradigma de análise de dados nas Ciências Sociais. Ao invés do consumo de softwares já com funções estatísticas programadas disponíveis no mercado, tais como o Statistical Package for Social Sciences (SPSS), produto da IBM, e o Excel, produto da Microsoft, estamos migrando para linguagens de programação de acesso livre e gratuito.
+
+Esse é o primeiro ponto forte do trabalho com as linguagens de programação. São de acesso livre e uso gratuito. Há, contudo, outros pontos importantes.
+
+- **Potência:** não estamos mais limitados às funções programadas no software. Podemos programar funções novas e fazer (quase) tudo com R. Excel e SPSS estão anos atrás!
+
+- **Replicabilidade e transparência:** os procedimentos são registrados em código, portando mais transparentes e possíveis de serem replicado. Práticas fundamentais e cada vez mais impulsionadas por revistas e instituições acadêmicas.
+
+- **Popularidade:** movido por uma comunidade internacional extensa, que desenvolve e acompanha o software. Cada vez mais adotado em instituições (principalmente públicas) e pela comunidade acadêmica.
+
+- **Código livre:** não pagamos para usar e podemos ter controle sobre o que estamos fazendo em termos de processamento.
+
+A popularidade das programação também está relacionada ao contexto de ampliação das capacidades de armazenamento e processamento de dados. Estamos produzindo dados o tempo todo pela internet. Acessar, manusear e analisar esses dados, no entanto, são desafios para as Ciências Sociais.
+
+Na verdade, o manuseio e a análise de dados é um desafio de longa data. Do ponto de vista do armazenamento e processamento, a principal pesquisa nacional, o cenos demográfico, já era um desafio desde, pelo menos, 1960 ([para saber mais sobre a história dos censos](https://www.scielo.br/j/nec/a/nJnk3y84WffXCjwp76FNjJr/)).
+
+Uma área que emergiu diante desses desafios é a de Ciências Sociais Computacionais, que aborda desde o desenvolvimento de algoritmos para a extração e análise de dados até a discussão teórica sobre ambientes digitais.
+
+Ainda que a programação esteja relacionada com lógica e cálculo, não se trata apenas de informações quantitativas. Podemos tratar, além dos famosos *surveys*, também dados não estruturados, textos, imagens, sons e tudo o mais que puder ser registrado. Tudo isso faz da análise de dados com uso de programação mais atraente.
+
+Se você é uma pessoa curiosa e que quer explorar a criatividade, a sofisticação e a elegância em seu trabalho, está no lugar certo.
 
 ## Operações básicas no R
 
@@ -23,14 +51,25 @@ Caso queria consultar materiais mais elaborados, recomendo:
 
 Neste tutorial, veremos o básico das operações em R.
 
-## Parte I - Operações elementares
+## Parte I - Noções gerais e funções básicas
 
-O R é, como as outras linguagens, uma grande calculadora. O principal fluxo de
-trabalho com dados é com *armazenamento* e *manuseio*.
+O R é, como as outras linguagens, uma grande calculadora. Usamos ela como linguagem para se comunicar com o computador e solicitar determinados processamentos. Colocamos informações de entrada (*input*) e recebemos resposta de saída (*output*).
+
+Escrevemos nossos códigos com a **sintaxe** da linguagem, isto é, com uma estrutura especifica de comandos e códigos. Por convenção, seguimos padrões de escrita do código que chamamos de **identação**.
+
+A identação do código segue convenções bem estabelecidas. Em geral, seguimos a lógica do fluxo de trabalho.
+
+O fluxo de trabalho pode ser descrito por:
+
+- **Setup e configurações básicas**
+- **Armazenamento**
+- **Manuseio**
+- **Análise**
+- **Comunicação dos resultados**
 
 É fundamental entender a sintaxe e funcionamento do R, pois a base serve para
 a programação de funções mais complexas. Tudo o que vamos ver de importação,
-manuseio e visualização de dados é programado com as operações básicas.
+manuseio e visualização de dados é programado com as operações básicas que já estão contidas na linguagem e no software. Chamamos essas funções de R base, pois são a base do R.
 
 Sintaxe básica
 
@@ -115,8 +154,8 @@ Podemos também fazer cálculos com objetos, veja:
 x <- 2
 x+3
 
-x <- 1:100
-y <- log(1:100)
+x <- 1:10
+y <- 1:10
 
 plot(x,y)
 ```

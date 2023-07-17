@@ -1,6 +1,5 @@
 # Introdução ao R - operações básicas ------------------------------------------
 # Author: Victor Gabriel Alcantara 
-# Date: 
 # Github: https://github.com/victorgalcantara 
 # LinkedIn: https://www.linkedin.com/in/victorgalcantara/ 
 
@@ -12,7 +11,7 @@
 # Tutorial Leonardo Barone
 # https://github.com/leobarone/cebrap_lab_programacao_r
 
-# Parte I - Operações elementares ----------------------------------------------
+# Parte I - Noções gerais e funções básicas ----------------------------------------------
 
 # 1. R como calculadora ----
 
@@ -20,23 +19,16 @@
 2*3      # multiplicação
 2^2      # potência
 
-sqrt(16) # raíz quadrada / square roots
-16^(1/2)
-
-exp(1)   # exponencial - padrão: n de euler (e)
-
-log(10)  # logarítmo
-log2(16)
-
 # Respeita ordem PEMDAS
 # Parenteses> Expoentes > Multiplicação > Divisão > Adição > Subtração
-4*6+5*6
+2+2*3
 
-(4*6)+(5*6)
+2+2*3^3
 
-(4+5)*6
-
-9*6
+# Ordem do cálculo
+3 * 3 * 3
+3 * 3 * 3 * 2
+3 * 3 * 3 * 2 + 2
 
 # Divisão inteira: quanto sobra da divisão
 4%%2
@@ -45,15 +37,168 @@ log2(16)
 # No python não tem isso!
 pi-2
 
-# 2. Objetos ----
+# 1.2 Introduzindo funções básicas ----
+
+sqrt(x = 16) # raíz quadrada / square roots
+
+exp(x = 1)   # exponencial - padrão: n de euler (e)
+
+log(x = 10)  # logarítmo
+
+log2(16)
+
+2^4
+
+# 2. Criando objetos ----
 
 x <- 2
+x = 3
+
 x+3
 
-x <- 1:10
-y <- exp(1:10)
+x <- 1:16
+y <- sqrt(1:16)
 
-plot(x,y)
+plot(x = x,y = y)
+lines(x,y)
+
+# PULO PARA BASE DE DADOS
+
+## 1. Vetores ----
+# Def.: coleção ordenada de dados de mesma classe/tipo
+# Propriedades: nome, tipo/classe, elementos, dimensão
+
+# 0. Unidade básica no R
+# 1. Apenas uma dimensão
+# 2. Só aceita uma classe (núm, char, logi)
+# 3. Default: string sobrepõe
+
+j <- c(1.20,3.2,2.2,3.4)
+x <- c(2L,4L,4L,6L)
+y <- c("Fulano","Ciclano","Beltrano","Tetrano")
+z <- c(TRUE,FALSE,TRUE,FALSE)
+
+class(j)
+class(x)
+class(y)
+class(z)
+
+t <- c(1,2,"Fulano",FALSE)
+class(t)
+
+w <- c(j,x,y,z)
+w # observe o que compõe o vetor "w"
+class(w)
+
+w <- as.numeric(w) # o que aconteceria se tudo fosse transformado para número?
+w
+
+# Factor: isso também não tem no py! ;)
+a <- c("Bom","Ruim","Regular","Péssimo")
+
+a <- factor(a,levels=c("Péssimo","Ruim","Regular","Bom"), ordered=T)
+
+a
+levels(a)
+
+# Agora podemos fazer algumas operações com factor
+min(a)
+max(a)
+
+## 2. Data frame ----
+# Def.: coleção de vetores de mesma dimensão que guardam infos
+# Propriedades: dim e str
+# 0. Dados estruturados em observações x variáveis (survey)
+
+idad  <- c(65,74,21,24,27,34,24,23)
+educ  <- c(2,2,12,14,12,16,14,14)
+rend  <- c(1200,1600,1800,2200,1800,6400,2300,2500)
+sexo  <- c("M","F","F","M","F","M","F","M")
+raca  <- c("Branca","Parda","Preta","Parda","Preta","Branca",
+           "Parda","Amarela")
+
+d <- data.frame(educ = educ, idad = idad, rend = rend,
+                sexo = sexo, raca = raca)
+
+# 3. Verbos importantes ----
+# Visualizar dados - fluxo de trabalho
+
+class(d)  # classe do objeto
+dim(d)    # dimensão da base (linhas x colunas)
+head(d)   # Primeiros 5 casos
+tail(d)   # Últimos 5 casos
+str(d)    # Estrutura dos dados
+
+summary(d)      # sumário das variáveis
+summary(d$rend) # sumário de uma variável numérica
+summary(d$sexo) # sumário de uma variável categórica
+
+### 4. Subset ----
+
+# acessar informações guardadas em um vetor
+y[1]
+
+# acessar informações guardadas em um data.frame 
+# [linhas,colunas]
+d[1,1]
+
+# operações com coordenadas
+d[,"nome"] <- y # criando nova variável
+df <- d[,-6]    # excluindo variável
+
+# Filtrando dados
+filtro <- c(F,T,T,T,T,T,T,T)
+df <- d[filtro,]
+
+# Selecionando variáveis
+selecao <- c(T,T,T,T,T,F)
+df <- d[,selecao]
+
+# Complexificando
+filtro <- d[,"idad"] < 29
+df <- d[filtro,]
+
+selecao <- names(d) %in% c("educ","rend")
+df <- d[,selecao]
+
+# Função base para subset
+subset(x = d, subset = sexo == "F")
+subset(x = d, select = "sexo")
+
+### 5. Recodificação ----
+
+# Renda
+d[,"ln_rend"] <- log(d[,"rend"])
+
+# Raca
+d[,"vd_raca"] <- d$raca
+
+negra   <- d[,"raca"] %in% c("Preta","Parda")
+
+d[negra,"vd_raca"] <- "Negra"
+
+# Complexificando mais um pouco
+# Raca e sexo
+m_negra   <- d[,"raca"] %in% c("Preta","Parda") &
+  d[,"sexo"] == "F"
+
+m_branca   <- d[,"raca"] %in% c("Branca") &
+  d[,"sexo"] == "M"
+
+d[m_negra,"vd_raca_sexo"] <- "Mulher negra"
+d[m_branca,"vd_raca_sexo"] <- "Mulher branca"
+
+h_negro   <- d[,"raca"] %in% c("Preta","Parda") & d[,"sexo"] == "M"
+
+h_branco   <- d[,"raca"] %in% c("Branca") & d[,"sexo"] == "M"
+
+h_amarelo   <- d[,"raca"] %in% c("Amarela") & d[,"sexo"] == "M"
+
+d[h_negro,"vd_raca_sexo"] <- "Homem negro"
+d[h_branco,"vd_raca_sexo"] <- "Homem branco"
+d[h_amarelo,"vd_raca_sexo"] <- "Homem amarelo"
+
+# vocês entenderam...
 
 # 3. Operações lógicas ----
 # São operações em testamos uma sentença tendo como resultado:
@@ -154,139 +299,6 @@ setwd() # Mude o diretório de trabalho
 dir.create("minha pasta") # Crie uma pasta com este nome
 
 # Parte II - Classes de objetos ------------------------------------------------
-
-## 1. Vetores ----
-# Def.: coleção ordenada de dados de mesma classe/tipo
-# Propriedades: nome, tipo/classe, elementos, dimensão
-
-# 0. Unidade básica no R
-# 1. Apenas uma dimensão
-# 2. Só aceita uma classe (núm, char, logi)
-# 3. Default: string sobrepõe
-
-j <- c(1.20,3.2,2.2,3.4)
-x <- c(2L,4L,4L,6L)
-y <- c("Fulano","Ciclano","Beltrano","Tetrano")
-z <- c(T,F,T,F)
-
-class(j)
-class(x)
-class(y)
-class(z)
-
-w <- c(j,x,y,z)
-w # observe o que compõe o vetor "w"
-class(w)
-
-w <- as.numeric(w) # o que aconteceria se tudo fosse transformado para número?
-w
-
-# Factor: isso também não tem no py! ;)
-a <- c("Bom","Ruim","Regular","Péssimo")
-
-a <- factor(a,levels=c("Péssimo","Ruim","Regular","Bom"), ordered=T)
-
-a
-levels(a)
-
-# Agora podemos fazer algumas operações com factor
-min(a)
-max(a)
-
-## 2. Data frame ----
-# Def.: coleção de vetores de mesma dimensão que guardam infos
-# Propriedades: dim e str
-# 0. Dados estruturados em observações x variáveis (survey)
-
-idad  <- c(65,74,21,24,27,34,24,23)
-educ  <- c(2,2,12,14,12,16,14,14)
-rend  <- c(1200,1600,1800,2200,1800,6400,2300,2500)
-sexo  <- c("M","F","F","M","F","M","F","M")
-raca  <- c("Branca","Parda","Preta","Parda","Preta","Branca",
-           "Parda","Amarela")
-
-d <- data.frame(educ = educ, idad = idad, rend = rend,
-                sexo = sexo, raca = raca)
-
-# 3. Verbos importantes ----
-# Visualizar dados - fluxo de trabalho
-
-class(d)  # classe do objeto
-dim(d)    # dimensão da base (linhas x colunas)
-head(d)   # Primeiros 5 casos
-tail(d)   # Últimos 5 casos
-str(d)    # Estrutura dos dados
-
-summary(d)      # sumário das variáveis
-summary(d$rend) # sumário de uma variável numérica
-summary(d$sexo) # sumário de uma variável categórica
-
-### 4. Subset ----
-
-# acessar informações guardadas em um vetor
-y[1]
-
-# acessar informações guardadas em um data.frame 
-# [linhas,colunas]
-d[1,1]
-
-# operações com coordenadas
-d[,"nome"] <- y # criando nova variável
-df <- d[,-6]    # excluindo variável
-
-# Filtrando dados
-filtro <- c(F,T,T,T,T,T,T,T)
-df <- d[filtro,]
-
-# Selecionando variáveis
-selecao <- c(T,T,T,T,T,F)
-df <- d[,selecao]
-
-# Complexificando
-filtro <- d[,"idad"] < 29
-df <- d[filtro,]
-
-selecao <- names(d) %in% c("educ","rend")
-df <- d[,selecao]
-
-# Função base para subset
-subset(x = d, subset = sexo == "F")
-subset(x = d, select = "sexo")
-
-### 5. Recodificação ----
-
-# Renda
-d[,"ln_rend"] <- log(d[,"rend"])
-
-# Raca
-d[,"vd_raca"] <- d$raca
-
-negra   <- d[,"raca"] %in% c("Preta","Parda")
-
-d[negra,"vd_raca"] <- "Negra"
-
-# Complexificando mais um pouco
-# Raca e sexo
-m_negra   <- d[,"raca"] %in% c("Preta","Parda") &
-             d[,"sexo"] == "F"
-
-m_branca   <- d[,"raca"] %in% c("Branca") &
-  d[,"sexo"] == "M"
-
-d[m_negra,"vd_raca_sexo"] <- "Mulher negra"
-d[m_branca,"vd_raca_sexo"] <- "Mulher branca"
-
-h_negro   <- d[,"raca"] %in% c("Preta","Parda") & d[,"sexo"] == "M"
-
-h_branco   <- d[,"raca"] %in% c("Branca") & d[,"sexo"] == "M"
-
-h_amarelo   <- d[,"raca"] %in% c("Amarela") & d[,"sexo"] == "M"
-
-d[h_negro,"vd_raca_sexo"] <- "Homem negro"
-d[h_branco,"vd_raca_sexo"] <- "Homem branco"
-d[h_amarelo,"vd_raca_sexo"] <- "Homem amarelo"
-
-# vocês entenderam...
 
 # Funções que facilitam a nossa vida: pacote TIDYVERSE
 
