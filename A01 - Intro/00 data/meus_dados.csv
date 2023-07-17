@@ -1,6 +1,6 @@
-Aluno,Escola,Desempenho
-Breatriz,Escola01,350
-Danilo,Escola01,298
-Flora,Escola02,284
-Lara,Escola02,180
-Mateus,Escola03,230
+Q01, Q02, Q03, Q04, Q05
+nome, educ, rend, sexo, raca
+Pedro, 17, 5500.50, M, Preto
+Fernanda, 12, 1360.20, F, Branca
+Flora, 17, 6000.10, F, Parda
+Matheus, 9, 900.20, M, Indigena
