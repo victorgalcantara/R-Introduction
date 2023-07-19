@@ -1,10 +1,12 @@
 # Title : manuseando dados da pnad-c
 # Author: Victor Gabriel Alcantara 
-# Date: 30/08/2022  
+# Date: 19/07/2023  
 # Github: https://github.com/victorgalcantara 
 # LinkedIn: https://www.linkedin.com/in/victorgalcantara/ 
 
 # 0. Setup and packages --------------------------------------------------------
+#install.packages()
+
 library(tidyverse)
 library(openxlsx)
 library(rio)
@@ -59,8 +61,12 @@ myPnad2022 <- myPnad2022 %>% rename(.,
                                     classeOcup2="VD4011" # Agrupamento ocup2
 )
 
+# Função mutate para transformar nossas variáveis
 myPnad2022 <- myPnad2022 %>% 
   mutate(.,
+         
+         ln_rendOcup = log(rendOcup),
+         
          # Formatando para numérico
          anosEst = ifelse(
            test = anosEst == "Sem instrução e menos de 1 ano de estudo",
