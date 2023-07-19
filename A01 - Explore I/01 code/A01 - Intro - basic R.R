@@ -39,9 +39,9 @@ pi-2
 
 # 1.2 Introduzindo funções básicas ----
 
-sqrt(x = 16) # raíz quadrada / square roots
+sqrt(16) # raíz quadrada / square roots
 
-exp(x = 1)   # exponencial - padrão: n de euler (e)
+exp(1)   # exponencial - padrão: n de euler (e)
 
 log(x = 10)  # logarítmo
 
@@ -78,10 +78,26 @@ x <- c(2L,4L,4L,6L)
 y <- c("Fulano","Ciclano","Beltrano","Tetrano")
 z <- c(TRUE,FALSE,TRUE,FALSE)
 
+# Funções para olhar classe e tipo dos vetores (CLASSE = TIPO)
+# Função class para verificar a classe do vetor
 class(j)
 class(x)
 class(y)
 class(z)
+
+# Função typeof para verificar tipo do vetor
+typeof(j)
+typeof(x)
+typeof(y)
+typeof(z)
+
+# verificar se aparece mais abaixo no exercício
+TRUE + TRUE
+FALSE + FALSE
+TRUE + FALSE
+
+# O que acontece se unir valores de diferentes qualidades
+# em um único vetor?
 
 t <- c(1,2,"Fulano",FALSE)
 class(t)
@@ -90,16 +106,32 @@ w <- c(j,x,y,z)
 w # observe o que compõe o vetor "w"
 class(w)
 
-w <- as.numeric(w) # o que aconteceria se tudo fosse transformado para número?
+# o que aconteceria se tudo fosse transformado para número?
+w <- as.numeric(w)
 w
 
-# Factor: isso também não tem no py! ;)
+# Factor: é um tipo de vetor que guarda valores categóricos
+# possibilitando a ordenação 
+
+# Exemplo
 a <- c("Bom","Ruim","Regular","Péssimo")
 
-a <- factor(a,levels=c("Péssimo","Ruim","Regular","Bom"), ordered=T)
+a <- factor(x = a,levels=c("Péssimo","Ruim","Regular","Bom"), ordered=TRUE)
 
 a
 levels(a)
+
+# Outro exemplo
+b <- c(0,1,2,3)
+
+b <- factor(x=b,
+            levels = c(0,1,2,3),
+            labels = c("Péssimo","Ruim","Regular","Bom"),
+            ordered = TRUE
+)
+
+b
+levels(b)
 
 # Agora podemos fazer algumas operações com factor
 min(a)
@@ -117,34 +149,53 @@ sexo  <- c("M","F","F","M","F","M","F","M")
 raca  <- c("Branca","Parda","Preta","Parda","Preta","Branca",
            "Parda","Amarela")
 
-d <- data.frame(educ = educ, idad = idad, rend = rend,
-                sexo = sexo, raca = raca)
+d <- data.frame(educ, idad, rend,sexo,raca)
+view(d)
 
 # 3. Verbos importantes ----
 # Visualizar dados - fluxo de trabalho
 
 class(d)  # classe do objeto
 dim(d)    # dimensão da base (linhas x colunas)
-head(d)   # Primeiros 5 casos
-tail(d)   # Últimos 5 casos
+head(d,n = 6)   # Primeiros 6 casos
+tail(d,n = 6)   # Últimos 6 casos
 str(d)    # Estrutura dos dados
 
-summary(d)      # sumário das variáveis
+# sumário das variáveis
+summary(d)      
 summary(d$rend) # sumário de uma variável numérica
 summary(d$sexo) # sumário de uma variável categórica
 
 ### 4. Subset ----
 
+y <- 1:8
+
 # acessar informações guardadas em um vetor
-y[1]
+y[5]
 
 # acessar informações guardadas em um data.frame 
-# [linhas,colunas]
-d[1,1]
+# [Linhas,Colunas]
+d[5,3]
 
 # operações com coordenadas
-d[,"nome"] <- y # criando nova variável
-df <- d[,-6]    # excluindo variável
+d[,"mg"] <- c(1:8) # criando nova variável
+
+df <- d[,-c(6,7,8)]    # excluindo variável
+
+d
+
+df
+
+# Subset com cifrão $ e colchetes
+
+# O cifrão é muito usado para acessar variáveis
+d$educ
+
+# Os colchetes após o cifrão é usado para acessar valores dentro da variável
+d$educ[4]
+
+# Vimos até aqui na Aula 02
+# Pulei essa parte até a linha 335
 
 # Filtrando dados
 filtro <- c(F,T,T,T,T,T,T,T)
@@ -310,7 +361,7 @@ dir.create("minha pasta") # Crie uma pasta com este nome
 # Jovens
 d <- d %>% filter(idad > 15  & idad < 29)
 
-d <- d %>% select(educ,rend,sexo_raca)
+d <- d %>% select(educ,rend)
 
 ## 6.1 Verbo "mutate" ----
 

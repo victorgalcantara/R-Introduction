@@ -6,6 +6,7 @@
 
 # 0. Setup and packages --------------------------------------------------------
 install.packages("PNADcIBGE")
+install.packages("openxlsx")
 library(PNADcIBGE)
 library(tidyverse)
 library(openxlsx)
@@ -13,8 +14,14 @@ library(openxlsx)
 # Requisitando/baixando dados da pnad-c 2022, 1º trim
 pnad2022 <- get_pnadc(year = 2022, # ano
                       quarter = 1, # trimestre
-                      design = F   # estrutura específica survey design
+                      design = F,  # estrutura específica survey design
+                      labels=F
                       )
+
+# Padronizando minha pasta de trabalho
+getwd()
+
+setwd("G:/Meu Drive/00 GitHub/R-Introduction/000 - P&R/01 code/pnadc2022")
 
 save(pnad2022,file = "PNAD2022_1T.RDS")
 
@@ -46,7 +53,7 @@ myPnad2022 <- myPnad2022 %>% rename(.,
                                     ocup = "V4010"
                                     )
 
-myPnad2022_sp <- myPnad2022 %>% filter(UF == "São Paulo")
+myPnad2022_sp <- myPnad2022 %>% filter(UF == 35)
 
 # Amostragem aleatória para fins didáticos
 
@@ -59,7 +66,6 @@ myPnad2022 <- myPnad2022[s,]
 
 # Salvando objeto com os dados
 getwd() # verifica o dir de trabalho
-setwd("G:/Meu Drive/00 data/IBGE/PNADc/1T_2022") # modifica o dir
 
 write.csv(x = myPnad2022,
           file="myPNAD2022_1T.csv")

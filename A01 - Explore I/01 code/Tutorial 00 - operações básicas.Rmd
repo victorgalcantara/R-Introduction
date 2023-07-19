@@ -160,7 +160,7 @@ y <- 1:10
 plot(x,y)
 ```
 
-Além dos cálculos, podemos também fazer operações lógicas (Verdadeiro/Falso)
+### Além dos cálculos, podemos também fazer operações lógicas (Verdadeiro/Falso)
 
 ```{r}
 # 3. Operações lógicas ----
@@ -354,7 +354,7 @@ Deve inverter as barras para ficar assim:
 G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/00 data
 
 ```{r}
-setwd("G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/00 data")
+setwd("G:/Meu Drive/00 GitHub/R-Introduction/000 - P&R/00 data")
 
 meus_dados <- import("meus_dados.csv")
 

@@ -12,7 +12,7 @@ getwd() # verifica o dir de trabalho
 setwd("G:/Meu Drive/00 data/IBGE/PNADc") # modifica o dir
 
 # 1. Import dos dados ----------------------------------------------------------
-load("PNAD2022_1T.RDS")
+load("myPNAD2022_1T.RDS")
 load("PNAD2022_1T_SP.RDS")
 
 # 2. Manuseio dos dados --------------------------------------------------------

@@ -440,10 +440,14 @@ Por convenção, seguimos padrões de escrita do código que chamamos de
 <strong>identação</strong>.</p>
 <p>A identação do código segue convenções bem estabelecidas. Em geral,
 seguimos a lógica do fluxo de trabalho.</p>
-<p>O fluxo de trabalho pode ser descrito por: - <strong>Setup e
-configurações básicas</strong> - <strong>Armazenamento</strong> -
-<strong>Manuseio</strong> - <strong>Análise</strong> -
-<strong>Comunicação dos resultados</strong></p>
+<p>O fluxo de trabalho pode ser descrito por:</p>
+<ul>
+<li><strong>Setup e configurações básicas</strong></li>
+<li><strong>Armazenamento</strong></li>
+<li><strong>Manuseio</strong></li>
+<li><strong>Análise</strong></li>
+<li><strong>Comunicação dos resultados</strong></li>
+</ul>
 <p>É fundamental entender a sintaxe e funcionamento do R, pois a base
 serve para a programação de funções mais complexas. Tudo o que vamos ver
 de importação, manuseio e visualização de dados é programado com as
@@ -518,8 +522,10 @@ y &lt;- 1:10
 
 plot(x,y)</code></pre>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABUAAAAPACAMAAADDuCPrAAAAvVBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZrY6AAA6OgA6Ojo6OmY6ZmY6ZpA6ZrY6kLY6kNtmAABmOgBmOjpmZjpmZmZmZpBmkLZmkNtmtttmtv+QOgCQZjqQZmaQkDqQkLaQtraQttuQtv+Q2/+2ZgC2Zjq2kDq2kGa2tpC2tra2ttu227a229u22/+2///bkDrbkGbbtmbbtpDbtrbb25Db27bb29vb2//b////tmb/25D/27b/29v//7b//9v////80vLNAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAZU0lEQVR4nO3de3/TVoLHYYUCaTt0oZ1Mp8DsttswLd1Celko4WK//5c1kuM4JqQp/kW2fM55nj/I5eM4Okj+WrKOnG4OQKSbegEASiWgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQjtd0A7gNGMn6jR73FEU/9vA3UZvVFj3+GYtvCEATRLQAFCAgoQElCAUIEBnb38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CAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUEp22nW3ng+fzB513d2pl4bmCCglW3VzVVLYIQGlaK8Pu4Pv5/N3D7ru4dTLQnsElLIdd92dV8t/YccElLIt9j37A/hhPxR2TEApXB/PTw677v7Uy0GLBJTCDeeRHMAzDQGldK8PHcAzEQGldMMuqClMTEJAKd3JcAjvJVCmIKAU7t2D7uDQMTyTEFAKd9zvfp64jpNJCChlOx3OwLsQiWkIKEUbziA9dCk8ExFQinZyNgV06KjzSOycgFKy1+enj1zMyRQElJIdr84eHTuPxO4JKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEDoPw2GcQsctVyNAAAAAElFTkSuQmCC" width="672" /></p>
-<p>Além dos cálculos, podemos também fazer operações lógicas
-(Verdadeiro/Falso)</p>
+</div>
+<div id="além-dos-cálculos-podemos-também-fazer-operações-lógicas-verdadeirofalso" class="section level3">
+<h3>Além dos cálculos, podemos também fazer operações lógicas
+(Verdadeiro/Falso)</h3>
 <pre class="r"><code># 3. Operações lógicas ----
 # São operações em testamos uma sentença tendo como resultado:
 # TRUE (T) ou FALSE (F)
@@ -627,7 +633,7 @@ ifelse(test = 1&gt;3,yes = &quot;Verdade&quot;,no =&quot;Mentira&quot;)</code></
 ##         ans[npos] &lt;- rep(no, length.out = len)[npos]
 ##     ans
 ## }
-## &lt;bytecode: 0x00000182b9095258&gt;
+## &lt;bytecode: 0x00000174a4e9c3a8&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>Loucura né? Deixa pro pessoal da computação essa parte. O importante
 é entender o que a função faz para utilizá-la.</p>
@@ -664,6 +670,7 @@ com a instalação e carregamento dos pacotes necessários.</p>
 
 # Carregando os pacotes ou &quot;pegando na biblioteca do computador&quot;
 library(tidyverse)</code></pre>
+<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 4.3.1</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.2     ✔ readr     2.1.4
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.0
@@ -675,6 +682,7 @@ library(tidyverse)</code></pre>
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <pre class="r"><code>library(rio)</code></pre>
+<pre><code>## Warning: package &#39;rio&#39; was built under R version 4.3.1</code></pre>
 <p>Antes de finalizarmos, precisamos ver algumas funções básicas de
 conexão entre o R e nosso computador.</p>
 </div>
@@ -688,21 +696,17 @@ Directory</em> - wd), onde o R busca e salva arquivos.</p>
 
 # Get wd
 getwd() # Em qual diretório/pasta estou trabalhando?</code></pre>
-<pre><code>## [1] &quot;G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/01 code&quot;</code></pre>
+<pre><code>## [1] &quot;G:/Meu Drive/00 GitHub/R-Introduction/A01 - Explore I/01 code&quot;</code></pre>
 <pre class="r"><code># Directory
 dir()   # o que tem nesse diretório/pasta?</code></pre>
-<pre><code>##  [1] &quot;A01---Intro.html&quot;                     
-##  [2] &quot;A01 - Intro - basic R.R&quot;              
-##  [3] &quot;A01 - Intro.Rmd&quot;                      
-##  [4] &quot;libs&quot;                                 
-##  [5] &quot;style.css&quot;                            
-##  [6] &quot;Tutorial-00---operações-básicas.html&quot; 
-##  [7] &quot;Tutorial-00---operações-básicas.Rmd&quot;  
-##  [8] &quot;Tutorial-00---operações-básicas_files&quot;
-##  [9] &quot;Tutorial-01---data-frames.html&quot;       
-## [10] &quot;Tutorial 00 - operações básicas.Rmd&quot;  
-## [11] &quot;Tutorial 01 - data frames.Rmd&quot;        
-## [12] &quot;xaringan-themer.css&quot;</code></pre>
+<pre><code>## [1] &quot;A01---Intro.html&quot;                     
+## [2] &quot;A01 - Intro - basic R.R&quot;              
+## [3] &quot;A01 - Intro.Rmd&quot;                      
+## [4] &quot;libs&quot;                                 
+## [5] &quot;Tutorial-00---operações-básicas.html&quot; 
+## [6] &quot;Tutorial-00---operações-básicas.Rmd&quot;  
+## [7] &quot;Tutorial-00---operações-básicas_files&quot;
+## [8] &quot;Tutorial 00 - operações básicas.Rmd&quot;</code></pre>
 <pre class="r"><code># Set wd
 # setwd() # Configure o diretório de trabalho
 
@@ -772,17 +776,17 @@ que separam o endereço no sistema é “/”</p>
 Intro\00 data</p>
 <p>Deve inverter as barras para ficar assim: G:/Meu Drive/00
 GitHub/R-Introduction/A01 - Intro/00 data</p>
-<pre class="r"><code>setwd(&quot;G:/Meu Drive/00 GitHub/R-Introduction/A01 - Intro/00 data&quot;)
+<pre class="r"><code>setwd(&quot;G:/Meu Drive/00 GitHub/R-Introduction/000 - P&amp;R/00 data&quot;)
 
 meus_dados &lt;- import(&quot;meus_dados.csv&quot;)
 
 meus_dados</code></pre>
-<pre><code>##      Aluno   Escola Desempenho
-## 1 Breatriz Escola01        350
-## 2   Danilo Escola01        298
-## 3    Flora Escola02        284
-## 4     Lara Escola02        180
-## 5   Mateus Escola03        230</code></pre>
+<pre><code>##        Q01  Q02     Q03  Q04         Q05
+## 1     nome educ    rend sexo        raca
+## 2    Pedro   17 5500.50    M       Preto
+## 3 Fernanda   12 1360.20    F      Branca
+## 4    Flora   17 6000.10    F       Parda
+## 5  Matheus    9  900.20    M Ind\xedgena</code></pre>
 <p>Vamos parar aqui para praticar essa parte básica (que é MUITO
 importante)</p>
 <p>Tente fazer o tutorial 01 do data.frame, nele tem mais explicações
