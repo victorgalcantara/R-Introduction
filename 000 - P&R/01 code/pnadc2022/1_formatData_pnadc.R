@@ -118,4 +118,4 @@ save(object = myPnad2022,
 
 # Usando pacote RIO
 export(x = myPnad2022,
-       file=paste0(wd_data_intror,"myPNAD2022_1T.csv"))
+       file=paste0(wd_data_intror,"myPNAD2022_1T.sav"))

@@ -8,7 +8,7 @@
 library(pacman)
 p_load(tidyverse,PNADcIBGE)
 
-wd <- "GH:/Meu Drive/00 data/IBGE/PNADc"
+wd <- "G:/Meu Drive/00 data/IBGE/PNADc"
 setwd(wd)
 
 # 1. Get data ------------------------------------------------------------------

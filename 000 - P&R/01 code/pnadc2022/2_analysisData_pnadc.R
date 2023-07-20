@@ -32,6 +32,9 @@ names(bd)
 
 # 2. Algumas analises descritivas ----------------------------------------------
 
+# Atenção! Se tiver missing (NA) na sua base, é preciso especificar
+# na função para remover esses casos com "na.rm=TRUE"
+
 ## 2.1 Medidas de tendência central ----
 mean(bd$rendOcup)     # média
 median(bd$rendOcup)   # mediana
@@ -61,6 +64,12 @@ t_sexo <- bd %>% group_by(sexo) %>% summarise(
   me_rend = mean(rendOcup)
 )
 
+t_raca <- bd %>% group_by(raca) %>% summarise(
+  n = n(),
+  me_educ = round(mean(anosEst),1),
+  me_rend = mean(rendOcup)
+)
+
 t_educ <- bd %>% group_by(anosEst) %>% summarise(
   n = n(),
   me_rend = mean(rendOcup),
@@ -71,7 +80,7 @@ t_educ <- bd %>% group_by(anosEst) %>% summarise(
 
 tab1 <- table(bd$sexo,bd$raca)
 
-tab1_prop <- prop.table(tab1,margin = 1) # margin 1 = percentual na linha
+tab1_prop <- prop.table(tab1,margin = 2) # margin 1 = percentual na linha
 
 # 3. Gráficos ------------------------------------------------------------------
 
@@ -90,7 +99,7 @@ barplot(tab1,
 ggplot(data=bd,aes(x = sexo))+
   theme_bw()+
   geom_bar(fill="steelblue")+
-  scale_y_continuous(expand = c(0.01,0))+
+  scale_y_continuous(expand = c(0.0,0))+
   scale_x_discrete(name="")
 
 # Histograma
@@ -120,7 +129,8 @@ d1 <- ggplot(data=bd,aes(x = anosEst,y=rendOcup))+
   scale_y_continuous(name="Renda da ocupação principal")
 
 d2 <- d1 + stat_smooth(aes(x = anosEst, y = rendOcup), 
-                        method = "lm",
+                        method = "lm", # Linear Model ~ Regressão Linear
                         formula = y ~ x, se = FALSE)
 
 d2 + facet_wrap(~sexo)
+

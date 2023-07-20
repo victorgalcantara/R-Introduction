@@ -41,6 +41,15 @@ str(Pessoa03_SP)
 
 # 1. Data imput and merge --------------------------------------
 
+basico_SP2 <- basico_SP2 %>% mutate(.,
+                                    V009 = gsub(",", ".", V009),
+) %>% mutate(
+  V009 = as.numeric(V009)
+) %>% rename(
+  "code_tract" = Cod_setor,
+  "me_rend" = V009
+)
+
 mydata1 <- basico_SP2 %>% select(code_tract,me_rend)
 
 Pessoa03_SP <- Pessoa03_SP %>% mutate_all(~ gsub(",", ".", .))
