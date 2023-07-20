@@ -302,6 +302,10 @@ true_igual_um + 1
 # Loops são operações de iteração fundamentais na automação
 # Trabalho com processos repetitivos
 
+for(i in 1:10){
+  print(i)
+}
+
 a=1
 while (a<=10)  {
   a=a+1
@@ -314,10 +318,6 @@ repeat {
   a=a+1
   if (a >= 10) break()
 }
-
-for(i in 1:10){
-  print(i)
-  }
 
 # 7. Funções ----
 # são operações já programadas

@@ -1,0 +1,12 @@
+Começo de conversa
+- Recomendações de cursos no GitHub
+- 2e R for Data Science - navegando pelo livro
+
+Abrir arquivo excel
+
+Operações básicas: iterações
+For, if, ifelse, while
+
+Unir banco de dados: merge
+
+

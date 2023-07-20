@@ -1,0 +1,248 @@
+---
+title: "Introdução à Estatística com R"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## Apresentação
+
+Este arquivo apresenta uma introdução à Estatística com o R, usando dados fictícios criados para fins didáticos. Os dados são os seguintes:
+
+```{r,include=F}
+
+# 0. Packages and Setup ----
+library(pacman)
+p_load(tidyverse,rio)
+
+getwd()
+setwd("G:/Meu Drive/00 GitHub/R-Introduction/000 - P&R/00 data")
+
+# Rm notação científica
+options(scipen=999)
+
+# 1. Import ----
+
+mydata_1 <- import("dados_educ_ficticios_1.xlsx")
+mydata_2 <- import("dados_educ_ficticios_2.xlsx")
+
+# Merge data
+mydata <- merge(mydata_1,mydata_2,by = "aluno")
+```
+
+```{r}
+mydata
+```
+
+## E de onde vem?
+
+A palavra provém do latim *statisticum collegium*, que significa os assuntos sobre o Estado, de onde derivou a palavra italiana *statista* (homem de estado ou político) e a palavra alemã *statistik*, que designa análise de dados sobre o Estado. A preocupação em sintetizar informações sobre o Estado e a população remonta diferentes civilizações na antiguidade, como os sumérios e os egípcios. As primeiras utilizações da estatística envolvia compilações de dados e gráficos que descreviam vários aspectos de um Estado ou país, para fins de mensuração e planejamento ( adaptação de Bussab e Moretin).
+
+Na idade contemporânea, a Estatística se consolidou a ciência (ou a arte?) de coletar, organizar, sumarizar, visualizar, analisar e inferir sobre os dados. Tornou-se, assim, uma base para a ciência moderna. Usamos a estatística para:
+
+Dar sentido a um conjunto grande de dados
+
+-   Descrever
+
+-   Relatar
+
+Fazer inferências para populações com base em amostras
+
+-   Estimar
+
+-   Testar hipóteses
+
+Fazer predições
+
+-   Antecipar ou prever resultados futuros
+
+-   Simular valores não observados na realidade (dados faltantes, contrafactuais etc.)
+
+A Estatística é dividida em, pelo menos, duas grandes áreas: i) análise exploratória dos dados; ii) análise inferencial.
+
+Neste curso, abordaremos a análise exploratória dos dados.
+
+## Fundamento
+
+Antes, porém, precisamos tratar sobre o fundamento da Estatística: a classificação das variáveis.
+
+A classificação ou taxonomia das variáveis orienta todos os procedimentos estatísticos possíveis, desde a análise descritiva exploratória até a parte inferencial. Isto é, precisamos saber a classe das nossas variáveis para saber qual técnica devemos usar. Isso porque existe uma ciência por trás das medidas e dos gráficos, portanto devemos seguir regras e ordens bem estabelecidas até que tenhamos um domínio para sugerir mudanças e aperfeiçoamentos.
+
+#### Classificação ou taxonomia das variáveis
+
+As variáveis possuem uma classificação que se divide em dois ramos principais, ou duas famílias: i) qualitativa e ii) quantitativa.
+
+Entre as qualitativas, temos categorias que podem ser **nominais** (que nomeiam algo sem ordem implícita) e **ordinais** (que possuem ordenação implícita).
+
+Entre as quantitativas, temos números que podem ser **discretos** (números naturais e absolutos) ou **contínuos** (números racionais).
+
+![Fonte: Bussab e Morettin 6e 2010.](G:/Meu%20Drive/00%20GitHub/R-Introduction/A04%20-%20Analyse/03%20asset/Escala%20variáveis%20-%20Bussab%20e%20Morettin.png){fig-align="center"}
+
+Para cada classe de variável temos medidas e técnicas específicas que veremos adiante na parte de análise exploratória dos dados. Iniciaremos falando de apenas uma variável segundo sua classe, isto é, análises univariadas. Adiante, avançamos com a relação entre as variáveis e suas classes, em análises bivariadas. Por fim, alcançamos as análises multivariadas, em que analisamos a relação entre três ou mais variáveis.
+
+![Fonte: Jose G Dias.](G:/Meu%20Drive/00%20GitHub/R-Introduction/A04%20-%20Analyse/03%20asset/Statistics%20R%20-%20Jose%20G%20Dias.png){fig-align="center"}
+
+## Análise Exploratória dos Dados (AED)
+
+Na parte exploratória, estamos preocupados em **descrever** como nossos dados se comportam. Portanto, veremos a seguir as técnicas para descrever cada tipo de variável.
+
+#### Variáveis qualitativas ou categóricas
+
+Tendo em vista que as categorias não carregam valores implícitos, não podemos fazer cálculos. Não podemos, por exemplo, fazer uma média da religião confessada ou do sexo biológico das pessoas. Para variáveis categóricas, a principal forma de descrição é a tabela de frequências.
+
+Para fazer tabelas de frequência no R base, usamos a função **table( )**.
+
+```{r}
+table(mydata$sexo)
+```
+
+Temos, portanto, uma tabela de frequência absoluta. Podemos computar também uma frequência relativa com as proporções usando a função **prop.table( )**.
+
+```{r}
+prop.table( table(mydata$sexo) )
+```
+
+Para fazer cruzamentos entre variáveis categóricas, basta adicionar duas variáveis na função.
+
+```{r}
+table(mydata$sexo,mydata$raca)
+```
+
+Podemos fazer o mesmo procedimento para obter as frequências relativas ou proporções. Neste caso, podemos ainda indicar para somar o total na linha (margin = 1) ou nas colunas (margin = 2).
+
+```{r}
+prop.table( table(mydata$sexo,mydata$raca), margin=1 )
+```
+
+#### Variáveis quantitativas ou métricas
+
+Como o nome sugere, as variáveis quantitativas ou métricas permitem que façamos cálculos com elas. Neste caso, temos dois interesses principais para descrevê-las:
+
+-   Como está o centro? (Medidas de Tendência Central);
+
+-   Como os valores se distribuem? (Medidas de dispersão).
+
+**Medidas de tendência central**: entre as principais, temos a amplitude, a média, a mediana e a moda.
+
+A amplitude é simplesmente a distância entre o valor mínimo e o valor máximo.
+
+```{r}
+range(mydata$nota)
+```
+
+A média é a soma dos valores dividido pela quantidade total de valores.
+
+```{r}
+sum_nota <- sum(mydata$nota)
+qtd_nota <- length(mydata$nota)
+
+sum_nota / qtd_nota
+
+# Usando a função
+mean(mydata$nota)
+```
+
+A mediana é o valor central na distribuição ordenada.
+
+```{r}
+nota_ord <- sort(mydata$nota)
+nota_ord
+
+length(mydata$nota)
+
+nota_ord[8]
+
+# Usando função
+median(mydata$nota)
+```
+
+A mediana também faz parte dos quantis da distribuição ordenada dos valores. Isto é, é o quantil que divide a distribuição igualmente em 50% para um lado e 50% para outro.
+
+Podemos dividir a distribuição em quantas partes quisermos. Por exemplo, podemos dividir em percentis, decis, quintis, quartis.... Para isso, usamos a função **quantile( )**. Nesta função, o atributo de imput *probs* define os pontos de divisão da distribuição.
+
+```{r}
+quantile(mydata$nota, probs = 0.5)
+
+median(mydata$nota)
+```
+
+Conforme vimos, o quantil 50 é o mesmo que a mediana. Podemos dividir também em quartis, que é mais comum entre medidas de sumarização.
+
+```{r}
+quantile(mydata$nota, probs = c(0.25,0.50,0.75))
+```
+
+Esses são os pontos de corte que dividem a distribuição em quatro partes iguais.
+
+A moda é simplesmente o valor que mais aparece. É uma medida tão pouco explicativa que sequer tem função específica no R.
+
+**Medidas de dispersão**: entre as principais, temos a variância e o desvio-padrão.
+
+A variância representa o quanto os valores desviam da média. Se os valores desviam muito, então a variância é maior. Se desviam pouco, a variância é menor.
+
+Vejamos o passo a passo.
+
+1.  Qual a distância dos valores em relação a média?
+
+O primeiro passo para o cálculo da variância é centralizar os valores na média, isto é, medir a distância deles em relação a média e usar essa distância como uma nova escala.
+
+```{r}
+nota <- mydata$nota
+
+media_nota <- mean(nota)
+
+nota_centralizada <- nota - media_nota
+nota_centralizada
+```
+
+E se eu quisesse saber a distância média dos valores em relação à média?
+
+```{r}
+mean(nota_centralizada)
+```
+
+Note que a média será sempre zero, porque os valores estão centrados. Portanto, precisamos usar um recurso matemático para operacionalizar o cálculo. Para isso, usamos o quadrado dos valores para deixar todos positivos.
+
+```{r}
+nota_centralizada_2 <- nota_centralizada ^ 2
+nota_centralizada_2
+```
+
+Agora sim podemos somar os valores e dividir pelo N para obter a média das distâncias.
+
+```{r}
+somatorio = sum(nota_centralizada_2)
+N = length(nota_centralizada_2)
+
+variancia_nota <- somatorio / (N - 1)
+variancia_nota
+
+# Usando a função
+var(mydata$nota)
+```
+
+A variância pode ser descrita como: s² = Σ((xᵢ - x̄)²) / (N - 1)
+
+Em que:
+
+s² = variância
+
+xᵢ = valores
+
+x̄ = média
+
+Para retornar os valores a primeira potência, usamos a raíz quadrada e extraímos os desvios padronizados, obtendo a medida em desvio-padrão.
+
+```{r}
+sqrt(variancia_nota)
+
+# Usando a função
+sd(mydata$nota)
+```
+
+## Recomendações e referências
+
+[Livros de Bussab e Moretin sobre Estatística Básica](https://www.ime.usp.br/~pam/EstBas.html) (com livro na pasta de bibliografia)
+
+[Ciências Sociais Quantitativas com Gary King](https://projects.iq.harvard.edu/gov2001/lecture-videos)

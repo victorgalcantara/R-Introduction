@@ -17,3 +17,6 @@ Importação de dados usando pacote RIO
 
 * Por que só podemos ver as 50 primeiras variáveis
 
+Abrir arquivo excel
+Unir banco de dados
+

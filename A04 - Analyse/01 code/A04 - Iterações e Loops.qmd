@@ -1,0 +1,116 @@
+---
+title: "A04 - Operações Básicas - Iterações"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## Iterações/Loops
+
+No R, os loops sao executados principalmente atraves de 3 funcoes: for, while e repeat.
+
+A estrutura basica de uma sintaxe com a funcao for e a seguinte:
+
+**for** (*contador* **in** *conjunto_de_valores*) {
+
+*funcoes_e_comandos_que_serao_repetidos*
+
+}
+
+Suponha que voce deseja calcular a segunda potencia ("elevar a dois") todos os pares existentes até 20, tal como abaixo:
+
+```{r}
+2^2
+4^2
+6^2
+8^2
+10^2
+12^2
+14^2
+16^2
+18^2
+20^2
+```
+
+Essa é uma tarefa bastante repetitiva, certo? Leva um tempinho para fazer... e se a lista fosse maior, levaria ainda mais. Podemos, ao inves disso, criar um objeto que contém todos os números que desejamos elevar a dois e usar um loop para realizar a tarefa repetitiva.
+
+O loop é, na realidade, um conjunto de "rodadas" iterativas.
+
+Na primeira rodada, executamos a tarefa desejada (por exemplo: elevamos um numero ao quadrado) ...
+
+Na segunda rodada, executamos a MESMA TAREFA (elevar ao quadrado) usando informações diferente (um outro numero, por exemplo; 4 ao invés de 2)
+
+Na terceira rodada, novamente, executamos aquela MESMA TAREFA usando outras informacoes (6 ao invés de 4)...
+
+E assim por diante... até que o conjunto de informações se esgote.
+
+Veja o exemplo:
+
+```{r}
+numeros = seq(from = 2, to = 20, by = 2)
+
+for (i in numeros){
+        print(i^2)
+}
+```
+
+Alguns exemplos simples:
+
+```{r}
+nomes = c("Alcantaro","Jose Vitor","Karla")
+
+for (nome in nomes)
+{
+        print(nome)
+}
+
+# Imprimindo os mesmos nomes... mas colocando-os agora dentro de uma frase
+for(nome in c("Alcantaro","Jose Vitor","Karla")){
+        print(paste("Meu nome é",nome))
+}
+
+# Alguns exemplos um pouco menos simples... 
+
+#Exemplo 1:
+for (k in 11:25)
+{
+        print("Ola Mundo")
+}
+```
+
+Observe que aqui há várias características que poderiam causar confusão: o objeto temporário ("k") não está sendo utilizado dentro do loop. Ele está sendo usado do mesmo modo: na primeira rodada, recebe o valor 11 (primeiro valor dentro do conjunto de dados). No entanto, esse valor não é usado dentro do loop depois. Isso, porém, não é um problema. O que importa é que o loop é composto de RODADAS ou ITERAÇÕES. E o número de iterações é dado pelo número de elementos dentro do conjunto 11:25.
+
+Tentem agora avaliar com cuidado o que está sendo feito em cada um dos exemplos abaixo:
+
+```{r}
+#Exemplo 2:
+
+valores = rep(c(3,2),25)
+
+for (j in 1:50){
+        print(sqrt(valores[j]))
+}
+
+#Exemplo 3:
+
+soma_seq=0
+
+for (n in 1:10){
+        soma_seq = soma_seq + n
+}
+```
+
+### Condicionais
+
+O uso de condicionais e essencial em computação. Condicionais indicam que uma ação só será realizada se uma determinada condicao for cumprida.
+
+```{r}
+x = 10
+
+if( x == 10 ){"x é igual a 10"}
+
+if( x == 10 ){ x = x^2; print(x) }
+
+if( x == 10 ){"x é igual a 10"}else{"x é diferente de 10 agora"}
+```
