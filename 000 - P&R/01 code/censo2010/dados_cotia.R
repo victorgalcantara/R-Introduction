@@ -1,6 +1,6 @@
 # Title : manuseando dados do censo 2010
 # Author: Victor Gabriel Alcantara 
-# Date: 20/07/2023  
+# Date: 20/07/2023
 # Github: https://github.com/victorgalcantara 
 # LinkedIn: https://www.linkedin.com/in/victorgalcantara/ 
 
@@ -29,7 +29,7 @@ processQuantiles <- function(data, col,q, output_col) {
 }
 
 # Work directories
-wd_outp_intror <- "G:/Meu Drive/00 GitHub/R-Introduction/A03 - Import and Tidy Data/02 outp"
+wd_outp_intror <- "G:/Meu Drive/00 GitHub/R-Introduction/A03 - Import and Tidy Data/02 outp/"
 wd_data_intror <- "G:/Meu Drive/00 GitHub/R-Introduction/000 - P&R/00 data/"
 
 # Data censo
@@ -149,7 +149,8 @@ dev.off()
 
 # Nvl escolaridade ----
 
-tab_raca = data_censo_cotia %>% filter(cem_harm_idade > 24) %>% tabyl(raca,nvlEsc) %>% adorn_percentages("row")
+tab_raca = data_censo_cotia %>% filter(cem_harm_idade > 24) %>% 
+  tabyl(raca,nvlEsc) %>% adorn_percentages("row")
 
 tab_raca = tab_raca %>% gather(key = nvlEsc,value = "prop",-raca)
 

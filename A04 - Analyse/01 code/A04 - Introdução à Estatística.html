@@ -217,51 +217,78 @@ F M
 <li><p>Como está o centro? (Medidas de Tendência Central);</p></li>
 <li><p>Como os valores se distribuem? (Medidas de dispersão).</p></li>
 </ul>
-<p><strong>Medidas de tendência central</strong>: entre as principais, temos a média, a mediana e a moda.</p>
+<p><strong>Medidas de tendência central</strong>: entre as principais, temos a amplitude, a média, a mediana e a moda.</p>
+<p>A amplitude é simplesmente a distância entre o valor mínimo e o valor máximo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  3.5 10.0</code></pre>
+</div>
+</div>
 <p>A média é a soma dos valores dividido pela quantidade total de valores.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sum_nota <span class="ot">&lt;-</span> <span class="fu">sum</span>(mydata<span class="sc">$</span>nota)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>qtd_nota <span class="ot">&lt;-</span> <span class="fu">length</span>(mydata<span class="sc">$</span>nota)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>sum_nota <span class="sc">/</span> qtd_nota</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sum_nota <span class="ot">&lt;-</span> <span class="fu">sum</span>(mydata<span class="sc">$</span>nota)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>qtd_nota <span class="ot">&lt;-</span> <span class="fu">length</span>(mydata<span class="sc">$</span>nota)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>sum_nota <span class="sc">/</span> qtd_nota</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.613333</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usando a função</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usando a função</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.613333</code></pre>
 </div>
 </div>
 <p>A mediana é o valor central na distribuição ordenada.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nota_ordenada <span class="ot">&lt;-</span> <span class="fu">sort</span>(mydata<span class="sc">$</span>nota)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>nota_ordenada</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  3.5  3.6  5.5  6.0  6.1  6.3  7.9  8.2  8.6  9.1  9.4 10.0 10.0 10.0 10.0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nota_ord <span class="ot">&lt;-</span> <span class="fu">sort</span>(mydata<span class="sc">$</span>nota)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>nota_ord[<span class="dv">8</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>nota_ordenada[<span class="dv">8</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8.2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usando função</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usando função</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8.2</code></pre>
 </div>
 </div>
-<p>A moda é simplesmente o valor que mais aparece.</p>
+<p>A mediana também faz parte dos quantis da distribuição ordenada dos valores. Isto é, é o quantil que divide a distribuição igualmente em 50% para um lado e 50% para outro.</p>
+<p>Podemos dividir a distribuição em quantas partes quisermos. Por exemplo, podemos dividir em percentis, decis, quintis, quartis…. Para isso, usamos a função <strong>quantile( )</strong>. Nesta função, o atributo de imput <em>probs</em> define os pontos de divisão da distribuição.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Não há função</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(mydata<span class="sc">$</span>nota, <span class="at">probs =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-3.5 3.6 5.5   6 6.1 6.3 7.9 8.2 8.6 9.1 9.4  10 
-  1   1   1   1   1   1   1   1   1   1   1   4 </code></pre>
+<pre><code>50% 
+8.2 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.2</code></pre>
 </div>
 </div>
+<p>Conforme vimos, o quantil 50 é o mesmo que a mediana. Podemos dividir também em quartis, que é mais comum entre medidas de sumarização.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(mydata<span class="sc">$</span>nota, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.50</span>,<span class="fl">0.75</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> 25%  50%  75% 
+6.05 8.20 9.70 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mydata<span class="sc">$</span>nota) <span class="co"># Sumário da variável</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  3.500   6.050   8.200   7.613   9.700  10.000 </code></pre>
+</div>
+</div>
+<p>Esses são os pontos de corte que dividem a distribuição em quatro partes iguais.</p>
+<p>A moda é simplesmente o valor que mais aparece. É uma medida tão pouco explicativa que sequer tem função específica no R.</p>
 <p><strong>Medidas de dispersão</strong>: entre as principais, temos a variância e o desvio-padrão.</p>
 <p>A variância representa o quanto os valores desviam da média. Se os valores desviam muito, então a variância é maior. Se desviam pouco, a variância é menor.</p>
 <p>Vejamos o passo a passo.</p>
@@ -270,12 +297,12 @@ F M
 </ol>
 <p>O primeiro passo para o cálculo da variância é centralizar os valores na média, isto é, medir a distância deles em relação a média e usar essa distância como uma nova escala.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nota <span class="ot">&lt;-</span> mydata<span class="sc">$</span>nota</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>media_nota <span class="ot">&lt;-</span> <span class="fu">mean</span>(nota)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>nota_centralizada <span class="ot">&lt;-</span> nota <span class="sc">-</span> media_nota</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>nota_centralizada</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>nota <span class="ot">&lt;-</span> mydata<span class="sc">$</span>nota</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>media_nota <span class="ot">&lt;-</span> <span class="fu">mean</span>(nota)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>nota_centralizada <span class="ot">&lt;-</span> nota <span class="sc">-</span> media_nota</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>nota_centralizada</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0.5866667  1.7866667 -2.1133333 -1.5133333  0.2866667  0.9866667
  [7]  1.4866667 -1.6133333  2.3866667 -4.0133333  2.3866667 -1.3133333
@@ -284,15 +311,15 @@ F M
 </div>
 <p>E se eu quisesse saber a distância média dos valores em relação à média?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(nota_centralizada)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(nota_centralizada)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -5.918298e-17</code></pre>
+<pre><code>[1] -0.00000000000000005918298</code></pre>
 </div>
 </div>
 <p>Note que a média será sempre zero, porque os valores estão centrados. Portanto, precisamos usar um recurso matemático para operacionalizar o cálculo. Para isso, usamos o quadrado dos valores para deixar todos positivos.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>nota_centralizada_2 <span class="ot">&lt;-</span> nota_centralizada <span class="sc">^</span> <span class="dv">2</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>nota_centralizada_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>nota_centralizada_2 <span class="ot">&lt;-</span> nota_centralizada <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>nota_centralizada_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0.34417778  3.19217778  4.46617778  2.29017778  0.08217778  0.97351111
  [7]  2.21017778  2.60284444  5.69617778 16.10684444  5.69617778  1.72484444
@@ -301,28 +328,33 @@ F M
 </div>
 <p>Agora sim podemos somar os valores e dividir pelo N para obter a média das distâncias.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>somatorio <span class="ot">=</span> <span class="fu">sum</span>(nota_centralizada_2)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="fu">length</span>(nota_centralizada_2)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>variancia_nota <span class="ot">&lt;-</span> somatorio <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>variancia_nota</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>somatorio <span class="ot">=</span> <span class="fu">sum</span>(nota_centralizada_2)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="fu">length</span>(nota_centralizada_2)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>variancia_nota <span class="ot">&lt;-</span> somatorio <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>variancia_nota</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.264095</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usando a função</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usando a função</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.264095</code></pre>
 </div>
 </div>
+<p>A variância pode ser descrita como: s² = Σ((xᵢ - x̄)²) / (N - 1)</p>
+<p>Em que:</p>
+<p>s² = variância</p>
+<p>xᵢ = valores</p>
+<p>x̄ = média</p>
 <p>Para retornar os valores a primeira potência, usamos a raíz quadrada e extraímos os desvios padronizados, obtendo a medida em desvio-padrão.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(variancia_nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(variancia_nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.294362</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usando a função</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usando a função</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(mydata<span class="sc">$</span>nota)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.294362</code></pre>
 </div>

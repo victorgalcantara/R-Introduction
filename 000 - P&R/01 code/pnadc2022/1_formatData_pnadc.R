@@ -80,14 +80,20 @@ myPnad2022 <- myPnad2022 %>%
            sexo == 2 ~ "F",
          ),
          
-         raca = case_when(
+         raca2 = case_when(
            raca == 1 ~ "Branca",
            raca == 2 ~ "Preta",
            raca == 3 ~ "Amarela",
-           raca == 4 ~ "Parda ",
+           raca == 4 ~ "Parda",
            raca == 5 ~ "Indígena",
-           raca == 9 ~ "Ignorado"
+           raca == 9 ~ "Ignorado",
          ),
+         
+         raca3 = case_when(
+           raca %in% c(1,3) ~ "Brancos",
+           raca %in% c(2,4,5) ~ "PPI",
+           raca %in% 9 ~ "Missing"
+         )
   )
 
 myPnad2022_mg <- myPnad2022 %>% filter(UF == "31")

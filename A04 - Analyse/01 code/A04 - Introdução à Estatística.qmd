@@ -19,7 +19,7 @@ p_load(tidyverse,rio)
 getwd()
 setwd("G:/Meu Drive/00 GitHub/R-Introduction/000 - P&R/00 data")
 
-# Rm notação científica
+# Remover notação científica
 options(scipen=999)
 
 # 1. Import ----
@@ -146,12 +146,12 @@ mean(mydata$nota)
 A mediana é o valor central na distribuição ordenada.
 
 ```{r}
-nota_ord <- sort(mydata$nota)
-nota_ord
+nota_ordenada <- sort(mydata$nota)
+nota_ordenada
 
 length(mydata$nota)
 
-nota_ord[8]
+nota_ordenada[8]
 
 # Usando função
 median(mydata$nota)
@@ -171,6 +171,8 @@ Conforme vimos, o quantil 50 é o mesmo que a mediana. Podemos dividir também e
 
 ```{r}
 quantile(mydata$nota, probs = c(0.25,0.50,0.75))
+
+summary(mydata$nota) # Sumário da variável
 ```
 
 Esses são os pontos de corte que dividem a distribuição em quatro partes iguais.

@@ -96,7 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="iteraçõesloops" class="level2">
 <h2 class="anchored" data-anchor-id="iteraçõesloops">Iterações/Loops</h2>
-<p>No R, os loops sao executados principalmente atraves de 3 funcoes: for, while e repeat.</p>
+<p>No R, os loops são executados principalmente atraves de 3 funções: for, while e repeat.</p>
 <p>A estrutura basica de uma sintaxe com a funcao for e a seguinte:</p>
 <p><strong>for</strong> (<em>contador</em> <strong>in</strong> <em>conjunto_de_valores</em>) {</p>
 <p><em>funcoes_e_comandos_que_serao_repetidos</em></p>
@@ -155,18 +155,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>numeros <span class="ot">=</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">20</span>, <span class="at">by =</span> <span class="dv">2</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> numeros){</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(i<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(i)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(i<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4
+<pre><code>[1] 2
+[1] 4
+[1] 4
 [1] 16
+[1] 6
 [1] 36
+[1] 8
 [1] 64
+[1] 10
 [1] 100
+[1] 12
 [1] 144
+[1] 14
 [1] 196
+[1] 16
 [1] 256
+[1] 18
 [1] 324
+[1] 20
 [1] 400</code></pre>
 </div>
 </div>
@@ -174,10 +185,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nomes <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Alcantaro"</span>,<span class="st">"Jose Vitor"</span>,<span class="st">"Karla"</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (nome <span class="cf">in</span> nomes)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(nome)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (nome <span class="cf">in</span> nomes){</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(nome)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Alcantaro"
 [1] "Jose Vitor"
@@ -195,10 +205,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alguns exemplos um pouco menos simples... </span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Exemplo 1:</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">25</span>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">"Ola Mundo"</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (h <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">"Ola Mundo"</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Ola Mundo"
 [1] "Ola Mundo"
@@ -209,24 +218,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [1] "Ola Mundo"
 [1] "Ola Mundo"
 [1] "Ola Mundo"
-[1] "Ola Mundo"
-[1] "Ola Mundo"
-[1] "Ola Mundo"
-[1] "Ola Mundo"
-[1] "Ola Mundo"
 [1] "Ola Mundo"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Essa é a iteração"</span>,i))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Essa é a iteração 1"
+[1] "Essa é a iteração 2"
+[1] "Essa é a iteração 3"
+[1] "Essa é a iteração 4"
+[1] "Essa é a iteração 5"
+[1] "Essa é a iteração 6"
+[1] "Essa é a iteração 7"
+[1] "Essa é a iteração 8"
+[1] "Essa é a iteração 9"
+[1] "Essa é a iteração 10"</code></pre>
 </div>
 </div>
 <p>Observe que aqui há várias características que poderiam causar confusão: o objeto temporário (“k”) não está sendo utilizado dentro do loop. Ele está sendo usado do mesmo modo: na primeira rodada, recebe o valor 11 (primeiro valor dentro do conjunto de dados). No entanto, esse valor não é usado dentro do loop depois. Isso, porém, não é um problema. O que importa é que o loop é composto de RODADAS ou ITERAÇÕES. E o número de iterações é dado pelo número de elementos dentro do conjunto 11:25.</p>
 <p>Tentem agora avaliar com cuidado o que está sendo feito em cada um dos exemplos abaixo:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Exemplo 2:</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>valores <span class="ot">=</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>),<span class="dv">25</span>)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>){</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="fu">sqrt</span>(valores[j]))</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Exemplo 2:</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>valores <span class="ot">=</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>),<span class="dv">25</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>){</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="fu">sqrt</span>(valores[j]))</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.732051
 [1] 1.414214
@@ -279,29 +298,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [1] 1.732051
 [1] 1.414214</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Exemplo 3:</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>soma_seq<span class="ot">=</span><span class="dv">0</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>        soma_seq <span class="ot">=</span> soma_seq <span class="sc">+</span> n</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Exemplo 3:</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>soma_seq<span class="ot">=</span><span class="dv">0</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>        soma_seq <span class="ot">=</span> soma_seq <span class="sc">+</span> n</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="condicionais" class="level3">
 <h3 class="anchored" data-anchor-id="condicionais">Condicionais</h3>
 <p>O uso de condicionais e essencial em computação. Condicionais indicam que uma ação só será realizada se uma determinada condicao for cumprida.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">10</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( x <span class="sc">==</span> <span class="dv">10</span> ){<span class="st">"x é igual a 10"</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( x <span class="sc">==</span> <span class="dv">10</span> ){<span class="st">"x é igual a 10"</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "x é igual a 10"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( x <span class="sc">==</span> <span class="dv">10</span> ){ x <span class="ot">=</span> x<span class="sc">^</span><span class="dv">2</span>; <span class="fu">print</span>(x) }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( x <span class="sc">==</span> <span class="dv">10</span> ){ x <span class="ot">=</span> x<span class="sc">^</span><span class="dv">2</span>; <span class="fu">print</span>(x) }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 100</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( x <span class="sc">==</span> <span class="dv">10</span> ){<span class="st">"x é igual a 10"</span>}<span class="cf">else</span>{<span class="st">"x é diferente de 10 agora"</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( x <span class="sc">==</span> <span class="dv">10</span> ){<span class="st">"x é igual a 10"</span>}<span class="cf">else</span>{<span class="st">"x é diferente de 10 agora"</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "x é diferente de 10 agora"</code></pre>
 </div>

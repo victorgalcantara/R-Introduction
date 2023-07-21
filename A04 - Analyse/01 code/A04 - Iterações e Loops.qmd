@@ -8,7 +8,7 @@ editor_options:
 
 ## Iterações/Loops
 
-No R, os loops sao executados principalmente atraves de 3 funcoes: for, while e repeat.
+No R, os loops são executados principalmente atraves de 3 funções: for, while e repeat.
 
 A estrutura basica de uma sintaxe com a funcao for e a seguinte:
 
@@ -51,6 +51,7 @@ Veja o exemplo:
 numeros = seq(from = 2, to = 20, by = 2)
 
 for (i in numeros){
+        print(i)
         print(i^2)
 }
 ```
@@ -60,8 +61,7 @@ Alguns exemplos simples:
 ```{r}
 nomes = c("Alcantaro","Jose Vitor","Karla")
 
-for (nome in nomes)
-{
+for (nome in nomes){
         print(nome)
 }
 
@@ -73,9 +73,12 @@ for(nome in c("Alcantaro","Jose Vitor","Karla")){
 # Alguns exemplos um pouco menos simples... 
 
 #Exemplo 1:
-for (k in 11:25)
-{
+for (h in 1:10){
         print("Ola Mundo")
+}
+
+for(i in 1:10){
+   print(x <- i+5)
 }
 ```
 
