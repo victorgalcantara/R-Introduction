@@ -41,25 +41,26 @@ str(Pessoa03_SP)
 
 # 1. Data imput and merge --------------------------------------
 
-basico_SP2 <- basico_SP2 %>% mutate(.,
-                                    V009 = gsub(",", ".", V009),
-) %>% mutate(
+# Substituindo vírgulas por pontos (notação inglesa)
+basico_SP2 <- basico_SP2 %>% mutate_all(~ gsub(",", ".", .))
+
+# Transformando a variável renda para métrica
+basico_SP2 <- basico_SP2 %>%  mutate(
   V009 = as.numeric(V009)
-) %>% rename(
+) 
+
+basico_SP2 <- basico_SP2 %>% rename(
   "code_tract" = Cod_setor,
   "me_rend" = V009
 )
 
+# Selecionando apenas cod do setor e renda das pessoas
 mydata1 <- basico_SP2 %>% select(code_tract,me_rend)
 
+# Fazendo o mesmo com a base das pessoas
 Pessoa03_SP <- Pessoa03_SP %>% mutate_all(~ gsub(",", ".", .))
 
 Pessoa03_SP <- Pessoa03_SP %>% mutate(.,
-                                      V001 = gsub(",", ".", V001),
-                                      V003 = gsub(",", ".", V003),
-                                      V005 = gsub(",", ".", V005),
-                                      ) %>% 
-  mutate(.,
                                     qt_pessoas=as.numeric(V001),
                                     qt_brancos = as.numeric(V002),         
                                     qt_pretos = as.numeric(V003),
@@ -73,7 +74,7 @@ Pessoa03_SP <- Pessoa03_SP %>% mutate(
   p_negros = (qt_pretos+qt_pardos)/qt_pessoas,
   p_amarelos = qt_amarelos/qt_pessoas,
   p_indigena = qt_indigena/qt_pessoas,
-)%>% rename(
+) %>% rename(
   "code_tract" = Cod_setor
 )
 
@@ -142,3 +143,20 @@ pdf(file=paste0(wd_out_graph,"map_raca.pdf"),
     width = 10, height = 6)
 plot(plt_map_renda_raca)
 dev.off()
+
+# 3. Explorando escolas em Cotia -----------------------------------------------
+
+geo_schools <- read_schools(year = 2020)
+
+schools_cotia <- geo_schools %>% filter(name_muni == "Cotia")
+
+map_cotia_renda + geom_sf(data = schools_cotia,
+                             color="black",size=1,shape=1)
+
+# Olhem a minha escola
+mySchool <- schools_cotia %>% filter(name_school %in% c("SIDRONIA NUNES PIRES",
+                                                        "IDALINA GODINHO DA SILVA EM",
+                                                        "IVO MARIO ISAAC PIRES PREFEITO EM"))
+
+map_cotia_renda + geom_sf(data = mySchool,
+                          color="black",size=1.5,shape=1)

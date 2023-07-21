@@ -1,0 +1,251 @@
+---
+title: "A05 - Visualize GGplot"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## Visualize
+
+### *Uma imagem vale mais do que mil palavras*
+
+Existe uma ciência por trás sobre por que, quando e como fazer gráficos.
+
+Os gráficos permitem caracterizar, descrever e relacionar as variáveis. Está entre as técnicas mais poderosas de exploração dos dados, pois sintetiza as informações.
+
+**Bons gráficos**: apresenta muita informação de forma concisa e coerente.
+
+**Gráficos ruins**: distorcem informações, dificultam e enviesam a interpretação.
+
+Para representar graficamente as variáveis, seguimos também as regras de classificações.
+
+**Variáveis categóricas ou qualitativas**
+
+-   Tabela de frequência
+
+-   Barras
+
+-   Pizza
+
+**Variáveis métricas discretas**
+
+-   Tabela de frequência
+
+-   Barras
+
+**Variáveis métricas contínuas**
+
+-   Tabela de frequência de agrupamentos (faixas)
+
+-   Histograma
+
+-   Densidade
+
+-   Boxplot
+
+Vejamos agora como representar nossas variáveis com o pacote GGplot.
+
+Antes, porém, vamos carregar nossos dados fictícios para representar graficamente.
+
+```{r}
+# 0. Packages and Setup ----
+# install.packages("pacman")
+library(pacman)
+p_load(tidyverse,rio)
+
+getwd()
+setwd("G:/Meu Drive/00 GitHub/R-Introduction/000 - P&R/00 data")
+
+# Remover notação científica
+options(scipen=999)
+
+# 1. Import ----
+
+mydata_1 <- import("dados_educ_ficticios_1.xlsx")
+mydata_2 <- import("dados_educ_ficticios_2.xlsx")
+
+# Merge data
+mydata <- merge(mydata_1,mydata_2,by = "aluno")
+```
+
+Vamos trabalhar com os dados
+
+```{r}
+mydata
+```
+
+## GGplot: A Grammar of Graphics
+
+GGplot é a gramática dos gráficos no R.
+
+As funções para criação de gráfico seguem um padrão estrutural lógico que é organizado por camadas.
+
+Na primeira camada, definimos nossos dados e as variáveis.
+
+**ggplot**( data = ... , **aes**( x = ... , y ... ) )
+
+Como vamos iniciar com apenas uma variável, inserimos apenas o input do x.
+
+```{r}
+ggplot( data = mydata , aes( x = sexo ) )
+```
+
+Na segunda camada (adicionada com + ao final), definimos o tipo do gráfico.
+
+ggplot( data = ... , aes( x = ... , y ... ) )**+**
+
+**geom_bar**( ... )
+
+```{r}
+ggplot( data = mydata , aes( x = sexo ) )+
+  geom_bar()
+```
+
+Nas demais camadas, podemos definir opções para os eixos e muito mais
+
+ggplot( data = ... , aes( x = ... , y ... ) )+
+
+geom_bar( ... )+
+
+**scale_y_continuous**( ... )**+**
+
+**scale_x_discrete**( ... )
+
+```{r}
+ggplot( data = mydata , aes( x = sexo ) )+
+  geom_bar(fill="steelblue")+
+  scale_y_continuous(limits=c(0,10))+
+  scale_x_discrete()+
+  labs(title = "Frequência absoluta por sexo",
+       y="Frequência absoluta",x="")+
+  theme_bw()
+```
+
+Podemos complexificar nosso gráfico inserindo outras variáveis. Por exemplo, vamos colorir as barras de acordo com a raça.
+
+```{r}
+ggplot(data = mydata, aes(x = sexo, fill = raca))+
+  geom_bar()
+```
+
+Alternativamente, podemos separar as barras coloridas especificando a posição delas no argumento onde definimos as barras.
+
+```{r}
+ggplot(data = mydata, aes(x = sexo, fill = raca))+
+  geom_bar(stat = "count",position = position_dodge())
+```
+
+Como estamos trabalhando com camadas, podemos salvar camadas em objetos e adicionar outras em cima dele. Veja:
+
+```{r}
+g1 <- ggplot(data = mydata, aes(x = sexo, fill = raca))+
+  geom_bar(stat = "count",position = position_dodge())
+
+g1
+
+g1 + labs(title = "Frequência absoluta por sexo",
+       y="Frequência absoluta",x="",fill="Raça")+
+     theme_bw()
+```
+
+A mesma lógica seguimos para outros tipos de gráficos. Vejamos as opções para as variáveis métricas.
+
+Como vimos, as variáveis métricas discretas são representadas com barras, como as categóricas.
+
+```{r}
+ggplot( data = mydata , aes( x = faltas ) )+
+  geom_bar(fill="steelblue")+
+  scale_y_continuous(limits=c(0,5))+
+  scale_x_continuous(limits=c(0,10),breaks=seq(0,10,2))+
+  labs(title = "Frequência de faltas",
+       y="Frequência absoluta",x="")+
+  theme_bw()
+```
+
+As variáveis métricas contínuas, por outro lado, são representadas por histogramas, densidades ou boxplots.
+
+```{r}
+ggplot( data = mydata , aes( x = nota ) )+
+  geom_histogram(col="blue")+
+  scale_y_continuous(limits = c(0,5),expand = c(0,0))+
+  scale_x_continuous(limits = c(0,11),expand = c(0,0))+
+  labs(title = "Histograma da nota",
+       y="Frequência absoluta",x="Nota")+
+  theme_bw()
+```
+
+E se ao invés de trabalharmos apenas com poucos casos, tivéssemos milhares?
+
+Vamos fazer o exercício de criar aleatoriamente 10.000 notas entre 0 e 10.
+
+```{r}
+notas_aleatorias <- rnorm(n = 10000,mean = 5,sd = 2)
+alunos <- 1:10000
+
+mydata2 <- data.frame(alunos,notas_aleatorias)
+
+ggplot( data = mydata2 , aes( x = notas_aleatorias ) )+
+  geom_histogram(col="blue")+
+  scale_y_continuous(expand = c(0,0))+
+  scale_x_continuous(limits = c(0,11),expand = c(0,0))+
+  labs(title = "Histograma da nota",
+       y="Frequência absoluta",x="Nota")+
+  theme_bw()
+```
+
+Podemos representar esse tipo de variável também com um boxplot.
+
+```{r}
+ggplot( data = mydata2 , aes( x = notas_aleatorias ) )+
+  geom_boxplot(col="blue")+
+  scale_y_continuous()+
+  scale_x_continuous(limits = c(0,11),breaks = seq(0,12,2.5))+
+  labs(title = "Histograma da nota",
+       y="Frequência absoluta",x="Nota")+
+  theme_bw()
+
+summary(mydata2$notas_aleatorias)
+```
+
+Podemos, ainda, representar duas variáveis métricas juntas com um gráfico de dispersão.
+
+```{r}
+ggplot( data = mydata , aes( x = nse, y =  nota) )+
+  geom_point(col="blue")+
+  scale_y_continuous(limits = c(0,11))+
+  scale_x_continuous(limits = c(0,11),expand = c(0,0))+
+  labs(title = "Histograma da nota",
+       y="Nota",x="NSE")+
+  theme_bw()
+```
+
+Podemos ainda salvar nosso gráfico em um objeto e acrescentar uma linha de tendência.
+
+```{r}
+g2 <- ggplot( data = mydata , aes( x = nse, y =  nota) )+
+  geom_point(col="blue")+
+  scale_y_continuous(limits = c(0,11))+
+  scale_x_continuous(limits = c(0,11),expand = c(0,0))+
+  labs(title = "Histograma da nota",
+       y="Nota",x="NSE")+
+  theme_bw()
+
+g2 + geom_smooth(method = "lm")
+```
+
+Há muitas opções no GGplot. Mas também há outros pacotes adicionais. O plotly, por exemplo, produz gráficos interativos.
+
+```{r,warning=F,message=F}
+library(plotly)
+plot_ly(data = mydata, 
+                   x = ~nse, 
+                   y = ~nota,
+                   z = ~faltas,
+                   color = ~sexo,
+                   #type = 'scatter', 
+                   mode = 'markers') %>%
+    layout(xaxis = list(title = "NSE"),
+           yaxis = list(title = "Nota"),
+           zaxis = list(title = "Faltas")) 
+```
