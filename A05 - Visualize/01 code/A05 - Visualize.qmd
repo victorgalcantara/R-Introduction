@@ -186,7 +186,7 @@ alunos <- 1:10000
 mydata2 <- data.frame(alunos,notas_aleatorias)
 
 ggplot( data = mydata2 , aes( x = notas_aleatorias ) )+
-  geom_histogram(col="blue")+
+  geom_histogram(col="blue",bins=100)+
   scale_y_continuous(expand = c(0,0))+
   scale_x_continuous(limits = c(0,11),expand = c(0,0))+
   labs(title = "Histograma da nota",
@@ -212,7 +212,7 @@ Podemos, ainda, representar duas variáveis métricas juntas com um gráfico de 
 
 ```{r}
 ggplot( data = mydata , aes( x = nse, y =  nota) )+
-  geom_point(col="blue")+
+  geom_point(col="blue",size=2)+
   scale_y_continuous(limits = c(0,11))+
   scale_x_continuous(limits = c(0,11),expand = c(0,0))+
   labs(title = "Histograma da nota",
@@ -231,13 +231,15 @@ g2 <- ggplot( data = mydata , aes( x = nse, y =  nota) )+
        y="Nota",x="NSE")+
   theme_bw()
 
-g2 + geom_smooth(method = "lm")
+g2 + geom_smooth(method = "lm") # Linear Model
 ```
 
 Há muitas opções no GGplot. Mas também há outros pacotes adicionais. O plotly, por exemplo, produz gráficos interativos.
 
 ```{r,warning=F,message=F}
+# install.packages(plotly)
 library(plotly)
+
 plot_ly(data = mydata, 
                    x = ~nse, 
                    y = ~nota,
@@ -247,5 +249,5 @@ plot_ly(data = mydata,
                    mode = 'markers') %>%
     layout(xaxis = list(title = "NSE"),
            yaxis = list(title = "Nota"),
-           zaxis = list(title = "Faltas")) 
+           zaxis = list(title = "Faltas"))
 ```

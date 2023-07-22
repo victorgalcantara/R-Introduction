@@ -1,1 +1,5 @@
 O fato de ser comum o erro no trabalho com programação > vimos muitos erros ao longo do curso
+
+por que não funcionou o detach( ) para tirar os dados da memória
+
+

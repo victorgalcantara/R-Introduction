@@ -1,8 +1,6 @@
-install.packages("geobr")
-library(geobr)
-library(ggplot2)
-library(sf)
-library(dplyr)
+# install.packages("pacman")
+library(pacman)
+p_load(geobr,ggplot2,sf,dplyr)
 
 # Available data sets
 datasets <- list_geobr()
@@ -15,10 +13,11 @@ no_axis <- theme(axis.title=element_blank(),
 
 
 # Depict all the Brazilian States + Federal District, 2019
-states <- read_state(year=2019)
+states <- read_state(year=2020)
+
 ggplot() +
   geom_sf(data=states, fill="#FFDB6D", color="#293352", size=.5, show.legend = FALSE) +
-  labs(subtitle="States of Brazil and Federal District, 2019", size=8) +
+  labs(subtitle="States of Brazil and Federal District, 2020", size=8) +
   theme_minimal() +
   no_axis
 
@@ -39,22 +38,22 @@ ggplot() +
   no_axis
 
 # All municipalities in Brazil
-muni <- read_municipality(year=2019)
+muni <- read_municipality(year=2020)
 ggplot() +
   geom_sf(data=muni, fill="#FFDB6D", color="#293352", size=.15, show.legend = FALSE) +
   labs(subtitle="Municipalities of Brazil, 2019", size=8) +
   theme_minimal() +
   no_axis
 
-# All municipalities in the state of RJ
-muniRJ <- read_municipality(code_muni= "RJ", year=2019)
+# All municipalities in the state of MG
+muniMG <- read_municipality(code_muni= "MG", year=2020)
 ggplot() +
-  geom_sf(data=muniRJ, fill="#FFDB6D", color="#293352", size=.15, show.legend = FALSE) +
-  labs(subtitle="Municipalities of Rio de Janeiro, 2019", size=8) +
+  geom_sf(data=muniMG, fill="#FFDB6D", color="#293352", size=.15, show.legend = FALSE) +
+  labs(subtitle="Municipalities of Minas Gerais, 2020", size=8) +
   theme_minimal() +
   no_axis
 
-# Municipality of RJ city
+# Municipality of MG city
 muniRJC <- read_municipality(code_muni = 3304557, year=2019)
 ggplot() +
   geom_sf(data=muniRJC, fill="#FFDB6D", color="#293352", size=.15, show.legend = FALSE) +
@@ -67,6 +66,8 @@ ggplot() +
 # Read data.frame with Population density
 # Import data on the variable you want to depict
 # Excel file RMaps_Brazil
+
+RMaps_Brazil <- import(file.choose())
 
 # Compute density
 data <- mutate(RMaps_Brazil, Popdens=Pop/AreaKm2)

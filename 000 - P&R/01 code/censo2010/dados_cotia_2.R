@@ -15,7 +15,7 @@ rm(list=ls()) # Remove all objects
 gc() # Garbage Clean
 
 # Work directories
-wd_outp_intror <- "G:/Meu Drive/00 GitHub/R-Introduction/A03 - Import and Tidy Data/02 outp"
+wd_outp_intror <- "G:/Meu Drive/00 GitHub/R-Introduction/A05 - Visualize/02 outp"
 wd_data_intror <- "G:/Meu Drive/00 GitHub/R-Introduction/000 - P&R/00 data/"
 
 # Data censo
@@ -116,8 +116,10 @@ mydata <- mydata %>% filter(code_muni == 3513009)
 no_axis <- theme(axis.title=element_blank(),
                  axis.text=element_blank(),
                  axis.ticks=element_blank())
+
 # Mean of income
-map_cotia_renda <- mydata %>% drop_na(me_renda2) %>% ggplot() +
+map_cotia_renda <- mydata %>% drop_na(me_renda2) %>% 
+  ggplot() +
   geom_sf(aes(fill = me_renda2), show.legend = T,color=NA) +
   scale_fill_manual(name="Renda média \n em Reais (R$)",
                     values = rev(heat.colors(6, alpha = 1.0)))+
@@ -139,7 +141,7 @@ plt_map_renda_raca <- map_cotia_renda+map_cotia_raca+
 
 # Save plot
 dev.off()
-pdf(file=paste0(wd_out_graph,"map_raca.pdf"),
+pdf(file=paste0(wd_outp_intror,"/plt_map_renda_raca.pdf"),
     width = 10, height = 6)
 plot(plt_map_renda_raca)
 dev.off()
