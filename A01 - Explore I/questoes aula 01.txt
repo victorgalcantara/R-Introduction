@@ -1,0 +1,23 @@
+1. Apresentação do curso
+2. Organização dos materiais (Github)
+3. Dinâmica (apresentação, prática com tutoriais e exercícios)
+
+Apresentação do software e contextualização
+4. Instalação R
+5. Conteúdo geral R
+6. Setup, janelas e workflow
+7. Script e Rmarckdown
+
+Mão na massa
+1. Início abstrato - lógica de programação, sintaxe e identação
+2. R como calculadora
+3. Salto para bases de dados
+
+Alunos ingresso tipo 6 - externos - maioria
+
+pós da UNIFESP
+
+O que pode ter errado com atalhos no R
+
+Como lidar com acentos no R - CSV2 e funções
+

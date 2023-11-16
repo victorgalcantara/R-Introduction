@@ -1,12 +1,7 @@
-Agradecimento pelas perguntas
-
 Nivelando expectativas
-
-Recomendações de curso de R
 
 Proposta da aula:
 Retomar pontos passados batido: 
-- Características do R: Pergunta da Cíntia: como olhar para a base de dados (variáveis e labels)?
 - Encoding
 - R Base x Pacotes externos
 - Importação e exportação de dados TXT e XLSX
@@ -15,8 +10,5 @@ Importação de dados usando pacote RIO
 - Estudo de caso com a PNADc
 - Estudo de caso com o censo 2010
 
-* Por que só podemos ver as 50 primeiras variáveis
 
-Abrir arquivo excel
-Unir banco de dados
 
